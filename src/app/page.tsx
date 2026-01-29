@@ -9,7 +9,6 @@ export default function Home() {
       <div className="h-20" />
 
       <div className="max-w-[1280px] mx-auto px-6 py-20">
-        <h1 className="text-4xl font-bold">Content Placeholders</h1>
       </div>
     </main>
   );

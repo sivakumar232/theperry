@@ -19,6 +19,7 @@
   --font-sans: 'Switzer', var(--font-inter), system-ui, sans-serif;
   --font-switzer: 'Switzer', sans-serif;
   --font-clash: 'ClashDisplay', sans-serif;
+  --font-satoshi: 'Satoshi', sans-serif;
 }
 
 /* Base Styles */
@@ -153,6 +154,47 @@ body {
   font-family: 'ClashDisplay';
   src: url('/fonts/ClashDisplay-Bold.woff2') format('woff2');
   font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+/* Satoshi Font Faces */
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Regular.woff2') format('woff2');
+  font-weight: 400;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Medium.woff2') format('woff2');
+  font-weight: 500;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Bold.woff2') format('woff2');
+  font-weight: 700;
+  font-display: swap;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Satoshi';
+  src: url('/fonts/Satoshi-Black.woff2') format('woff2');
+  font-weight: 900;
   font-display: swap;
   font-style: normal;
 }
