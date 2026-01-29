@@ -44,7 +44,7 @@ function ScrollRevealWord({
                     <motion.span
                         key={index}
                         style={{ opacity, y }}
-                        className="inline-block mr-[0.3em] whitespace-nowrap"
+                        className="inline-block mr-[0.15em] whitespace-nowrap"
                     >
                         {word}
                     </motion.span>
@@ -69,7 +69,7 @@ export function FloatingIntro() {
     return (
         <section
             ref={containerRef}
-            className="relative h-[400vh]" // Increased height for better stickiness control
+            className="relative h-[200vh]" // Reduced height for faster reveal
         >
             <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
                 {/* Background decorative orb */}
@@ -83,26 +83,54 @@ export function FloatingIntro() {
 
                     {/* Primary Headline Block - Center Aligned */}
                     <div className="mb-12 md:mb-16 lg:mb-20 text-center w-full">
-                        {/* Main headline - Display size */}
-                        <div className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-clash font-bold leading-[1.1] tracking-tight">
-                            <span className="block text-beige mb-2 md:mb-4">
-                                <ScrollRevealWord
-                                    text="We specialize in"
-                                    scrollProgress={scrollYProgress}
-                                    startOffset={0.05}
-                                    endOffset={0.25}
-                                />
+                        {/* Main headline - Display size with Satoshi font */}
+                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-satoshi font-bold leading-[1.1] tracking-tight">
+                            <span className="block mb-2 md:mb-4">
+                                <span className="text-beige">
+                                    <ScrollRevealWord
+                                        text="We "
+                                        scrollProgress={scrollYProgress}
+                                        startOffset={0.1}
+                                        endOffset={0.2}
+                                    />
+                                </span>
+                                <span className="text-green-300">
+                                    <ScrollRevealWord
+                                        text="specialize "
+                                        scrollProgress={scrollYProgress}
+                                        startOffset={0.15}
+                                        endOffset={0.25}
+                                    />
+                                </span>
+                                <span className="text-beige">
+                                    <ScrollRevealWord
+                                        text="in"
+                                        scrollProgress={scrollYProgress}
+                                        startOffset={0.2}
+                                        endOffset={0.28}
+                                    />
+                                </span>
                             </span>
                             {/* Force customer happiness to be on same line with nowrap */}
-                            <span className="block text-green-300 italic whitespace-nowrap">
-                                <ScrollRevealWord
-                                    text="customer happiness."
-                                    scrollProgress={scrollYProgress}
-                                    startOffset={0.25}
-                                    endOffset={0.45}
-                                />
+                            <span className="block whitespace-nowrap">
+                                <span className="text-beige">
+                                    <ScrollRevealWord
+                                        text="customer "
+                                        scrollProgress={scrollYProgress}
+                                        startOffset={0.28}
+                                        endOffset={0.38}
+                                    />
+                                </span>
+                                <span className="text-green-300 italic">
+                                    <ScrollRevealWord
+                                        text="happiness."
+                                        scrollProgress={scrollYProgress}
+                                        startOffset={0.35}
+                                        endOffset={0.45}
+                                    />
+                                </span>
                             </span>
-                        </div>
+                        </h2>
                     </div>
 
                     {/* Secondary Content Block - Center Aligned */}
@@ -114,15 +142,15 @@ export function FloatingIntro() {
                                     text="Tailored strategies, "
                                     scrollProgress={scrollYProgress}
                                     startOffset={0.45}
-                                    endOffset={0.6}
+                                    endOffset={0.55}
                                 />
                             </span>
                             <span className="text-beige inline-block ml-2">
                                 <ScrollRevealWord
                                     text="Guaranteed results."
                                     scrollProgress={scrollYProgress}
-                                    startOffset={0.6}
-                                    endOffset={0.7}
+                                    startOffset={0.52}
+                                    endOffset={0.62}
                                 />
                             </span>
                         </div>
@@ -132,8 +160,8 @@ export function FloatingIntro() {
                             <ScrollRevealWord
                                 text="That's why we offer a full suite of services, each tailored to address your unique challenges and goals. Our team of experts combines creativity with data to build strategies that deliver results."
                                 scrollProgress={scrollYProgress}
-                                startOffset={0.7}
-                                endOffset={0.9}
+                                startOffset={0.62}
+                                endOffset={0.85}
                             />
                         </div>
                     </div>
