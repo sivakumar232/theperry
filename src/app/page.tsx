@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { FlipWords } from "@/components/ui/flip-words";
 import { ServicesGrid } from "@/components/ServicesGrid";
+import { ScrollIndicator } from "@/components/ui/scroll-indicator";
 
 export default function Home() {
   const flipWords = ["Perform.", "Scale.", "Grow."];
@@ -10,7 +11,7 @@ export default function Home() {
       <Navbar />
 
       {/* Spacer for fixed navbar */}
-      <div className="h-25" />
+      <div className="h-30" />
 
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center min-h-[60vh] px-6">
@@ -22,7 +23,12 @@ export default function Home() {
         <p className="mt-6 text-lg md:text-xl text-beige/70 font-satoshi font-medium text-center max-w-3xl">
           We transform your vision into a high-performance digital experience that converts visitors and scales effortlessly.
         </p>
+        <div className="h-10" />
+
+        {/* Scroll indicator */}
+        <ScrollIndicator href="#services" />
       </section>
+      <div className="h-10" />
 
       {/* Services Section */}
       <ServicesGrid />

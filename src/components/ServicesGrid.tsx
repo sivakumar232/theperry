@@ -100,7 +100,7 @@ export function ServicesGrid() {
     ];
 
     return (
-        <section className="py-20 md:py-32 px-6">
+        <section id="services" className="py-20 md:py-32 px-6">
             <div className="max-w-7xl mx-auto">
                 {/* Section Header */}
                 <motion.div

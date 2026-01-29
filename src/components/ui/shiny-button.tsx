@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useState, useRef, useEffect } from "react";
-import { motion, useAnimationFrame } from "motion/react";
+import React, { useRef, useEffect, useState } from "react";
+import { motion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 type ShinyButtonProps = {
@@ -10,65 +10,63 @@ type ShinyButtonProps = {
     href?: string;
 };
 
-export const ShinyButton = ({ children, className, href }: ShinyButtonProps) => {
-    const [isHovered, setIsHovered] = useState(false);
+export const ShinyButton = ({
+    children,
+    className,
+    href,
+}: ShinyButtonProps) => {
     const containerRef = useRef<HTMLAnchorElement>(null);
-    const [pathLength, setPathLength] = useState(0);
-    const [dimensions, setDimensions] = useState({ width: 0, height: 0, borderRadius: 24 });
+    const [pathLength, setPathLength] = useState<number>(0);
 
-    // Measure the button dimensions
     useEffect(() => {
-        if (containerRef.current) {
-            const { width, height } = containerRef.current.getBoundingClientRect();
-            setDimensions({ width, height, borderRadius: 24 });
-            // Approximate perimeter of rounded rectangle
-            const perimeter = 2 * (width + height) - 8 * 24 + 2 * Math.PI * 24;
-            setPathLength(perimeter);
-        }
+        if (!containerRef.current) return;
+
+        const { width, height } =
+            containerRef.current.getBoundingClientRect();
+
+        const r = 24;
+        const perimeter =
+            2 * (width + height) - 8 * r + 2 * Math.PI * r;
+
+        setPathLength(perimeter);
     }, []);
 
     return (
         <motion.a
             ref={containerRef}
             href={href}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
             whileTap={{ scale: 0.95 }}
             className={cn(
-                "relative inline-flex items-center justify-center px-6 py-3 rounded-full cursor-pointer",
+                "relative inline-flex items-center justify-center px-6 py-3 rounded-full",
                 "bg-beige text-neutral-900 font-medium font-clash text-sm",
-                "overflow-visible",
                 className
             )}
         >
-            {/* SVG for the border beam */}
+            {/* SVG BORDER */}
             <svg
                 className="absolute -inset-[2px] w-[calc(100%+4px)] h-[calc(100%+4px)] pointer-events-none"
-                style={{ overflow: 'visible' }}
+                overflow="visible"
             >
                 <defs>
-                    {/* Multi-color gradient for the beam */}
+                    {/* Gradient beam */}
                     <linearGradient id="beamGradient" x1="0%" y1="0%" x2="100%" y2="0%">
-                        <stop offset="0%" stopColor="#4285f4" />
-                        <stop offset="25%" stopColor="#9c27b0" />
-                        <stop offset="50%" stopColor="#ea4335" />
-                        <stop offset="75%" stopColor="#fbbc04" />
-                        <stop offset="100%" stopColor="#34a853" />
+                        <stop offset="0%" stopColor="#ffffff" />
+                        <stop offset="25%" stopColor="#4285f4" />
+                        <stop offset="55%" stopColor="#ea4335" />
+                        <stop offset="100%" stopColor="#34a853" stopOpacity="0.25" />
                     </linearGradient>
 
-                    {/* Glow filter */}
-                    <filter id="glow" x="-60%" y="-60%" width="220%" height="220%">
-                        <feGaussianBlur stdDeviation="6" result="coloredBlur" />
+                    {/* Glow */}
+                    <filter id="glow" x="-70%" y="-70%" width="240%" height="240%">
+                        <feGaussianBlur stdDeviation="6" result="blur" />
                         <feMerge>
-                            <feMergeNode in="coloredBlur" />
+                            <feMergeNode in="blur" />
                             <feMergeNode in="SourceGraphic" />
                         </feMerge>
                     </filter>
-
-
                 </defs>
 
-                {/* Background track (optional subtle border) */}
+                {/* Static base border */}
                 <rect
                     x="1"
                     y="1"
@@ -77,48 +75,41 @@ export const ShinyButton = ({ children, className, href }: ShinyButtonProps) => 
                     rx="24"
                     ry="24"
                     fill="none"
-                    stroke="rgba(255,255,255,0.1)"
+                    stroke="rgba(255,255,255,0.15)"
                     strokeWidth="1"
                 />
 
-                {/* Animated beam */}
-                <motion.rect
-                    x="1"
-                    y="1"
-                    width="calc(100% - 2px)"
-                    height="calc(100% - 2px)"
-                    rx="24"
-                    ry="24"
-                    fill="none"
-                    stroke="url(#beamGradient)"
-                    strokeWidth="4"                 // ✅ thicker beam
-                    strokeLinecap="round"
-                    filter="url(#glow)"
-                    strokeDasharray={`${pathLength * 0.45} ${pathLength}`} // ✅ long beam
-                    animate={{
-                        strokeDashoffset: [-pathLength, 0],
-                    }}
-                    transition={{
-                        duration: 3.2,                // ✅ smooth Google-like speed
-                        repeat: Infinity,
-                        ease: "linear",
-                    }}
-                />
-
+                {/* 🔥 NON-STOP ROTATING BEAM */}
+                {pathLength > 0 && (
+                    <motion.rect
+                        x="1"
+                        y="1"
+                        width="calc(100% - 2px)"
+                        height="calc(100% - 2px)"
+                        rx="24"
+                        ry="24"
+                        fill="none"
+                        stroke="url(#beamGradient)"
+                        strokeWidth="4"
+                        strokeLinecap="round"
+                        filter="url(#glow)"
+                        strokeDasharray={`${pathLength * 0.35} ${pathLength}`}
+                        animate={{
+                            strokeDashoffset: [-pathLength, 0],
+                        }}
+                        transition={{
+                            duration: 3,
+                            ease: "linear",
+                            repeat: Infinity,
+                        }}
+                    />
+                )}
             </svg>
 
             {/* Content */}
             <span className="relative z-10 flex items-center gap-2">
                 {children}
-                <motion.span
-                    animate={{
-                        x: isHovered ? 0 : -10,
-                        opacity: isHovered ? 1 : 0,
-                    }}
-                    transition={{ duration: 0.2 }}
-                >
-                    →
-                </motion.span>
+                <span aria-hidden>→</span>
             </span>
         </motion.a>
     );
