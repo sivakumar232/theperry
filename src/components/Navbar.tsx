@@ -2,6 +2,8 @@
 import Link from "next/link";
 import { SketchyLink } from "@/components/ui/sketchy-link";
 
+import { ShinyButton } from "@/components/ui/shiny-button";
+
 export default function Navbar() {
     const navLinks = [
         { name: "Our Work", href: "/#work" },
@@ -36,14 +38,12 @@ export default function Navbar() {
 
                 {/* Right: CTA Button */}
                 <div>
-                    <Link
-                        href="/contact"
-                        className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium font-clash transition-all duration-300 bg-beige text-black rounded-full"
-                    >
+                    <ShinyButton href="/contact">
                         Get in Touch
-                    </Link>
+                    </ShinyButton>
                 </div>
             </div>
         </nav>
     );
 }
+
