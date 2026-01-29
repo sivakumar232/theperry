@@ -18,7 +18,7 @@ export default function Navbar() {
                     href="/"
                     className="text-xl font-bold font-clash tracking-tight text-beige hover:text-beige/90 transition-colors"
                 >
-                    The Perry.
+                    The Perry. 
                 </Link>
 
                 {/* Middle: Navigation Links */}
