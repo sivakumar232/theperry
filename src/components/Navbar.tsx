@@ -18,7 +18,7 @@ export default function Navbar() {
                     href="/"
                     className="text-xl font-bold font-clash tracking-tight text-beige hover:text-beige/90 transition-colors"
                 >
-                    The Perry. 
+                    The Perry.
                 </Link>
 
                 {/* Middle: Navigation Links */}
@@ -27,7 +27,7 @@ export default function Navbar() {
                         <SketchyLink
                             key={link.name}
                             href={link.href}
-                            className="text-lg font-medium font-clash text-beige"
+                            className="text-md font-medium font-clash text-beige"
                         >
                             {link.name}
                         </SketchyLink>
@@ -38,7 +38,7 @@ export default function Navbar() {
                 <div>
                     <Link
                         href="/contact"
-                        className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium font-clash transition-all duration-300 bg-beige text-black rounded-full hover:bg-beige hover:-translate-y-0.5"
+                        className="inline-flex items-center justify-center px-6 py-3 text-sm font-medium font-clash transition-all duration-300 bg-beige text-black rounded-full"
                     >
                         Get in Touch
                     </Link>
