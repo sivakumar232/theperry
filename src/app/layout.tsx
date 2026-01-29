@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/ui/smooth-scroll";
+import { CircularCTA } from "@/components/CircularCTA";
 
 const inter = Inter({
   variable: "--font-inter",

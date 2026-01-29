@@ -64,7 +64,7 @@ export function SketchyLink({
                     animate={
                         isHovered
                             ? {
-                                pathLength: [0, 1, 0.85, 1], // ⬅️ forward → back → forward
+                                pathLength: [0, 1], // ⬅️ forward → back → forward
                                 opacity: 1,
                                 y: variation.yOffset,
                                 rotate: variation.rotate,
@@ -75,7 +75,7 @@ export function SketchyLink({
                             }
                     }
                     transition={{
-                        duration: 0.3,
+                        duration: 0.6,
                         ease: "easeInOut",
                     }}
                     style={{

@@ -3,6 +3,8 @@
 import React from "react";
 import { motion } from "motion/react";
 import Link from "next/link";
+import { FlipWords } from "./ui/flip-words";
+import { MagneticButton } from "./ui/magnetic-button";
 
 const footerLinks = {
     services: [
@@ -59,6 +61,7 @@ const footerLinks = {
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
+    const rotateWords = ["Experiences", "Brands", "Futures", "Success"];
 
     return (
         <footer className="py-16 md:py-24 px-6 bg-beige">
@@ -77,22 +80,25 @@ export function Footer() {
                                 the<span className="text-green-600">perry</span>
                             </span>
                         </Link>
-                        <p className="text-background/60 font-satoshi text-sm leading-relaxed mb-6">
-                            Building digital experiences that convert visitors into customers and scale with your business.
-                        </p>
+                        <div className="text-background/60 font-satoshi text-sm leading-relaxed mb-6">
+                            Building digital <br />
+                            <FlipWords words={rotateWords} className="text-background font-bold px-0 ml-0" /> <br />
+                            that convert and scale.
+                        </div>
                         {/* Social Links */}
                         <div className="flex gap-3">
                             {footerLinks.social.map((social) => (
-                                <a
-                                    key={social.label}
-                                    href={social.href}
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="w-10 h-10 rounded-full bg-background/5 border border-background/20 flex items-center justify-center text-background/60 hover:text-green-600 hover:border-green-600/30 hover:bg-background/10 transition-all duration-300"
-                                    aria-label={social.label}
-                                >
-                                    {social.icon}
-                                </a>
+                                <MagneticButton key={social.label}>
+                                    <a
+                                        href={social.href}
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="w-10 h-10 rounded-full bg-background/5 border border-background/20 flex items-center justify-center text-background/60 hover:text-green-600 hover:border-green-600/30 hover:bg-background/10 transition-all duration-300"
+                                        aria-label={social.label}
+                                    >
+                                        {social.icon}
+                                    </a>
+                                </MagneticButton>
                             ))}
                         </div>
                     </motion.div>

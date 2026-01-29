@@ -1,8 +1,9 @@
 import Navbar from "@/components/Navbar";
 import { FlipWords } from "@/components/ui/flip-words";
-import { ServicesGrid } from "@/components/ServicesGrid";
 import { ScrollIndicator } from "@/components/ui/scroll-indicator";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
+import { FloatingIntro } from "@/components/FloatingIntro";
+import { ImmersiveServices } from "@/components/ImmersiveServices";
 import { FAQ } from "@/components/FAQ";
 import { Footer } from "@/components/Footer";
 
@@ -10,7 +11,7 @@ export default function Home() {
   const flipWords = ["Perform.", "Scale.", "Grow."];
 
   return (
-    <main className="min-h-screen bg-background text-foreground">
+    <main className="min-h-screen bg-background text-foreground tracking-tight">
       <Navbar />
 
       {/* Spacer for fixed navbar */}
@@ -33,8 +34,11 @@ export default function Home() {
       </section>
       <div className="h-10" />
 
-      {/* Services Section */}
-      <ServicesGrid />
+      {/* Floating Intro Section */}
+      <FloatingIntro />
+
+      {/* Services Section - Immersive Horizontal Scroll */}
+      <ImmersiveServices />
 
       {/* Why Choose Us Section */}
       <WhyChooseUs />
