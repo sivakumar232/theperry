@@ -15,7 +15,7 @@ export default function Home() {
       <Navbar />
 
       {/* Spacer for fixed navbar */}
-      <div className="h-30" />
+      <div className="h-35" />
 
       {/* Hero Section */}
       <section className="flex flex-col items-center justify-center min-h-[60vh] px-6">
