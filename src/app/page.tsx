@@ -2,6 +2,9 @@ import Navbar from "@/components/Navbar";
 import { FlipWords } from "@/components/ui/flip-words";
 import { ServicesGrid } from "@/components/ServicesGrid";
 import { ScrollIndicator } from "@/components/ui/scroll-indicator";
+import { WhyChooseUs } from "@/components/WhyChooseUs";
+import { FAQ } from "@/components/FAQ";
+import { Footer } from "@/components/Footer";
 
 export default function Home() {
   const flipWords = ["Perform.", "Scale.", "Grow."];
@@ -32,6 +35,15 @@ export default function Home() {
 
       {/* Services Section */}
       <ServicesGrid />
+
+      {/* Why Choose Us Section */}
+      <WhyChooseUs />
+
+      {/* FAQ Section */}
+      <FAQ />
+
+      {/* Footer */}
+      <Footer />
     </main>
   );
 }
