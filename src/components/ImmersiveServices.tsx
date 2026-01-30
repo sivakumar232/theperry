@@ -136,7 +136,7 @@ export function ImmersiveServices() {
                             className="flex-shrink-0 w-screen h-full flex items-center justify-center relative overflow-hidden"
                         >
                             {/* Large background number */}
-                            <div className="absolute -right-10 md:right-10 top-1/2 -translate-y-1/2 text-[20rem] md:text-[30rem] font-clash font-black text-beige/[0.02] select-none pointer-events-none">
+                            <div className="absolute -right-10 md:right-10 top-1/2 -translate-y-1/2 text-[20rem] md:text-[30rem] font-satoshi font-black text-beige/[0.02] select-none pointer-events-none">
                                 {String(index + 1).padStart(2, "0")}
                             </div>
 
@@ -148,7 +148,7 @@ export function ImmersiveServices() {
                                 </p>
 
                                 {/* Title */}
-                                <h2 className="text-5xl md:text-7xl lg:text-8xl font-clash font-bold text-beige leading-none mb-6">
+                                <h2 className="text-5xl md:text-7xl lg:text-8xl font-satoshi font-bold text-beige leading-none mb-6">
                                     {service.title}
                                 </h2>
 

@@ -48,7 +48,7 @@ export function Process() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold font-clash text-beige mb-6">
+                    <h2 className="text-4xl md:text-6xl lg:text-7xl font-bold font-satoshi text-beige mb-6">
                         From Concept to <br />
                         <span className="text-green-300 italic font-normal">Conversion-Ready</span>
                     </h2>
@@ -83,12 +83,12 @@ export function Process() {
 
                             <div className="relative z-10">
                                 {/* Number */}
-                                <div className="text-5xl md:text-6xl font-clash font-bold text-white/5 group-hover:text-green-300/10 transition-colors duration-500 mb-4">
+                                <div className="text-5xl md:text-6xl font-satoshi font-bold text-white/5 group-hover:text-green-300/10 transition-colors duration-500 mb-4">
                                     {step.number}
                                 </div>
 
                                 {/* Content */}
-                                <h3 className="text-xl font-bold font-clash text-beige mb-3 group-hover:text-green-300 transition-colors duration-300">
+                                <h3 className="text-xl font-bold font-satoshi text-beige mb-3 group-hover:text-green-300 transition-colors duration-300">
                                     {step.title}
                                 </h3>
                                 <p className="text-sm text-beige/50 font-satoshi leading-relaxed mb-4">

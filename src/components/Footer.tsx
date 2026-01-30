@@ -76,7 +76,7 @@ export function Footer() {
                         transition={{ duration: 0.6 }}
                     >
                         <Link href="/" className="inline-block mb-4">
-                            <span className="text-2xl font-bold font-clash text-background">
+                            <span className="text-2xl font-bold font-satoshi text-background">
                                 the<span className="text-green-600">perry</span>
                             </span>
                         </Link>
@@ -110,7 +110,7 @@ export function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.1 }}
                     >
-                        <h3 className="text-background font-clash font-medium text-lg mb-4">Services</h3>
+                        <h3 className="text-background font-satoshi font-medium text-lg mb-4">Services</h3>
                         <ul className="space-y-3">
                             {footerLinks.services.map((link) => (
                                 <li key={link.label}>
@@ -132,7 +132,7 @@ export function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                     >
-                        <h3 className="text-background font-clash font-medium text-lg mb-4">Company</h3>
+                        <h3 className="text-background font-satoshi font-medium text-lg mb-4">Company</h3>
                         <ul className="space-y-3">
                             {footerLinks.company.map((link) => (
                                 <li key={link.label}>
@@ -154,7 +154,7 @@ export function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.6, delay: 0.3 }}
                     >
-                        <h3 className="text-background font-clash font-medium text-lg mb-4">Get In Touch</h3>
+                        <h3 className="text-background font-satoshi font-medium text-lg mb-4">Get In Touch</h3>
                         <ul className="space-y-3">
                             <li>
                                 <a

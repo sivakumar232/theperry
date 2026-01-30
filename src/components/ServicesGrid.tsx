@@ -110,7 +110,7 @@ export function ServicesGrid() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash text-beige mb-4">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-beige mb-4">
                         Our <span className="text-green-300 italic font-normal">Services</span>
                     </h2>
                     <p className="text-lg text-beige/60 font-satoshi max-w-2xl mx-auto">

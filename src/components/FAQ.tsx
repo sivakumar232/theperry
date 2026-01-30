@@ -42,7 +42,7 @@ function FAQItem({ question, answer, isOpen, onClick }: { question: string; answ
                 className="w-full py-6 flex items-center justify-between text-left group"
                 onClick={onClick}
             >
-                <span className="text-lg md:text-xl font-clash font-medium text-beige group-hover:text-green-300 transition-colors duration-300">
+                <span className="text-lg md:text-xl font-satoshi font-medium text-beige group-hover:text-green-300 transition-colors duration-300">
                     {question}
                 </span>
                 <motion.div
@@ -99,7 +99,7 @@ export function FAQ() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash text-beige mb-4">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-beige mb-4">
                         Frequently Asked <span className="text-green-300 italic font-normal">Questions</span>
                     </h2>
                     <p className="text-lg text-beige/60 font-satoshi max-w-2xl mx-auto">

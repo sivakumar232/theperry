@@ -40,7 +40,7 @@ export default function Navbar() {
                     href="/"
                     className="text-xl font-bold font-clash tracking-tight text-beige hover:text-beige/90 transition-colors"
                 >
-                    The Perry.
+                    ThePerry.
                 </Link>
 
                 {/* Middle: Navigation Links */}
@@ -49,7 +49,7 @@ export default function Navbar() {
                         <SketchyLink
                             key={link.name}
                             href={link.href}
-                            className="text-md font-medium font-clash text-beige"
+                            className="text-md font-medium font-satoshi text-beige"
                         >
                             {link.name}
                         </SketchyLink>

@@ -26,7 +26,7 @@ export function CircularCTA() {
                             d="M 100, 100 m -75, 0 a 75,75 0 1,1 150,0 a 75,75 0 1,1 -150,0"
                         />
                     </defs>
-                    <text className="text-[16px] font-clash font-bold fill-beige uppercase tracking-[0.3em]">
+                    <text className="text-[16px] font-satoshi font-bold fill-beige uppercase tracking-[0.3em]">
                         <textPath href="#circlePath" startOffset="0%">
                             LET&apos;S WORK • LET&apos;S WORK • LET&apos;S WORK •
                         </textPath>

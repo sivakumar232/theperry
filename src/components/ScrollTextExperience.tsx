@@ -168,7 +168,7 @@ function TextLine({
             }}
         >
             <h2
-                className={`${size} font-clash font-bold leading-tight tracking-tight ${highlight ? "text-green-300 italic" : "text-beige"
+                className={`${size} font-satoshi font-bold leading-tight tracking-tight ${highlight ? "text-green-300 italic" : "text-beige"
                     }`}
             >
                 {text}

@@ -52,7 +52,7 @@ export const BentoGridItem = ({
                 <div className="text-beige/70 group-hover/bento:text-green-300 transition-colors duration-300 mb-3">
                     {icon}
                 </div>
-                <div className="font-clash font-bold text-xl text-beige group-hover/bento:text-white transition-colors duration-300 mb-2">
+                <div className="font-satoshi font-bold text-xl text-beige group-hover/bento:text-white transition-colors duration-300 mb-2">
                     {title}
                 </div>
                 <div className="font-satoshi text-sm text-beige/60 group-hover/bento:text-beige/80 transition-colors duration-300 leading-relaxed">

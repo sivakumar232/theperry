@@ -69,7 +69,7 @@ export function FloatingIntro() {
     return (
         <section
             ref={containerRef}
-            className="relative h-[200vh]" // Reduced height for faster reveal
+            className="relative h-[150vh]" // Reduced height for earlier trigger
         >
             <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
                 {/* Background decorative orb */}

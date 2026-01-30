@@ -79,7 +79,7 @@ export function HorizontalProcess() {
                         How We Work
                     </motion.p>
                     <motion.h2
-                        className="text-4xl md:text-6xl font-clash font-bold text-beige"
+                        className="text-4xl md:text-6xl font-satoshi font-bold text-beige"
                         initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.1 }}
@@ -113,7 +113,7 @@ export function HorizontalProcess() {
                                 transition={{ duration: 0.5, delay: index * 0.1 }}
                             >
                                 {/* Background number */}
-                                <div className="absolute -right-8 -bottom-16 text-[20rem] font-clash font-black text-white/[0.03] select-none pointer-events-none group-hover:text-white/[0.06] transition-colors duration-700">
+                                <div className="absolute -right-8 -bottom-16 text-[20rem] font-satoshi font-black text-white/[0.03] select-none pointer-events-none group-hover:text-white/[0.06] transition-colors duration-700">
                                     {step.number}
                                 </div>
 
@@ -122,7 +122,7 @@ export function HorizontalProcess() {
                                     <span className="text-green-300 font-satoshi text-sm font-medium tracking-wider">
                                         STEP {step.number}
                                     </span>
-                                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-clash font-bold text-beige mt-2 mb-4">
+                                    <h3 className="text-4xl md:text-5xl lg:text-6xl font-satoshi font-bold text-beige mt-2 mb-4">
                                         {step.title}
                                     </h3>
                                     <p className="text-lg text-beige/70 font-satoshi mb-2">
@@ -157,7 +157,7 @@ export function HorizontalProcess() {
                             whileInView={{ opacity: 1, scale: 1 }}
                             transition={{ duration: 0.5 }}
                         >
-                            <h3 className="text-4xl md:text-5xl font-clash font-bold text-beige mb-4">
+                            <h3 className="text-4xl md:text-5xl font-satoshi font-bold text-beige mb-4">
                                 Ready to Start?
                             </h3>
                             <p className="text-beige/60 font-satoshi text-lg mb-8 max-w-sm">

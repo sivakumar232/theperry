@@ -45,16 +45,9 @@ const features = [
             </svg>
         ),
         title: "Dedicated Support",
-        description: "We're with you 24/7. Real humans, real solutions, real fast.",
+        description: "We're with you every step of the way. Real humans, real solutions, real fast.",
         gradient: "from-blue-500/20 via-cyan-500/10 to-transparent",
     },
-];
-
-const stats = [
-    { value: "50+", label: "Projects Delivered" },
-    { value: "98%", label: "Client Satisfaction" },
-    { value: "2x", label: "Faster Than Average" },
-    { value: "24/7", label: "Support Available" },
 ];
 
 export function WhyChooseUs() {
@@ -69,39 +62,12 @@ export function WhyChooseUs() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6 }}
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-clash text-beige mb-4">
+                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-beige mb-4">
                         Why <span className="text-green-300 italic font-normal">Choose Us</span>
                     </h2>
                     <p className="text-lg text-beige/60 font-satoshi max-w-2xl mx-auto">
                         We don&apos;t just build websites. We craft digital experiences that drive real results.
                     </p>
-                </motion.div>
-
-                {/* Stats Row */}
-                <motion.div
-                    className="grid grid-cols-2 md:grid-cols-4 gap-6 mb-16"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
-                >
-                    {stats.map((stat, index) => (
-                        <div
-                            key={stat.label}
-                            className="text-center p-6 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm"
-                        >
-                            <motion.div
-                                className="text-3xl md:text-4xl font-bold font-clash text-green-300"
-                                initial={{ scale: 0.5, opacity: 0 }}
-                                whileInView={{ scale: 1, opacity: 1 }}
-                                viewport={{ once: true }}
-                                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                            >
-                                {stat.value}
-                            </motion.div>
-                            <div className="text-sm text-beige/60 font-satoshi mt-2">{stat.label}</div>
-                        </div>
-                    ))}
                 </motion.div>
 
                 {/* Features Grid */}
@@ -122,7 +88,7 @@ export function WhyChooseUs() {
                                 <div className="text-green-300 mb-4 transition-transform duration-300 group-hover:scale-110">
                                     {feature.icon}
                                 </div>
-                                <h3 className="text-xl md:text-2xl font-bold font-clash text-beige mb-3">
+                                <h3 className="text-xl md:text-2xl font-bold font-satoshi text-beige mb-3">
                                     {feature.title}
                                 </h3>
                                 <p className="text-beige/60 font-satoshi leading-relaxed">
