@@ -81,27 +81,22 @@ export default function Home() {
       {/* Trust Bar */}
       <TrustBar />
 
-
-
-      {/* Founder Section */}
-      <FounderSection />
-
-      {/* Process Section */}
-      <ProcessSection />
-
-      {/* Services Section */}
-      <ImmersiveServices />
-
-      {/* Guarantee Section */}
-
-
       {/* Why Choose Us */}
       <WhyChooseUs />
+
+      {/* Services Section - Horizontal Scroll */}
+      <ImmersiveServices />
+
+      {/* Process Section - How We Work Together */}
+      <ProcessSection />
 
       {/* FAQ Section */}
       <FAQ />
 
-      {/* Final CTA */}
+      {/* Founder Section - Story Behind */}
+      <FounderSection />
+
+      {/* Final CTA - Ready to Build */}
       <FinalCTA />
 
       {/* Footer */}
