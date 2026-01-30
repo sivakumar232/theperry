@@ -77,28 +77,28 @@ function Card({ item, index }: { item: typeof cards[0]; index: number }) {
 
     return (
         <motion.div
-            className="group relative p-8 md:p-10 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden"
-            initial={{ opacity: 0, y: 30 }}
+            className="group relative p-6 md:p-8 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden"
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
+            transition={{ duration: 0.4, delay: index * 0.06 }}
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
-            style={{ minHeight: "280px" }}
+            style={{ minHeight: "240px" }}
         >
-            {/* Subtle gradient - same for both states */}
+            {/* Subtle gradient */}
             <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
             {/* Content */}
             <div className="relative z-10 h-full flex flex-col">
                 {/* Label */}
-                <div className="mb-6">
+                <div className="mb-4">
                     <motion.span
-                        className="inline-block text-xs font-satoshi font-medium uppercase tracking-[0.2em] px-3 py-1.5 rounded-full border transition-all duration-300"
+                        className="inline-block text-xs font-satoshi font-medium uppercase tracking-[0.15em] px-2.5 py-1 rounded-full border transition-all duration-300"
                         animate={{
-                            backgroundColor: isHovered ? "rgba(134, 239, 172, 0.1)" : "rgba(255, 255, 255, 0.05)",
-                            borderColor: isHovered ? "rgba(134, 239, 172, 0.3)" : "rgba(255, 255, 255, 0.1)",
-                            color: isHovered ? "rgb(134, 239, 172)" : "rgba(245, 245, 220, 0.5)",
+                            backgroundColor: isHovered ? "rgba(254, 251, 227, 0.1)" : "rgba(255, 255, 255, 0.05)",
+                            borderColor: isHovered ? "rgba(254, 251, 227, 0.3)" : "rgba(255, 255, 255, 0.1)",
+                            color: isHovered ? "rgb(254, 251, 227)" : "rgba(254, 251, 227, 0.5)",
                         }}
                         transition={{ duration: 0.3 }}
                     >
@@ -106,44 +106,44 @@ function Card({ item, index }: { item: typeof cards[0]; index: number }) {
                     </motion.span>
                 </div>
 
-                {/* Title with smooth crossfade */}
-                <div className="relative mb-4 min-h-[72px]">
+                {/* Title */}
+                <div className="relative mb-3 min-h-[56px]">
                     <AnimatePresence mode="wait">
                         <motion.h3
                             key={isHovered ? "solution" : "problem"}
-                            className="text-2xl md:text-3xl font-bold font-satoshi text-beige leading-tight"
-                            initial={{ opacity: 0, y: 8 }}
+                            className="text-xl md:text-2xl font-bold font-satoshi text-beige leading-tight"
+                            initial={{ opacity: 0, y: 6 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -8 }}
-                            transition={{ duration: 0.25, ease: "easeOut" }}
+                            exit={{ opacity: 0, y: -6 }}
+                            transition={{ duration: 0.2, ease: "easeOut" }}
                         >
                             {isHovered ? item.solution.title : item.problem.title}
                         </motion.h3>
                     </AnimatePresence>
                 </div>
 
-                {/* Description with smooth crossfade */}
+                {/* Description */}
                 <div className="relative flex-1">
                     <AnimatePresence mode="wait">
                         <motion.p
                             key={isHovered ? "solution-desc" : "problem-desc"}
-                            className="text-base md:text-lg text-beige/60 font-satoshi leading-relaxed"
-                            initial={{ opacity: 0, y: 8 }}
+                            className="text-sm md:text-base text-beige/50 font-satoshi leading-relaxed"
+                            initial={{ opacity: 0, y: 6 }}
                             animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -8 }}
-                            transition={{ duration: 0.25, ease: "easeOut", delay: 0.05 }}
+                            exit={{ opacity: 0, y: -6 }}
+                            transition={{ duration: 0.2, ease: "easeOut", delay: 0.03 }}
                         >
                             {isHovered ? item.solution.description : item.problem.description}
                         </motion.p>
                     </AnimatePresence>
                 </div>
 
-                {/* Bottom accent line */}
+                {/* Bottom accent */}
                 <motion.div
-                    className="mt-6 h-px bg-gradient-to-r from-transparent via-green-300/30 to-transparent"
+                    className="mt-4 h-px bg-gradient-to-r from-transparent via-beige/30 to-transparent"
                     initial={{ scaleX: 0 }}
                     animate={{ scaleX: isHovered ? 1 : 0 }}
-                    transition={{ duration: 0.4, ease: "easeOut" }}
+                    transition={{ duration: 0.3, ease: "easeOut" }}
                 />
             </div>
         </motion.div>
@@ -152,27 +152,27 @@ function Card({ item, index }: { item: typeof cards[0]; index: number }) {
 
 export function WhyChooseUs() {
     return (
-        <section id="why-us" className="py-20 md:py-32 px-6">
-            <div className="max-w-7xl mx-auto">
+        <section id="why-us" className="py-16 md:py-24 px-6">
+            <div className="max-w-6xl mx-auto">
                 {/* Section Header */}
                 <motion.div
-                    className="text-center mb-16 md:mb-20"
-                    initial={{ opacity: 0, y: 20 }}
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-beige mb-4">
+                    <h2 className="text-3xl md:text-4xl font-bold font-satoshi text-beige mb-3">
                         Why{" "}
-                        <span className="text-green-300 italic font-normal">Choose Us</span>
+                        <span className="text-beige/70 italic font-normal">Choose Us</span>
                     </h2>
-                    <p className="text-lg text-beige/50 font-satoshi max-w-2xl mx-auto">
+                    <p className="text-base text-beige/50 font-satoshi max-w-xl mx-auto">
                         Every problem has a solution. Hover to see how we solve what others can&apos;t.
                     </p>
                 </motion.div>
 
-                {/* Perfect 2x3 Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {/* Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                     {cards.map((item, index) => (
                         <Card key={item.id} item={item} index={index} />
                     ))}

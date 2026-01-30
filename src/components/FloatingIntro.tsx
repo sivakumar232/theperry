@@ -24,7 +24,6 @@ function ScrollRevealWord({
     return (
         <span className={className}>
             {words.map((word, index) => {
-                // Calculate scroll range for this word
                 const wordStart = startOffset + (index / totalWords) * (endOffset - startOffset);
                 const wordEnd = wordStart + (endOffset - startOffset) / totalWords + 0.05;
 
@@ -62,30 +61,29 @@ export function FloatingIntro() {
         offset: ["start start", "end end"],
     });
 
-    // Background orb parallax
     const orbScale = useTransform(scrollYProgress, [0, 0.5, 1], [0.8, 1.2, 0.8]);
     const orbOpacity = useTransform(scrollYProgress, [0, 0.2, 0.8, 1], [0, 1, 1, 0]);
 
     return (
         <section
+            id="intro"
             ref={containerRef}
-            className="relative h-[150vh]" // Reduced height for earlier trigger
+            className="relative h-[130vh]"
         >
             <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden">
-                {/* Background decorative orb */}
+                {/* Background decorative orb - beige instead of green */}
                 <motion.div
-                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] bg-green-300/5 rounded-full blur-[150px] pointer-events-none"
+                    className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-beige/5 rounded-full blur-[120px] pointer-events-none"
                     style={{ scale: orbScale, opacity: orbOpacity }}
                 />
 
-                {/* Content container - flex col to center vertically */}
-                <div className="max-w-7xl mx-auto px-6 md:px-12 lg:px-16 w-full flex flex-col items-center justify-center h-full">
+                {/* Content container */}
+                <div className="max-w-6xl mx-auto px-6 md:px-12 w-full flex flex-col items-center justify-center h-full">
 
-                    {/* Primary Headline Block - Center Aligned */}
-                    <div className="mb-12 md:mb-16 lg:mb-20 text-center w-full">
-                        {/* Main headline - Display size with Satoshi font */}
-                        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-satoshi font-bold leading-[1.1] tracking-tight">
-                            <span className="block mb-2 md:mb-4">
+                    {/* Primary Headline Block */}
+                    <div className="mb-10 md:mb-14 text-center w-full">
+                        <h2 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-satoshi font-bold leading-[1.1] tracking-tight">
+                            <span className="block mb-2">
                                 <span className="text-beige">
                                     <ScrollRevealWord
                                         text="We "
@@ -94,7 +92,7 @@ export function FloatingIntro() {
                                         endOffset={0.2}
                                     />
                                 </span>
-                                <span className="text-green-300">
+                                <span className="text-beige/70 italic">
                                     <ScrollRevealWord
                                         text="specialize "
                                         scrollProgress={scrollYProgress}
@@ -111,7 +109,6 @@ export function FloatingIntro() {
                                     />
                                 </span>
                             </span>
-                            {/* Force customer happiness to be on same line with nowrap */}
                             <span className="block whitespace-nowrap">
                                 <span className="text-beige">
                                     <ScrollRevealWord
@@ -121,7 +118,7 @@ export function FloatingIntro() {
                                         endOffset={0.38}
                                     />
                                 </span>
-                                <span className="text-green-300 italic">
+                                <span className="text-beige/70 italic">
                                     <ScrollRevealWord
                                         text="happiness."
                                         scrollProgress={scrollYProgress}
@@ -133,11 +130,11 @@ export function FloatingIntro() {
                         </h2>
                     </div>
 
-                    {/* Secondary Content Block - Center Aligned */}
-                    <div className="max-w-4xl mx-auto text-center">
-                        {/* Subheadline - Title size */}
-                        <div className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-satoshi font-medium leading-snug mb-8 md:mb-10 lg:mb-12">
-                            <span className="text-beige/80 inline-block">
+                    {/* Secondary Content Block */}
+                    <div className="max-w-3xl mx-auto text-center">
+                        {/* Subheadline */}
+                        <div className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-satoshi font-medium leading-snug mb-6 md:mb-8">
+                            <span className="text-beige/70 inline-block">
                                 <ScrollRevealWord
                                     text="Tailored strategies, "
                                     scrollProgress={scrollYProgress}
@@ -155,8 +152,8 @@ export function FloatingIntro() {
                             </span>
                         </div>
 
-                        {/* Body text - Regular size */}
-                        <div className="text-base sm:text-lg md:text-xl font-satoshi text-beige/50 leading-relaxed max-w-3xl mx-auto">
+                        {/* Body text */}
+                        <div className="text-sm sm:text-base md:text-lg font-satoshi text-beige/50 leading-relaxed max-w-2xl mx-auto">
                             <ScrollRevealWord
                                 text="That's why we offer a full suite of services, each tailored to address your unique challenges and goals. Our team of experts combines creativity with data to build strategies that deliver results."
                                 scrollProgress={scrollYProgress}

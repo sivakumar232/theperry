@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "motion/react";
 const faqs = [
     {
         question: "How long does it take to build a website?",
-        answer: "Typically, a fully custom website takes 4-8 weeks depending on complexity. We'll provide a detailed timeline during our initial consultation based on your specific requirements.",
+        answer: "Typically, a fully custom website takes 3-4 weeks depending on complexity. We'll provide a detailed timeline during our initial consultation based on your specific requirements.",
     },
     {
         question: "What technologies do you use?",
@@ -14,7 +14,7 @@ const faqs = [
     },
     {
         question: "Do you provide ongoing support?",
-        answer: "Absolutely! We offer 24/7 support and maintenance packages. After launch, we're still here to help with updates, fixes, and improvements whenever you need them.",
+        answer: "Absolutely! We offer support and maintenance packages. After launch, we're still here to help with updates, fixes, and improvements whenever you need them.",
     },
     {
         question: "What's included in your pricing?",
@@ -34,32 +34,32 @@ function FAQItem({ question, answer, isOpen, onClick }: { question: string; answ
     return (
         <motion.div
             className="border-b border-white/10 last:border-b-0"
-            initial={{ opacity: 0, y: 20 }}
+            initial={{ opacity: 0, y: 16 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
         >
             <button
-                className="w-full py-6 flex items-center justify-between text-left group"
+                className="w-full py-4 flex items-center justify-between text-left group"
                 onClick={onClick}
             >
-                <span className="text-lg md:text-xl font-satoshi font-medium text-beige group-hover:text-green-300 transition-colors duration-300">
+                <span className="text-base md:text-lg font-satoshi font-medium text-beige group-hover:text-beige/80 transition-colors duration-300">
                     {question}
                 </span>
                 <motion.div
-                    className="flex-shrink-0 ml-4 w-8 h-8 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-green-300/20 transition-colors duration-300"
+                    className="flex-shrink-0 ml-3 w-7 h-7 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-beige/20 transition-colors duration-300"
                     animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.3 }}
+                    transition={{ duration: 0.25 }}
                 >
                     <svg
-                        width="16"
-                        height="16"
+                        width="14"
+                        height="14"
                         viewBox="0 0 24 24"
                         fill="none"
                         stroke="currentColor"
                         strokeWidth="2"
                         strokeLinecap="round"
                         strokeLinejoin="round"
-                        className="text-beige group-hover:text-green-300 transition-colors duration-300"
+                        className="text-beige/70 group-hover:text-beige transition-colors duration-300"
                     >
                         <line x1="12" y1="5" x2="12" y2="19" />
                         <line x1="5" y1="12" x2="19" y2="12" />
@@ -72,10 +72,10 @@ function FAQItem({ question, answer, isOpen, onClick }: { question: string; answ
                         initial={{ height: 0, opacity: 0 }}
                         animate={{ height: "auto", opacity: 1 }}
                         exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3, ease: "easeInOut" }}
+                        transition={{ duration: 0.25, ease: "easeInOut" }}
                         className="overflow-hidden"
                     >
-                        <p className="pb-6 text-beige/60 font-satoshi leading-relaxed pr-12">
+                        <p className="pb-4 text-sm text-beige/50 font-satoshi leading-relaxed pr-10">
                             {answer}
                         </p>
                     </motion.div>
@@ -89,31 +89,31 @@ export function FAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <section id="faq" className="py-20 md:py-32 px-6">
-            <div className="max-w-4xl mx-auto">
+        <section id="faq" className="py-16 md:py-24 px-6">
+            <div className="max-w-3xl mx-auto">
                 {/* Section Header */}
                 <motion.div
-                    className="text-center mb-16"
-                    initial={{ opacity: 0, y: 20 }}
+                    className="text-center mb-10"
+                    initial={{ opacity: 0, y: 16 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6 }}
+                    transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-beige mb-4">
-                        Frequently Asked <span className="text-green-300 italic font-normal">Questions</span>
+                    <h2 className="text-3xl md:text-4xl font-bold font-satoshi text-beige mb-3">
+                        Frequently Asked <span className="text-beige/70 italic font-normal">Questions</span>
                     </h2>
-                    <p className="text-lg text-beige/60 font-satoshi max-w-2xl mx-auto">
+                    <p className="text-base text-beige/50 font-satoshi max-w-xl mx-auto">
                         Got questions? We&apos;ve got answers. If you don&apos;t see what you&apos;re looking for, reach out!
                     </p>
                 </motion.div>
 
                 {/* FAQ Items */}
                 <motion.div
-                    className="bg-white/5 border border-white/10 rounded-2xl backdrop-blur-sm p-2 md:p-6"
-                    initial={{ opacity: 0, y: 30 }}
+                    className="bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm p-4 md:p-5"
+                    initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    transition={{ duration: 0.5, delay: 0.1 }}
                 >
                     {faqs.map((faq, index) => (
                         <FAQItem

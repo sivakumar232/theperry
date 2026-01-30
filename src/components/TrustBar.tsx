@@ -25,15 +25,14 @@ const technologies = [
 ];
 
 export function TrustBar() {
-    // Duplicate for infinite scroll effect
     const duplicatedTech = [...technologies, ...technologies];
 
     return (
-        <section className="py-8 border-y border-white/10 bg-white/[0.02] overflow-hidden">
+        <section id="trust" className="py-6 border-y border-white/10 bg-white/[0.02] overflow-hidden">
             <div className="flex items-center">
                 {/* Label */}
-                <div className="flex-shrink-0 pl-6 pr-8">
-                    <span className="text-sm font-satoshi text-beige/50 uppercase tracking-widest">
+                <div className="flex-shrink-0 pl-6 pr-6">
+                    <span className="text-xs font-satoshi text-beige/40 uppercase tracking-widest">
                         Built with
                     </span>
                 </div>
@@ -41,7 +40,7 @@ export function TrustBar() {
                 {/* Scrolling logos */}
                 <div className="flex-1 overflow-hidden">
                     <motion.div
-                        className="flex gap-12"
+                        className="flex gap-10"
                         animate={{
                             x: ["0%", "-50%"],
                         }}
@@ -59,13 +58,13 @@ export function TrustBar() {
                             return (
                                 <div
                                     key={`${tech.name}-${index}`}
-                                    className="flex items-center gap-2 flex-shrink-0 group cursor-default"
+                                    className="flex items-center gap-1.5 flex-shrink-0 group cursor-default"
                                 >
                                     <Icon
-                                        className="w-4 h-4 text-beige/40 group-hover:text-green-300 transition-colors"
+                                        className="w-3.5 h-3.5 text-beige/30 group-hover:text-beige/60 transition-colors"
                                         strokeWidth={1.5}
                                     />
-                                    <span className="text-sm font-satoshi text-beige/40 group-hover:text-green-300 transition-colors whitespace-nowrap">
+                                    <span className="text-xs font-satoshi text-beige/30 group-hover:text-beige/60 transition-colors whitespace-nowrap">
                                         {tech.name}
                                     </span>
                                 </div>

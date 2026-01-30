@@ -35,11 +35,9 @@ export function ImmersiveServices() {
         offset: ["start start", "end end"],
     });
 
-    // Calculate total scroll distance
     const totalScrollPercent = (services.length - 1) * 100;
     const x = useTransform(scrollYProgress, [0, 1], ["0%", `-${totalScrollPercent}%`]);
 
-    // Parallax layer speeds (slower than main content)
     const backgroundX = useTransform(scrollYProgress, [0, 1], ["0%", `-${totalScrollPercent * 0.3}%`]);
     const midgroundX = useTransform(scrollYProgress, [0, 1], ["0%", `-${totalScrollPercent * 0.6}%`]);
 
@@ -53,7 +51,7 @@ export function ImmersiveServices() {
             {/* Sticky container */}
             <div className="sticky top-0 h-screen overflow-hidden bg-background">
 
-                {/* Background parallax layer - slowest */}
+                {/* Background parallax layer */}
                 <motion.div
                     className="absolute inset-0 flex pointer-events-none"
                     style={{ x: backgroundX }}
@@ -63,8 +61,8 @@ export function ImmersiveServices() {
                             key={index}
                             className="flex-shrink-0 w-screen h-full relative"
                         >
-                            <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-green-300/5 to-transparent" />
-                            <div className="absolute left-1/4 top-1/4 w-[40rem] h-[40rem] rounded-full bg-green-300/[0.03] blur-[100px]" />
+                            <div className="absolute right-0 top-0 w-1/2 h-full bg-gradient-to-l from-beige/5 to-transparent" />
+                            <div className="absolute left-1/4 top-1/4 w-[30rem] h-[30rem] rounded-full bg-beige/[0.03] blur-[80px]" />
                         </div>
                     ))}
                 </motion.div>
@@ -79,13 +77,13 @@ export function ImmersiveServices() {
                             key={index}
                             className="flex-shrink-0 w-screen h-full relative"
                         >
-                            <div className="absolute right-20 bottom-20 w-[30rem] h-[30rem] rounded-full bg-beige/[0.02] blur-[80px]" />
+                            <div className="absolute right-20 bottom-20 w-[25rem] h-[25rem] rounded-full bg-beige/[0.02] blur-[60px]" />
                         </div>
                     ))}
                 </motion.div>
 
-                {/* Service Names Navigation - Fixed at Top */}
-                <div className="absolute top-8 left-0 right-0 z-30 flex justify-center gap-12 px-8">
+                {/* Service Names Navigation */}
+                <div className="absolute top-6 left-0 right-0 z-30 flex justify-center gap-8 px-6">
                     {services.map((service, index) => {
                         const serviceStart = index / services.length;
                         const serviceEnd = (index + 1) / services.length;
@@ -94,7 +92,7 @@ export function ImmersiveServices() {
                         return (
                             <motion.button
                                 key={service.id}
-                                className="text-sm md:text-base font-satoshi uppercase tracking-widest transition-colors duration-300 relative"
+                                className="text-xs md:text-sm font-satoshi uppercase tracking-widest transition-colors duration-300 relative"
                                 style={{
                                     opacity: useTransform(
                                         scrollYProgress,
@@ -104,14 +102,14 @@ export function ImmersiveServices() {
                                     color: useTransform(
                                         scrollYProgress,
                                         [serviceStart, serviceMid, serviceEnd],
-                                        ["rgb(245, 245, 220)", "rgb(134, 239, 172)", "rgb(245, 245, 220)"]
+                                        ["rgb(254, 251, 227)", "rgb(254, 251, 227)", "rgb(254, 251, 227)"]
                                     ),
                                 }}
                             >
                                 {service.title}
                                 {/* Active indicator line */}
                                 <motion.div
-                                    className="absolute -bottom-2 left-0 right-0 h-[2px] bg-green-300"
+                                    className="absolute -bottom-1.5 left-0 right-0 h-px bg-beige"
                                     style={{
                                         scaleX: useTransform(
                                             scrollYProgress,
@@ -125,7 +123,7 @@ export function ImmersiveServices() {
                     })}
                 </div>
 
-                {/* Main content - Foreground (fastest) */}
+                {/* Main content */}
                 <motion.div
                     className="flex h-full"
                     style={{ x }}
@@ -136,38 +134,38 @@ export function ImmersiveServices() {
                             className="flex-shrink-0 w-screen h-full flex items-center justify-center relative overflow-hidden"
                         >
                             {/* Large background number */}
-                            <div className="absolute -right-10 md:right-10 top-1/2 -translate-y-1/2 text-[20rem] md:text-[30rem] font-satoshi font-black text-beige/[0.02] select-none pointer-events-none">
+                            <div className="absolute -right-10 md:right-10 top-1/2 -translate-y-1/2 text-[15rem] md:text-[22rem] font-satoshi font-black text-beige/[0.02] select-none pointer-events-none">
                                 {String(index + 1).padStart(2, "0")}
                             </div>
 
                             {/* Content */}
-                            <div className="relative z-10 max-w-4xl px-8 md:px-16 text-center md:text-left">
+                            <div className="relative z-10 max-w-3xl px-6 md:px-12 text-center md:text-left">
                                 {/* Service number */}
-                                <p className="text-sm font-satoshi text-green-300/60 uppercase tracking-widest mb-4">
+                                <p className="text-xs font-satoshi text-beige/50 uppercase tracking-widest mb-3">
                                     0{index + 1} / 0{services.length}
                                 </p>
 
                                 {/* Title */}
-                                <h2 className="text-5xl md:text-7xl lg:text-8xl font-satoshi font-bold text-beige leading-none mb-6">
+                                <h2 className="text-4xl md:text-5xl lg:text-6xl font-satoshi font-bold text-beige leading-none mb-4">
                                     {service.title}
                                 </h2>
 
                                 {/* Tagline */}
-                                <p className="text-xl md:text-3xl font-satoshi font-medium text-green-300 italic mb-8">
+                                <p className="text-lg md:text-xl font-satoshi font-medium text-beige/70 italic mb-6">
                                     {service.tagline}
                                 </p>
 
                                 {/* Description */}
-                                <p className="text-base md:text-lg font-satoshi text-beige/60 max-w-2xl mb-10 leading-relaxed mx-auto md:mx-0">
+                                <p className="text-sm md:text-base font-satoshi text-beige/50 max-w-xl mb-8 leading-relaxed mx-auto md:mx-0">
                                     {service.description}
                                 </p>
 
                                 {/* Benefits */}
-                                <div className="flex flex-wrap justify-center md:justify-start gap-3 mb-10">
+                                <div className="flex flex-wrap justify-center md:justify-start gap-2 mb-8">
                                     {service.benefits.map((benefit) => (
                                         <span
                                             key={benefit}
-                                            className="px-4 py-2 text-sm font-satoshi text-beige/80 border border-beige/20 rounded-full"
+                                            className="px-3 py-1.5 text-xs font-satoshi text-beige/70 border border-beige/20 rounded-full"
                                         >
                                             {benefit}
                                         </span>
@@ -175,16 +173,16 @@ export function ImmersiveServices() {
                                 </div>
 
                                 {/* CTA */}
-                                <button className="group inline-flex items-center gap-3 text-green-300 font-satoshi font-medium text-lg hover:gap-5 transition-all duration-300">
+                                <button className="group inline-flex items-center gap-2 text-beige font-satoshi font-medium text-sm hover:gap-3 transition-all duration-300">
                                     <span>Explore This Service</span>
                                     <svg
-                                        width="24"
-                                        height="24"
+                                        width="18"
+                                        height="18"
                                         viewBox="0 0 24 24"
                                         fill="none"
                                         stroke="currentColor"
                                         strokeWidth="2"
-                                        className="group-hover:translate-x-1 transition-transform"
+                                        className="group-hover:translate-x-0.5 transition-transform"
                                     >
                                         <path d="M5 12h14M12 5l7 7-7 7" />
                                     </svg>
@@ -195,15 +193,15 @@ export function ImmersiveServices() {
                 </motion.div>
 
                 {/* Bottom scroll hint */}
-                <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-2 text-beige/30">
+                <div className="absolute bottom-6 left-1/2 -translate-x-1/2 z-20 flex flex-col items-center gap-1.5 text-beige/30">
                     <motion.div
-                        className="w-6 h-10 border border-beige/30 rounded-full flex justify-center pt-2"
+                        className="w-5 h-8 border border-beige/30 rounded-full flex justify-center pt-1.5"
                         animate={{ opacity: [0.3, 0.6, 0.3] }}
                         transition={{ duration: 2, repeat: Infinity }}
                     >
                         <motion.div
-                            className="w-1 h-2 bg-beige/50 rounded-full"
-                            animate={{ y: [0, 8, 0] }}
+                            className="w-0.5 h-1.5 bg-beige/50 rounded-full"
+                            animate={{ y: [0, 6, 0] }}
                             transition={{ duration: 1.5, repeat: Infinity }}
                         />
                     </motion.div>
