@@ -1,39 +1,64 @@
 "use client";
 
-import React from "react";
-import { motion } from "motion/react";
+import React, { useRef } from "react";
+import { motion, useScroll } from "motion/react";
 import { MagneticButton } from "./ui/magnetic-button";
+import { ScrollRevealWord } from "./ui/scroll-reveal-word";
 
 export function FinalCTA() {
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    const { scrollYProgress } = useScroll({
+        target: containerRef,
+        offset: ["start end", "end start"],
+    });
+
     return (
-        <section className="py-16 md:py-24 px-6 relative overflow-hidden">
+        <section ref={containerRef} className="py-16 md:py-24 px-6 relative overflow-hidden">
             {/* Background decoration */}
             <div className="absolute inset-0 pointer-events-none">
                 <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-beige/5 rounded-full blur-[120px]" />
             </div>
 
             <div className="max-w-3xl mx-auto relative z-10">
-                <motion.div
-                    className="text-center"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                >
-                    {/* Headline */}
-                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-satoshi text-beige mb-4 leading-tight">
-                        Ready to Build{" "}
-                        <span className="text-beige/70 italic font-normal">Something Amazing?</span>
+                <div className="text-center">
+                    {/* Headline with word-by-word scroll trigger */}
+                    <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-satoshi mb-4 leading-tight">
+                        <ScrollRevealWord
+                            text="Ready to Build "
+                            scrollProgress={scrollYProgress}
+                            startOffset={0.2}
+                            endOffset={0.35}
+                            className="text-beige"
+                        />
+                        <ScrollRevealWord
+                            text="Something Amazing?"
+                            scrollProgress={scrollYProgress}
+                            startOffset={0.32}
+                            endOffset={0.5}
+                            className="text-beige/70 italic font-normal"
+                        />
                     </h2>
 
-                    {/* Subheadline */}
-                    <p className="text-base md:text-lg text-beige/50 font-satoshi max-w-xl mx-auto mb-8 leading-relaxed">
-                        Let&apos;s discuss your project. No pressure, no obligation.
-                        Just a friendly conversation about your goals and how we can help.
+                    {/* Subheadline with word-by-word scroll trigger */}
+                    <p className="text-base md:text-lg font-satoshi max-w-xl mx-auto mb-8 leading-relaxed">
+                        <ScrollRevealWord
+                            text="Let's discuss your project. No pressure, no obligation. Just a friendly conversation about your goals and how we can help."
+                            scrollProgress={scrollYProgress}
+                            startOffset={0.4}
+                            endOffset={0.65}
+                            className="text-beige/50"
+                        />
                     </p>
 
                     {/* CTA Buttons */}
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6">
+                    <motion.div
+                        className="flex flex-col sm:flex-row items-center justify-center gap-3 mb-6"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.2 }}
+                    >
                         <MagneticButton>
                             <a
                                 href="/contact"
@@ -62,13 +87,19 @@ export function FinalCTA() {
                         >
                             hello@theperry.com
                         </a>
-                    </div>
+                    </motion.div>
 
                     {/* Social Proof */}
-                    <p className="text-xs text-beige/40 font-satoshi">
+                    <motion.p
+                        className="text-xs text-beige/40 font-satoshi"
+                        initial={{ opacity: 0 }}
+                        whileInView={{ opacity: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.4 }}
+                    >
                         Response within 24 hours • Free consultation • No commitment required
-                    </p>
-                </motion.div>
+                    </motion.p>
+                </div>
             </div>
         </section>
     );

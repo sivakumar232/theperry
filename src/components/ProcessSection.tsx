@@ -47,37 +47,37 @@ const steps = [
 ];
 
 function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; index: number; scrollProgress: ReturnType<typeof useScroll>["scrollYProgress"] }) {
-    // Each step activates at different scroll positions
-    const stepStart = 0.2 + index * 0.25;
+    // Faster reaction - tighter offsets
+    const stepStart = index * 0.2;
+    const stepMid = stepStart + 0.1;
     const stepEnd = stepStart + 0.2;
 
     const isActive = useTransform(
         scrollProgress,
-        [stepStart, stepStart + 0.05, stepEnd, stepEnd + 0.05],
-        [0, 1, 1, 0]
+        [stepStart, stepMid, stepEnd],
+        [0, 1, 0.8]
     );
 
     return (
         <motion.div
             className="relative flex gap-5 md:gap-8"
-            initial={{ opacity: 0, x: -16 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
+            initial={{ opacity: 0.5, x: -16 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
         >
             {/* Timeline Dot */}
             <div className="flex-shrink-0 relative z-10">
                 <motion.div
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-400"
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300"
                     style={{
-                        backgroundColor: useTransform(isActive, [0, 1], ["rgb(10, 10, 10)", "rgb(254, 251, 227)"]),
-                        borderColor: useTransform(isActive, [0, 1], ["rgba(255, 255, 255, 0.2)", "rgb(254, 251, 227)"]),
+                        backgroundColor: useTransform(isActive, [0, 0.5, 1], ["rgb(10, 10, 10)", "rgb(254, 251, 227)", "rgb(254, 251, 227)"]),
+                        borderColor: useTransform(isActive, [0, 0.5, 1], ["rgba(255, 255, 255, 0.2)", "rgb(254, 251, 227)", "rgb(254, 251, 227)"]),
                     }}
                 >
                     <motion.span
                         className="text-sm font-bold font-satoshi"
                         style={{
-                            color: useTransform(isActive, [0, 1], ["rgba(254, 251, 227, 0.7)", "rgb(10, 10, 10)"])
+                            color: useTransform(isActive, [0, 0.5, 1], ["rgba(254, 251, 227, 0.7)", "rgb(10, 10, 10)", "rgb(10, 10, 10)"])
                         }}
                     >
                         {step.number}
@@ -92,7 +92,7 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
                     <div className="flex items-center gap-2 mb-1">
                         <motion.span
                             style={{
-                                color: useTransform(isActive, [0, 1], ["rgba(254, 251, 227, 0.4)", "rgb(254, 251, 227)"])
+                                color: useTransform(isActive, [0, 0.5, 1], ["rgba(254, 251, 227, 0.4)", "rgb(254, 251, 227)", "rgb(254, 251, 227)"])
                             }}
                         >
                             {step.icon}
@@ -106,7 +106,7 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
                     <motion.p
                         className="text-xs font-satoshi font-medium uppercase tracking-wider mb-2"
                         style={{
-                            color: useTransform(isActive, [0, 1], ["rgba(254, 251, 227, 0.4)", "rgba(254, 251, 227, 0.8)"])
+                            color: useTransform(isActive, [0, 0.5, 1], ["rgba(254, 251, 227, 0.4)", "rgba(254, 251, 227, 0.8)", "rgba(254, 251, 227, 0.8)"])
                         }}
                     >
                         {step.caption}
@@ -127,79 +127,76 @@ export function ProcessSection() {
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start start", "end end"],
+        offset: ["start end", "end start"],
     });
 
-    const lineHeight = useTransform(scrollYProgress, [0.1, 0.9], ["0%", "100%"]);
+    const lineHeight = useTransform(scrollYProgress, [0.1, 0.8], ["0%", "100%"]);
 
     return (
         <section
             id="process"
             ref={containerRef}
-            className="relative h-[200vh]"
+            className="relative py-16 md:py-24"
         >
-            {/* Sticky container with heading at top */}
-            <div className="sticky top-0 h-screen flex flex-col justify-start pt-24 md:pt-32 overflow-hidden bg-background">
-                <div className="max-w-6xl mx-auto px-6 w-full">
-                    {/* Section Header - now part of sticky */}
+            <div className="max-w-6xl mx-auto px-6 w-full">
+                {/* Section Header */}
+                <motion.div
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <h2 className="text-3xl md:text-4xl font-bold font-satoshi text-beige mb-3">
+                        How We{" "}
+                        <span className="text-beige/70 italic font-normal">Work Together</span>
+                    </h2>
+                    <p className="text-base text-beige/50 font-satoshi font-normal max-w-xl mx-auto">
+                        A streamlined 3-step process designed to deliver exceptional results in 3 weeks.
+                    </p>
+                </motion.div>
+
+                {/* Process Steps */}
+                <div className="relative max-w-2xl mx-auto">
+                    {/* Background Line */}
+                    <div className="absolute left-5 md:left-6 top-0 bottom-0 w-px bg-white/10" />
+
+                    {/* Animated Progress Line */}
                     <motion.div
-                        className="text-center mb-12"
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5 }}
-                    >
-                        <h2 className="text-3xl md:text-4xl font-bold font-satoshi text-beige mb-3">
-                            How We{" "}
-                            <span className="text-beige/70 italic font-normal">Work Together</span>
-                        </h2>
-                        <p className="text-base text-beige/50 font-satoshi font-normal max-w-xl mx-auto">
-                            A streamlined 3-step process designed to deliver exceptional results in 3 weeks.
-                        </p>
-                    </motion.div>
+                        className="absolute left-5 md:left-6 top-0 w-px bg-gradient-to-b from-beige via-beige/50 to-transparent origin-top"
+                        style={{ height: lineHeight }}
+                    />
 
-                    {/* Process Steps */}
-                    <div className="relative max-w-2xl mx-auto">
-                        {/* Background Line */}
-                        <div className="absolute left-5 md:left-6 top-0 bottom-0 w-px bg-white/10" />
-
-                        {/* Animated Progress Line */}
-                        <motion.div
-                            className="absolute left-5 md:left-6 top-0 w-px bg-gradient-to-b from-beige via-beige/50 to-transparent origin-top"
-                            style={{ height: lineHeight }}
-                        />
-
-                        <div className="space-y-3">
-                            {steps.map((step, index) => (
-                                <ProcessStep
-                                    key={step.number}
-                                    step={step}
-                                    index={index}
-                                    scrollProgress={scrollYProgress}
-                                />
-                            ))}
-                        </div>
+                    <div className="space-y-3">
+                        {steps.map((step, index) => (
+                            <ProcessStep
+                                key={step.number}
+                                step={step}
+                                index={index}
+                                scrollProgress={scrollYProgress}
+                            />
+                        ))}
                     </div>
-
-                    {/* CTA */}
-                    <motion.div
-                        className="text-center mt-12"
-                        initial={{ opacity: 0, y: 16 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.3 }}
-                    >
-                        <a
-                            href="/contact"
-                            className="inline-flex items-center gap-2 px-6 py-3 bg-beige text-background font-satoshi font-semibold text-sm rounded-full hover:bg-beige/90 transition-colors"
-                        >
-                            Start Your Project
-                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                                <path d="M5 12h14M12 5l7 7-7 7" />
-                            </svg>
-                        </a>
-                    </motion.div>
                 </div>
+
+                {/* CTA */}
+                <motion.div
+                    className="text-center mt-12"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, delay: 0.3 }}
+                >
+                    <a
+                        href="/contact"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-beige text-background font-satoshi font-semibold text-sm rounded-full hover:bg-beige/90 transition-colors"
+                    >
+                        Start Your Project
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </a>
+                </motion.div>
             </div>
         </section>
     );

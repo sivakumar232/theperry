@@ -8,19 +8,15 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const lenis = new Lenis({
-            // Optimized for high-sensitivity trackpads and all devices
-            duration: 1.0, // Balanced smooth scrolling
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)), // Smooth exponential ease-out
+            duration: 0.7, // Faster, snappier scrolling
+            easing: (t) => 1 - Math.pow(1 - t, 3), // Simpler cubic ease-out
             orientation: "vertical",
             gestureOrientation: "vertical",
             smoothWheel: true,
-            wheelMultiplier: 1.0, // Normal wheel speed for better control
-            touchMultiplier: 2.0, // Better touch responsiveness
+            wheelMultiplier: 1.3, // Slightly faster wheel
+            touchMultiplier: 2.0,
             infinite: false,
             autoResize: true,
-            lerp: 0.1, // Smooth interpolation - lower = smoother but slower
-            syncTouch: false, // Disable touch sync for native feel on mobile
-            syncTouchLerp: 0.075, // Smoother touch interpolation if enabled
         });
 
         lenisRef.current = lenis;

@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SketchyLink } from "@/components/ui/sketchy-link";
-import { ShinyButton } from "@/components/ui/shiny-button";
+import { PremiumButton } from "@/components/ui/premium-button";
 
 export default function Navbar() {
     const [isHidden, setIsHidden] = useState(false);
@@ -56,10 +56,21 @@ export default function Navbar() {
                 </div>
 
                 {/* Right: CTA Button */}
-                <div>
-                    <ShinyButton href="/contact">
+                <div className="group">
+                    <PremiumButton href="/contact" variant="primary">
                         Get in Touch
-                    </ShinyButton>
+                        <svg
+                            width="16"
+                            height="16"
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                            className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
+                        >
+                            <path d="M5 12h14M12 5l7 7-7 7" />
+                        </svg>
+                    </PremiumButton>
                 </div>
             </div>
         </nav>

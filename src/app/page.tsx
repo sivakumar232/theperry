@@ -2,7 +2,7 @@ import Navbar from "@/components/Navbar";
 import { FlipWords } from "@/components/ui/flip-words";
 import { ScrollIndicator } from "@/components/ui/scroll-indicator";
 import { TrustBar } from "@/components/TrustBar";
-import { FloatingIntro } from "@/components/FloatingIntro";
+
 import { FounderSection } from "@/components/FounderSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { ImmersiveServices } from "@/components/ImmersiveServices";
@@ -11,6 +11,7 @@ import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
+import { PremiumButton } from "@/components/ui/premium-button";
 
 export default function Home() {
   const flipWords = ["Perform.", "Scale.", "Convert."];
@@ -45,22 +46,30 @@ export default function Home() {
         </p>
 
         {/* Dual CTA */}
-        <div className="flex flex-col sm:flex-row items-center gap-3 mt-8">
-          <a
-            href="/contact"
-            className="px-6 py-3 bg-green-300 text-background font-satoshi font-semibold text-sm rounded-full hover:bg-green-400 transition-colors"
-          >
-            Book Free Strategy Call
-          </a>
-          <a
-            href="#process"
-            className="px-6 py-3 text-beige/60 font-satoshi font-medium text-sm hover:text-beige transition-colors flex items-center gap-2"
-          >
+        <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
+          <div className="group">
+            <PremiumButton href="/contact" variant="primary">
+              <span className="flex items-center gap-2">
+                Book Free Strategy Call
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="opacity-0 w-0 group-hover:opacity-100 group-hover:w-[18px] transition-all duration-300"
+                >
+                  <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
+                </svg>
+              </span>
+            </PremiumButton>
+          </div>
+          <PremiumButton href="#process" variant="outline">
             See Our Process
-            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-              <path d="M5 12h14M12 5l7 7-7 7" />
-            </svg>
-          </a>
+          </PremiumButton>
         </div>
 
         <div className="h-30 md:h-32" />
@@ -72,8 +81,7 @@ export default function Home() {
       {/* Trust Bar */}
       <TrustBar />
 
-      {/* Floating Intro */}
-      <FloatingIntro />
+
 
       {/* Founder Section */}
       <FounderSection />

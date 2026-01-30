@@ -64,9 +64,12 @@ export function Footer() {
     const rotateWords = ["Experiences", "Brands", "Futures", "Success"];
 
     return (
-        <footer className="py-12 md:py-16 px-6 bg-beige">
-            <div className="max-w-6xl mx-auto">
-                <div className="grid md:grid-cols-4 gap-10 mb-12">
+        <footer className="relative py-20 md:py-28 px-6 bg-beige border-t border-background/10">
+            {/* Subtle gradient overlay */}
+            <div className="absolute inset-0 bg-gradient-to-b from-background/[0.02] to-transparent pointer-events-none" />
+
+            <div className="max-w-6xl mx-auto relative z-10">
+                <div className="grid md:grid-cols-4 gap-12 md:gap-14 mb-16">
                     {/* Brand Column */}
                     <motion.div
                         className="md:col-span-1"
@@ -75,12 +78,12 @@ export function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <Link href="/" className="inline-block mb-3">
-                            <span className="text-xl font-bold font-satoshi text-background">
-                                theperry
+                        <Link href="/" className="inline-block mb-4">
+                            <span className="text-2xl font-bold font-satoshi text-background">
+                                theperry.
                             </span>
                         </Link>
-                        <div className="text-background/60 font-satoshi text-sm leading-relaxed mb-5">
+                        <div className="text-background/60 font-satoshi text-sm leading-relaxed mb-6">
                             Building digital <br />
                             <FlipWords words={rotateWords} className="text-background font-bold px-0 ml-0" /> <br />
                             that convert and scale.
@@ -110,8 +113,8 @@ export function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.1 }}
                     >
-                        <h3 className="text-background font-satoshi font-medium text-base mb-3">Services</h3>
-                        <ul className="space-y-2">
+                        <h3 className="text-background font-satoshi font-semibold text-base mb-4">Services</h3>
+                        <ul className="space-y-2.5">
                             {footerLinks.services.map((link) => (
                                 <li key={link.label}>
                                     <a
@@ -132,8 +135,8 @@ export function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                     >
-                        <h3 className="text-background font-satoshi font-medium text-base mb-3">Company</h3>
-                        <ul className="space-y-2">
+                        <h3 className="text-background font-satoshi font-semibold text-base mb-4">Company</h3>
+                        <ul className="space-y-2.5">
                             {footerLinks.company.map((link) => (
                                 <li key={link.label}>
                                     <a
@@ -154,8 +157,8 @@ export function Footer() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5, delay: 0.3 }}
                     >
-                        <h3 className="text-background font-satoshi font-medium text-base mb-3">Get In Touch</h3>
-                        <ul className="space-y-2">
+                        <h3 className="text-background font-satoshi font-semibold text-base mb-4">Get In Touch</h3>
+                        <ul className="space-y-3">
                             <li>
                                 <a
                                     href="mailto:hello@theperry.com"
@@ -168,7 +171,7 @@ export function Footer() {
                                 Available for projects worldwide
                             </li>
                         </ul>
-                        <button className="mt-5 px-5 py-2.5 bg-background text-beige font-satoshi font-medium text-sm rounded-full hover:bg-background/90 transition-colors duration-300">
+                        <button className="mt-6 px-6 py-3 bg-background text-beige font-satoshi font-semibold text-sm rounded-full hover:bg-background/90 transition-all duration-300 hover:scale-105">
                             Start a Project
                         </button>
                     </motion.div>
@@ -176,7 +179,7 @@ export function Footer() {
 
                 {/* Bottom Bar */}
                 <motion.div
-                    className="pt-6 border-t border-background/20 flex flex-col md:flex-row items-center justify-between gap-3"
+                    className="pt-8 border-t border-background/20 flex flex-col md:flex-row items-center justify-between gap-4"
                     initial={{ opacity: 0 }}
                     whileInView={{ opacity: 1 }}
                     viewport={{ once: true }}
@@ -185,7 +188,7 @@ export function Footer() {
                     <p className="text-background/50 font-satoshi text-xs">
                         © {currentYear} theperry. All rights reserved.
                     </p>
-                    <div className="flex gap-5">
+                    <div className="flex gap-6">
                         <a href="#" className="text-background/50 font-satoshi text-xs hover:text-background/70 transition-colors duration-300">
                             Privacy Policy
                         </a>
