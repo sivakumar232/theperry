@@ -8,7 +8,7 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 2.5, // Very slow, heavy scroll
+            duration: 1.1, // Very slow, heavy scroll
             easing: (t) => 1 - Math.pow(1 - t, 4), // Quartic ease-out for "heavy" feel
             wheelMultiplier: 0.8, // Reduce wheel speed for more control
             touchMultiplier: 1.5,
