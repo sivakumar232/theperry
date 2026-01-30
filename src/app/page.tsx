@@ -6,7 +6,7 @@ import { FloatingIntro } from "@/components/FloatingIntro";
 import { FounderSection } from "@/components/FounderSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { ImmersiveServices } from "@/components/ImmersiveServices";
-import { PricingSection } from "@/components/PricingSection";
+// import { PricingSection } from "@/components/PricingSection";
 import { GuaranteeSection } from "@/components/GuaranteeSection";
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { FAQ } from "@/components/FAQ";
@@ -87,7 +87,7 @@ export default function Home() {
       <ImmersiveServices />
 
       {/* Pricing Section - Transparency */}
-      <PricingSection />
+      {/* <PricingSection /> */}
 
       {/* Guarantee Section - Risk reversal */}
       <GuaranteeSection />
