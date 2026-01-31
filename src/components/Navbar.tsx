@@ -22,12 +22,7 @@ export default function Navbar() {
         return () => window.removeEventListener("scroll", handleScroll);
     }, []);
 
-    const navLinks = [
-        { name: "Services", href: "/#services" },
-        { name: "Process", href: "/#process" },
-        { name: "About", href: "/#about" },
-        { name: "FAQ", href: "/#faq" },
-    ];
+
 
     return (
         <nav
@@ -44,26 +39,14 @@ export default function Navbar() {
                 </Link>
 
                 {/* Middle: Navigation Links in Pill */}
-                <div className="hidden md:flex items-center justify-center px-8 h-12 bg-background/60 backdrop-blur-xl border border-white/10 rounded-full">
-                    <div className="flex items-center gap-8">
-                        {navLinks.map((link) => (
-                            <SketchyLink
-                                key={link.name}
-                                href={link.href}
-                                className="text-sm font-medium font-satoshi text-beige/70 hover:text-beige"
-                            >
-                                {link.name}
-                            </SketchyLink>
-                        ))}
-                    </div>
-                </div>
+
 
                 {/* Right: CTA Button */}
                 <div className="group">
                     <PremiumButton
                         href="/contact"
                         variant="primary"
-                        className="!px-6 !py-3.5 !text-xs"
+                        className="!px-5 !py-3 !text-xs"
                     >
                         <span className="flex items-center gap-1">
                             Let's Talk <div className="flex items-center justify-center border border-black rounded-full bg-black h-6 w-6"><ArrowUpRight className="text-white w-3 h-3" /></div>
