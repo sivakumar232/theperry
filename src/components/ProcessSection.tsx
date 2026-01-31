@@ -2,6 +2,7 @@
 
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
+import { ContentContainer } from "./ui/ContentContainer";
 
 const steps = [
     {
@@ -200,7 +201,7 @@ export function ProcessSection() {
             ref={containerRef}
             className="relative py-16 md:py-24"
         >
-            <div className="max-w-6xl mx-auto px-6 w-full">
+            <ContentContainer className="w-full">
                 {/* Section Header */}
                 <motion.div
                     className="text-center mb-12"
@@ -209,7 +210,7 @@ export function ProcessSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl md:text-4xl font-bold font-satoshi text-beige mb-3">
+                    <h2 className="text-3xl md:text-5xl font-bold font-satoshi text-beige mb-3">
                         How We{" "}
                         <span className="text-beige/70 italic font-normal">Work Together</span>
                     </h2>
@@ -259,7 +260,7 @@ export function ProcessSection() {
                         </svg>
                     </a>
                 </motion.div>
-            </div>
+            </ContentContainer>
         </section>
     );
 }

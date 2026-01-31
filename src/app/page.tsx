@@ -88,7 +88,6 @@ export default function Home() {
       </section>
 
       {/* Trust Bar */}
-      <TrustBar />
 
       {/* Why Choose Us */}
       <WhyChooseUs />

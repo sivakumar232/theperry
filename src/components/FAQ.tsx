@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
+import { ContentContainer } from "./ui/ContentContainer";
 
 const faqs = [
     {
@@ -89,43 +90,45 @@ export function FAQ() {
     const [openIndex, setOpenIndex] = useState<number | null>(0);
 
     return (
-        <section id="faq" className="py-16 md:py-24 px-6">
-            <div className="max-w-3xl mx-auto">
-                {/* Section Header */}
-                <motion.div
-                    className="text-center mb-10"
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <h2 className="text-3xl md:text-4xl font-bold font-satoshi text-beige mb-3">
-                        Frequently Asked <span className="text-beige/70 italic font-normal">Questions</span>
-                    </h2>
-                    <p className="text-base text-beige/50 font-satoshi max-w-xl mx-auto">
-                        Got questions? We&apos;ve got answers. If you don&apos;t see what you&apos;re looking for, reach out!
-                    </p>
-                </motion.div>
+        <section id="faq" className="py-16 md:py-24">
+            <ContentContainer>
+                <div className="max-w-3xl mx-auto">
+                    {/* Section Header */}
+                    <motion.div
+                        className="text-center mb-10"
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5 }}
+                    >
+                        <h2 className="text-3xl md:text-5xl font-bold font-satoshi text-beige mb-3">
+                            Frequently Asked <span className="text-beige/70 italic font-normal">Questions</span>
+                        </h2>
+                        <p className="text-base text-beige/50 font-satoshi max-w-xl mx-auto">
+                            Got questions? We&apos;ve got answers. If you don&apos;t see what you&apos;re looking for, reach out!
+                        </p>
+                    </motion.div>
 
-                {/* FAQ Items */}
-                <motion.div
-                    className="bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm p-4 md:p-5"
-                    initial={{ opacity: 0, y: 20 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: 0.1 }}
-                >
-                    {faqs.map((faq, index) => (
-                        <FAQItem
-                            key={index}
-                            question={faq.question}
-                            answer={faq.answer}
-                            isOpen={openIndex === index}
-                            onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                        />
-                    ))}
-                </motion.div>
-            </div>
+                    {/* FAQ Items */}
+                    <motion.div
+                        className="bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm p-4 md:p-5"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, delay: 0.1 }}
+                    >
+                        {faqs.map((faq, index) => (
+                            <FAQItem
+                                key={index}
+                                question={faq.question}
+                                answer={faq.answer}
+                                isOpen={openIndex === index}
+                                onClick={() => setOpenIndex(openIndex === index ? null : index)}
+                            />
+                        ))}
+                    </motion.div>
+                </div>
+            </ContentContainer>
         </section>
     );
 }

@@ -5,6 +5,7 @@ import { motion } from "motion/react";
 import Link from "next/link";
 import { FlipWords } from "./ui/flip-words";
 import { MagneticButton } from "./ui/magnetic-button";
+import { ContentContainer } from "./ui/ContentContainer";
 
 const footerLinks = {
     services: [
@@ -68,7 +69,7 @@ export function Footer() {
             {/* Subtle gradient overlay */}
             <div className="absolute inset-0 bg-gradient-to-b from-background/[0.02] to-transparent pointer-events-none" />
 
-            <div className="max-w-6xl mx-auto relative z-10">
+            <ContentContainer>
                 <div className="grid md:grid-cols-4 gap-12 md:gap-14 mb-16">
                     {/* Brand Column */}
                     <motion.div
@@ -197,7 +198,7 @@ export function Footer() {
                         </a>
                     </div>
                 </motion.div>
-            </div>
+            </ContentContainer>
         </footer>
     );
 }
