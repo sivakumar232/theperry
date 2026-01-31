@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion, AnimatePresence, useMotionValue, useTransform } from "motion/react";
 
 const cards = [
     {
@@ -75,77 +75,126 @@ const cards = [
 function Card({ item, index }: { item: typeof cards[0]; index: number }) {
     const [isHovered, setIsHovered] = React.useState(false);
 
+    // 3D Tilt Effect
+    const x = useMotionValue(0);
+    const y = useMotionValue(0);
+    const rotateX = useTransform(y, [-100, 100], [3, -3]);
+    const rotateY = useTransform(x, [-100, 100], [-3, 3]);
+
+    // Spotlight Effect
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+
+    const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+        const rect = e.currentTarget.getBoundingClientRect();
+        const centerX = rect.left + rect.width / 2;
+        const centerY = rect.top + rect.height / 2;
+
+        x.set(e.clientX - centerX);
+        y.set(e.clientY - centerY);
+
+        mouseX.set(e.clientX - rect.left);
+        mouseY.set(e.clientY - rect.top);
+    };
+
+    const handleMouseLeave = () => {
+        setIsHovered(false);
+        x.set(0);
+        y.set(0);
+    };
+
     return (
         <motion.div
-            className="group relative p-6 md:p-8 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden"
+            className="group relative h-full perspective-1000"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.4, delay: index * 0.06 }}
-            onMouseEnter={() => setIsHovered(true)}
-            onMouseLeave={() => setIsHovered(false)}
-            style={{ minHeight: "240px" }}
+            style={{ perspective: 1000 }}
         >
-            {/* Subtle gradient */}
-            <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-
-            {/* Content */}
-            <div className="relative z-10 h-full flex flex-col">
-                {/* Label */}
-                <div className="mb-4">
-                    <motion.span
-                        className="inline-block text-xs font-satoshi font-medium uppercase tracking-[0.15em] px-2.5 py-1 rounded-full border transition-all duration-300"
-                        animate={{
-                            backgroundColor: isHovered ? "rgba(254, 251, 227, 0.1)" : "rgba(255, 255, 255, 0.05)",
-                            borderColor: isHovered ? "rgba(254, 251, 227, 0.3)" : "rgba(255, 255, 255, 0.1)",
-                            color: isHovered ? "rgb(254, 251, 227)" : "rgba(254, 251, 227, 0.5)",
-                        }}
-                        transition={{ duration: 0.3 }}
-                    >
-                        {isHovered ? "Solution" : "Problem"}
-                    </motion.span>
-                </div>
-
-                {/* Title */}
-                <div className="relative mb-3 min-h-[56px]">
-                    <AnimatePresence mode="wait">
-                        <motion.h3
-                            key={isHovered ? "solution" : "problem"}
-                            className="text-xl md:text-2xl font-bold font-satoshi text-beige leading-tight"
-                            initial={{ opacity: 0, y: 6 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -6 }}
-                            transition={{ duration: 0.2, ease: "easeOut" }}
-                        >
-                            {isHovered ? item.solution.title : item.problem.title}
-                        </motion.h3>
-                    </AnimatePresence>
-                </div>
-
-                {/* Description */}
-                <div className="relative flex-1">
-                    <AnimatePresence mode="wait">
-                        <motion.p
-                            key={isHovered ? "solution-desc" : "problem-desc"}
-                            className="text-sm md:text-base text-beige/50 font-satoshi leading-relaxed"
-                            initial={{ opacity: 0, y: 6 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            exit={{ opacity: 0, y: -6 }}
-                            transition={{ duration: 0.2, ease: "easeOut", delay: 0.03 }}
-                        >
-                            {isHovered ? item.solution.description : item.problem.description}
-                        </motion.p>
-                    </AnimatePresence>
-                </div>
-
-                {/* Bottom accent */}
+            <motion.div
+                className="relative h-full p-6 md:p-8 rounded-xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden transition-colors duration-500"
+                style={{
+                    rotateX: rotateX,
+                    rotateY: rotateY,
+                    transformStyle: "preserve-3d",
+                }}
+                onMouseMove={handleMouseMove}
+                onMouseEnter={() => setIsHovered(true)}
+                onMouseLeave={handleMouseLeave}
+            >
+                {/* Spotlight Gradient */}
                 <motion.div
-                    className="mt-4 h-px bg-gradient-to-r from-transparent via-beige/30 to-transparent"
-                    initial={{ scaleX: 0 }}
-                    animate={{ scaleX: isHovered ? 1 : 0 }}
-                    transition={{ duration: 0.3, ease: "easeOut" }}
+                    className="absolute inset-0 z-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
+                    style={{
+                        background: useTransform(
+                            [mouseX, mouseY],
+                            ([latestX, latestY]: any[]) => `radial-gradient(600px circle at ${latestX}px ${latestY}px, rgba(254, 251, 227, 0.1), transparent 40%)`
+                        ),
+                    }}
                 />
-            </div>
+
+                {/* Subtle base gradient */}
+                <div className="absolute inset-0 bg-gradient-to-br from-white/[0.02] via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+
+                {/* Content */}
+                <div className="relative z-10 h-full flex flex-col" style={{ transform: "translateZ(20px)" }}>
+                    {/* Label */}
+                    <div className="mb-4">
+                        <motion.span
+                            className="inline-block text-xs font-satoshi font-medium uppercase tracking-[0.15em] px-2.5 py-1 rounded-full border transition-all duration-300"
+                            animate={{
+                                backgroundColor: isHovered ? "rgba(254, 251, 227, 0.1)" : "rgba(255, 255, 255, 0.05)",
+                                borderColor: isHovered ? "rgba(254, 251, 227, 0.3)" : "rgba(255, 255, 255, 0.1)",
+                                color: isHovered ? "rgb(254, 251, 227)" : "rgba(254, 251, 227, 0.5)",
+                            }}
+                            transition={{ duration: 0.3 }}
+                        >
+                            {isHovered ? "Solution" : "Problem"}
+                        </motion.span>
+                    </div>
+
+                    {/* Title */}
+                    <div className="relative mb-3 min-h-[56px]">
+                        <AnimatePresence mode="wait">
+                            <motion.h3
+                                key={isHovered ? "solution" : "problem"}
+                                className="text-xl md:text-2xl font-bold font-satoshi text-beige leading-tight"
+                                initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
+                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                                exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
+                                transition={{ duration: 0.2, ease: "easeOut" }}
+                            >
+                                {isHovered ? item.solution.title : item.problem.title}
+                            </motion.h3>
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Description */}
+                    <div className="relative flex-1">
+                        <AnimatePresence mode="wait">
+                            <motion.p
+                                key={isHovered ? "solution-desc" : "problem-desc"}
+                                className="text-sm md:text-base text-beige/50 font-satoshi leading-relaxed"
+                                initial={{ opacity: 0, y: 6, filter: "blur(4px)" }}
+                                animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+                                exit={{ opacity: 0, y: -6, filter: "blur(4px)" }}
+                                transition={{ duration: 0.2, ease: "easeOut", delay: 0.03 }}
+                            >
+                                {isHovered ? item.solution.description : item.problem.description}
+                            </motion.p>
+                        </AnimatePresence>
+                    </div>
+
+                    {/* Bottom accent */}
+                    <motion.div
+                        className="mt-4 h-px bg-gradient-to-r from-transparent via-beige/30 to-transparent"
+                        initial={{ scaleX: 0 }}
+                        animate={{ scaleX: isHovered ? 1 : 0 }}
+                        transition={{ duration: 0.3, ease: "easeOut" }}
+                    />
+                </div>
+            </motion.div>
         </motion.div>
     );
 }

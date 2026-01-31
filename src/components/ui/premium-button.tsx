@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react";
+import React, { useRef, useState, useEffect } from "react";
+import { motion, useMotionValue, useTransform, AnimatePresence } from "motion/react";
 import Link from "next/link";
 
 interface PremiumButtonProps {
@@ -10,6 +10,7 @@ interface PremiumButtonProps {
     onClick?: () => void;
     variant?: "primary" | "secondary" | "outline";
     className?: string;
+    hoverText?: React.ReactNode;
 }
 
 export function PremiumButton({
@@ -18,29 +19,26 @@ export function PremiumButton({
     onClick,
     variant = "primary",
     className = "",
+    hoverText,
 }: PremiumButtonProps) {
     const buttonRef = useRef<HTMLButtonElement | HTMLAnchorElement>(null);
     const [isHovered, setIsHovered] = useState(false);
 
-    // Magnetic effect
-    const x = useMotionValue(0);
-    const y = useMotionValue(0);
-    const springX = useSpring(x, { stiffness: 300, damping: 20 });
-    const springY = useSpring(y, { stiffness: 300, damping: 20 });
-
     // Shine position
     const shineX = useMotionValue(-100);
 
-    const handleMouseMove = (e: React.MouseEvent) => {
-        if (!buttonRef.current) return;
-        const rect = buttonRef.current.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const deltaX = (e.clientX - centerX) * 0.15;
-        const deltaY = (e.clientY - centerY) * 0.15;
-        x.set(deltaX);
-        y.set(deltaY);
-    };
+    // Idle Pulse for Primary buttons
+    const [isIdle, setIsIdle] = useState(true);
+
+    useEffect(() => {
+        if (isHovered) {
+            setIsIdle(false);
+        } else {
+            // Delay returning to idle animation so it doesn't snap back instantly
+            const timeout = setTimeout(() => setIsIdle(true), 1000);
+            return () => clearTimeout(timeout);
+        }
+    }, [isHovered]);
 
     const handleMouseEnter = () => {
         setIsHovered(true);
@@ -51,46 +49,77 @@ export function PremiumButton({
 
     const handleMouseLeave = () => {
         setIsHovered(false);
-        x.set(0);
-        y.set(0);
     };
 
-    const baseStyles = "relative inline-flex items-center justify-center gap-2 px-6 py-3 font-satoshi font-semibold text-sm rounded-full overflow-hidden transition-all duration-300";
+    const baseStyles = "relative inline-flex items-center justify-center gap-2 px-8 py-4 font-satoshi font-bold text-sm rounded-full overflow-hidden transition-all duration-300 isolate";
 
     const variantStyles = {
-        primary: "bg-beige text-background hover:shadow-[0_0_30px_rgba(254,251,227,0.3)]",
+        primary: "bg-beige text-background hover:shadow-[0_0_40px_rgba(254,251,227,0.4)]",
         secondary: "bg-white/10 text-beige border border-white/20 hover:bg-white/15 hover:border-white/30",
-        outline: "bg-transparent text-beige border border-beige/50 hover:border-beige hover:bg-beige/5",
+        outline: "bg-transparent text-beige border border-beige/40 hover:border-beige hover:bg-beige/5",
     };
 
     const ButtonContent = (
         <>
             {/* Shine sweep effect */}
             <motion.div
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0 pointer-events-none z-20"
                 style={{
-                    background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent)",
+                    background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)",
                     x: useTransform(shineX, (v) => `${v}%`),
                 }}
-                transition={{ duration: 0.6, ease: "easeOut" }}
+                transition={{ duration: 0.7, ease: "easeOut" }}
             />
 
             {/* Glow effect */}
             <motion.div
-                className="absolute inset-0 rounded-full pointer-events-none"
+                className="absolute inset-0 rounded-full pointer-events-none -z-10"
                 animate={{
                     boxShadow: isHovered
                         ? variant === "primary"
-                            ? "0 0 40px rgba(254,251,227,0.4), inset 0 0 20px rgba(255,255,255,0.1)"
+                            ? "0 0 50px rgba(254,251,227,0.5), inset 0 0 20px rgba(255,255,255,0.2)"
                             : "0 0 30px rgba(254,251,227,0.2)"
-                        : "0 0 0px transparent",
+                        : isIdle && variant === "primary"
+                            ? ["0 0 0px rgba(254,251,227,0)", "0 0 15px rgba(254,251,227,0.3)", "0 0 0px rgba(254,251,227,0)"]
+                            : "0 0 0px transparent",
                 }}
-                transition={{ duration: 0.3 }}
+                transition={{
+                    boxShadow: { duration: 0.3 },
+                    default: { repeat: isIdle ? Infinity : 0, duration: 3, ease: "easeInOut", repeatDelay: 1 }
+                }}
             />
 
-            {/* Content */}
-            <span className="relative z-10 flex items-center gap-2">
-                {children}
+            {/* Content Swapper */}
+            <span className="relative z-10 flex items-center justify-center gap-2">
+                {/* Hover Text (Absolute, visible on hover) */}
+                {hoverText && (
+                    <motion.span
+                        className="absolute inset-0 flex items-center justify-center gap-2"
+                        initial={{ opacity: 0, y: 20, filter: "blur(4px)" }}
+                        animate={{
+                            opacity: isHovered ? 1 : 0,
+                            y: isHovered ? 0 : 20,
+                            filter: isHovered ? "blur(0px)" : "blur(4px)"
+                        }}
+                        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                        aria-hidden={!isHovered}
+                    >
+                        {hoverText}
+                    </motion.span>
+                )}
+
+                {/* Normal Text (Relative, visible when not hovered, dictates width) */}
+                <motion.span
+                    className="flex items-center gap-2"
+                    animate={{
+                        opacity: isHovered && hoverText ? 0 : 1,
+                        y: isHovered && hoverText ? -20 : 0,
+                        filter: isHovered && hoverText ? "blur(4px)" : "blur(0px)"
+                    }}
+                    transition={{ type: "spring", stiffness: 200, damping: 20 }}
+                >
+                    {children}
+                </motion.span>
             </span>
         </>
     );
@@ -98,13 +127,11 @@ export function PremiumButton({
     const motionProps = {
         ref: buttonRef as React.RefObject<HTMLButtonElement>,
         className: `${baseStyles} ${variantStyles[variant]} ${className}`,
-        style: { x: springX, y: springY },
-        onMouseMove: handleMouseMove,
         onMouseEnter: handleMouseEnter,
         onMouseLeave: handleMouseLeave,
-        whileHover: { scale: 1.03 },
-        whileTap: { scale: 0.98 },
-        transition: { type: "spring" as const, stiffness: 400, damping: 25 },
+        whileHover: { scale: 1.05 },
+        whileTap: { scale: 0.95 },
+        transition: { type: "spring", stiffness: 400, damping: 25 } as any,
     };
 
     if (href) {

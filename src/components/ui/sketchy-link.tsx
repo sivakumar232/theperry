@@ -75,7 +75,7 @@ export function SketchyLink({
                             }
                     }
                     transition={{
-                        duration: 0.6,
+                        duration: 0.2,
                         ease: "easeInOut",
                     }}
                     style={{

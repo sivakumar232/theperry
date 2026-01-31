@@ -3,6 +3,7 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { SketchyLink } from "@/components/ui/sketchy-link";
 import { PremiumButton } from "@/components/ui/premium-button";
+import { ArrowUpRight } from "lucide-react";
 
 export default function Navbar() {
     const [isHidden, setIsHidden] = useState(false);
@@ -30,10 +31,10 @@ export default function Navbar() {
 
     return (
         <nav
-            className={`fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-beige/5 transition-all duration-500 ${isHidden ? "opacity-0 -translate-y-full pointer-events-none" : "opacity-100 translate-y-0"
+            className={`fixed top-6 left-0 right-0 mx-auto max-w-7xl px-6 z-50 transition-all duration-500 ${isHidden ? "opacity-0 -translate-y-[150%] pointer-events-none" : "opacity-100 translate-y-0"
                 }`}
         >
-            <div className="max-w-6xl mx-auto px-6 h-16 flex items-center justify-between">
+            <div className="flex items-center justify-between h-14">
                 {/* Left: Logo */}
                 <Link
                     href="/"
@@ -42,34 +43,31 @@ export default function Navbar() {
                     theperry.
                 </Link>
 
-                {/* Middle: Navigation Links */}
-                <div className="hidden md:flex items-center gap-6">
-                    {navLinks.map((link) => (
-                        <SketchyLink
-                            key={link.name}
-                            href={link.href}
-                            className="text-sm font-medium font-satoshi text-beige/70 hover:text-beige"
-                        >
-                            {link.name}
-                        </SketchyLink>
-                    ))}
+                {/* Middle: Navigation Links in Pill */}
+                <div className="hidden md:flex items-center justify-center px-8 h-12 bg-background/60 backdrop-blur-xl border border-white/10 rounded-full">
+                    <div className="flex items-center gap-8">
+                        {navLinks.map((link) => (
+                            <SketchyLink
+                                key={link.name}
+                                href={link.href}
+                                className="text-sm font-medium font-satoshi text-beige/70 hover:text-beige"
+                            >
+                                {link.name}
+                            </SketchyLink>
+                        ))}
+                    </div>
                 </div>
 
                 {/* Right: CTA Button */}
                 <div className="group">
-                    <PremiumButton href="/contact" variant="primary">
-                        Get in Touch
-                        <svg
-                            width="16"
-                            height="16"
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            stroke="currentColor"
-                            strokeWidth="2"
-                            className="opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300"
-                        >
-                            <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
+                    <PremiumButton
+                        href="/contact"
+                        variant="primary"
+                        className="!px-6 !py-3.5 !text-xs"
+                    >
+                        <span className="flex items-center gap-1">
+                            Let's Talk <div className="flex items-center justify-center border border-black rounded-full bg-black h-6 w-6"><ArrowUpRight className="text-white w-3 h-3" /></div>
+                        </span>
                     </PremiumButton>
                 </div>
             </div>

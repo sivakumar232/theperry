@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useRef } from "react";
-import { motion, useScroll, useTransform } from "motion/react";
+import { motion, useScroll, useTransform, AnimatePresence } from "motion/react";
 
 const steps = [
     {
@@ -58,9 +58,19 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
         [0, 1, 0.8]
     );
 
+    const isFullyActive = useTransform(scrollProgress, (v) => v >= stepMid - 0.05 && v <= stepEnd + 0.1);
+    const [activeState, setActiveState] = React.useState(false);
+
+    React.useEffect(() => {
+        const unsubscribe = isFullyActive.on("change", (latest) => {
+            setActiveState(latest);
+        });
+        return () => unsubscribe();
+    }, [isFullyActive]);
+
     return (
         <motion.div
-            className="relative flex gap-5 md:gap-8"
+            className="relative flex gap-5 md:gap-8 active-step-container"
             initial={{ opacity: 0.5, x: -16 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.4, delay: index * 0.1 }}
@@ -68,14 +78,17 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
             {/* Timeline Dot */}
             <div className="flex-shrink-0 relative z-10">
                 <motion.div
-                    className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300"
+                    className="w-10 h-10 md:w-12 md:h-12 rounded-full flex items-center justify-center border-2 transition-all duration-300 relative overflow-hidden"
                     style={{
                         backgroundColor: useTransform(isActive, [0, 0.5, 1], ["rgb(10, 10, 10)", "rgb(254, 251, 227)", "rgb(254, 251, 227)"]),
                         borderColor: useTransform(isActive, [0, 0.5, 1], ["rgba(255, 255, 255, 0.2)", "rgb(254, 251, 227)", "rgb(254, 251, 227)"]),
                     }}
                 >
+                    {/* Pulse from center when active */}
+                    {/* Pulse from center when active - REMOVED */}
+
                     <motion.span
-                        className="text-sm font-bold font-satoshi"
+                        className="text-sm font-bold font-satoshi relative z-10"
                         style={{
                             color: useTransform(isActive, [0, 0.5, 1], ["rgba(254, 251, 227, 0.7)", "rgb(10, 10, 10)", "rgb(10, 10, 10)"])
                         }}
@@ -90,13 +103,28 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
                 <div className="py-1">
                     {/* Icon & Title Row */}
                     <div className="flex items-center gap-2 mb-1">
-                        <motion.span
+                        <motion.div
+                            className="text-2xl"
+                            animate={{
+                                rotate: activeState ? [0, -10, 10, -10, 0] : 0,
+                                scale: activeState ? 1.1 : 1
+                            }}
+                            transition={{ duration: 0.5 }}
                             style={{
                                 color: useTransform(isActive, [0, 0.5, 1], ["rgba(254, 251, 227, 0.4)", "rgb(254, 251, 227)", "rgb(254, 251, 227)"])
                             }}
                         >
-                            {step.icon}
-                        </motion.span>
+                            {/* Animated Icon Drawing */}
+                            {React.cloneElement(step.icon as any, {
+                                className: "w-6 h-6",
+                                initial: { pathLength: 0, opacity: 0.5 },
+                                animate: {
+                                    pathLength: activeState ? 1 : 0,
+                                    opacity: activeState ? 1 : 0.5
+                                },
+                                transition: { duration: 0.8, ease: "easeInOut" }
+                            })}
+                        </motion.div>
                         <h3 className="text-lg md:text-xl font-bold font-satoshi text-beige">
                             {step.title}
                         </h3>
@@ -112,10 +140,44 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
                         {step.caption}
                     </motion.p>
 
-                    {/* Description */}
-                    <p className="text-sm text-beige/50 font-satoshi leading-relaxed">
-                        {step.description}
-                    </p>
+                    {/* Description - Staggered Reveal */}
+                    <div className="text-sm text-beige/50 font-satoshi leading-relaxed relative min-h-[48px]">
+                        {/* Static fallback for layout */}
+                        <p className={activeState ? "opacity-0 absolute inset-0" : "opacity-100 transition-opacity duration-300"}>
+                            {step.description}
+                        </p>
+
+                        {/* Animated version */}
+                        {activeState && (
+                            <motion.p
+                                className="absolute inset-0"
+                                initial="hidden"
+                                animate="visible"
+                                variants={{
+                                    hidden: { opacity: 0 },
+                                    visible: {
+                                        opacity: 1,
+                                        transition: {
+                                            staggerChildren: 0.02
+                                        }
+                                    }
+                                }}
+                            >
+                                {step.description.split(" ").map((word, i) => (
+                                    <motion.span
+                                        key={i}
+                                        variants={{
+                                            hidden: { opacity: 0, y: 5 },
+                                            visible: { opacity: 1, y: 0 }
+                                        }}
+                                        className="inline-block mr-1 text-beige/80"
+                                    >
+                                        {word}
+                                    </motion.span>
+                                ))}
+                            </motion.p>
+                        )}
+                    </div>
                 </div>
             </div>
         </motion.div>

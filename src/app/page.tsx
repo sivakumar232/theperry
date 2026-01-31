@@ -1,6 +1,7 @@
+
 import Navbar from "@/components/Navbar";
 import { FlipWords } from "@/components/ui/flip-words";
-import { ScrollIndicator } from "@/components/ui/scroll-indicator";
+
 import { TrustBar } from "@/components/TrustBar";
 
 import { FounderSection } from "@/components/FounderSection";
@@ -12,6 +13,7 @@ import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { PremiumButton } from "@/components/ui/premium-button";
+import { ShineButton } from "@/components/ui/shine-button";
 
 export default function Home() {
   const flipWords = ["Perform.", "Scale.", "Convert."];
@@ -24,11 +26,32 @@ export default function Home() {
       <div className="h-35" />
 
       {/* Hero Section - Green accents only here */}
-      <section id="hero" className="flex flex-col items-center justify-center min-h-[55vh] px-6">
+      <section id="hero" className="relative isolate flex flex-col items-center justify-center min-h-[55vh] px-6 overflow-hidden">
+
+
+
+        {/* Grid Background with Fade */}
+        <div className="absolute inset-0 -z-10 bg-black/40">
+          {/* Subtle Noise Texture */}
+          <div
+            className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
+            style={{
+              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`
+            }}
+          ></div>
+
+
+          {/* Fade overlay - transparent at top, dark at bottom */}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+        </div>
+
         {/* Availability Badge */}
         <div className="mb-6">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/20 rounded-full text-xs font-satoshi text-beige/70">
-            <span className="w-1.5 h-1.5 bg-green-300 rounded-full animate-pulse" />
+          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/20 rounded-full text-xs font-satoshi text-beige/70 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30 cursor-default">
+            <span className="relative flex h-1.5 w-1.5">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
+            </span>
             Accepting projects for February
           </span>
         </div>
@@ -48,34 +71,20 @@ export default function Home() {
         {/* Dual CTA */}
         <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
           <div className="group">
-            <PremiumButton href="/contact" variant="primary">
+            <PremiumButton href="/contact" variant="primary" hoverText="Let's Build It">
               <span className="flex items-center gap-2">
                 Book Free Strategy Call
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="opacity-0 w-0 group-hover:opacity-100 group-hover:w-[18px] transition-all duration-300"
-                >
-                  <path d="M15.05 5A5 5 0 0 1 19 8.95M15.05 1A9 9 0 0 1 23 8.94m-1 7.98v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" />
-                </svg>
               </span>
             </PremiumButton>
           </div>
-          <PremiumButton href="#process" variant="outline">
+          <ShineButton href="#process" className="!bg-transparent !border-beige/40 !text-beige hover:!border-beige">
             See Our Process
-          </PremiumButton>
+          </ShineButton>
         </div>
 
         <div className="h-30 md:h-32" />
 
-        {/* Scroll indicator */}
-        <ScrollIndicator href="#services" />
+
       </section>
 
       {/* Trust Bar */}
