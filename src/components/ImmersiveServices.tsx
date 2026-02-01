@@ -6,24 +6,45 @@ import { motion, useScroll, useTransform } from "motion/react";
 const services = [
     {
         id: 1,
-        title: "Web Development",
-        tagline: "Where Ideas Become Reality",
-        description: "We craft high-performance digital experiences that captivate your audience and drive measurable results. From concept to launch, we build with precision and purpose.",
-        benefits: ["Lightning Fast", "SEO Optimized", "Conversion Focused", "Future Proof"],
+        title: "Digital Presence & Websites",
+        tagline: "Your Brand's Digital Home",
+        description: "We craft stunning, high-performance websites that capture your brand essence and convert visitors into customers.",
+        benefits: ["Business & Corporate Websites", "Startup Websites", "Personal & Portfolio Sites", "Website Redesigns"],
     },
     {
         id: 2,
-        title: "UI/UX Design",
-        tagline: "Design That Speaks Volumes",
-        description: "Every pixel tells a story. We create intuitive interfaces and memorable experiences that connect with your users on a deeper level and keep them coming back.",
-        benefits: ["User Centered", "Brand Aligned", "Research Driven", "Pixel Perfect"],
+        title: "Conversion & Landing Pages",
+        tagline: "Pages That Convert",
+        description: "Strategic landing pages engineered for maximum conversions. Every element optimized to turn visitors into leads and customers.",
+        benefits: ["Product Landing Pages", "Marketing & Campaign Pages", "Lead Generation Pages", "Sales Pages"],
     },
     {
         id: 3,
-        title: "SEO & Growth",
-        tagline: "Visibility That Converts",
-        description: "We don't just get you found—we get you chosen. Strategic optimization and data-driven growth tactics that put you ahead of the competition.",
-        benefits: ["Data Driven", "Results Focused", "Sustainable Growth", "Market Leading"],
+        title: "Custom Web Products",
+        tagline: "Built for Scale",
+        description: "From MVPs to enterprise platforms, we build robust web applications that power your business growth.",
+        benefits: ["MVP Development", "Dashboards & Admin Panels", "Client / User Portals", "SaaS Platforms", "Backend Systems & APIs"],
+    },
+    {
+        id: 4,
+        title: "E-Commerce & Payments",
+        tagline: "Sell Seamlessly Online",
+        description: "Complete e-commerce solutions with smooth checkout experiences and secure payment integrations.",
+        benefits: ["E-commerce Websites", "Custom Checkout Experiences", "Payment Gateway Integration", "Product & Inventory Systems"],
+    },
+    {
+        id: 5,
+        title: "Performance & Infrastructure",
+        tagline: "Speed That Scales",
+        description: "Optimize your digital infrastructure for lightning-fast performance and seamless scaling as you grow.",
+        benefits: ["Website & App Performance Optimization", "Backend & Database Optimization", "Scalability Architecture", "Cloud Deployment & Setup"],
+    },
+    {
+        id: 6,
+        title: "Product Launch & Growth",
+        tagline: "Launch with Impact",
+        description: "End-to-end launch support with analytics, user feedback systems, and growth optimization strategies.",
+        benefits: ["Product Launch Support", "User Onboarding Experiences", "Analytics & Tracking Setup", "User Feedback & Review Collection"],
     },
 ];
 
@@ -83,7 +104,7 @@ export function ImmersiveServices() {
                 </motion.div>
 
                 {/* Service Names Navigation */}
-                <div className="absolute top-6 left-0 right-0 z-30 flex justify-center gap-8 px-6">
+                <div className="absolute top-6 left-0 right-0 z-30 flex justify-center gap-4 md:gap-8 px-6 overflow-x-auto">
                     {services.map((service, index) => {
                         const serviceStart = index / services.length;
                         const serviceEnd = (index + 1) / services.length;
@@ -92,7 +113,7 @@ export function ImmersiveServices() {
                         return (
                             <motion.button
                                 key={service.id}
-                                className="text-xs md:text-sm font-satoshi uppercase tracking-widest transition-colors duration-300 relative"
+                                className="text-[10px] md:text-xs font-satoshi uppercase tracking-widest transition-colors duration-300 relative whitespace-nowrap"
                                 style={{
                                     opacity: useTransform(
                                         scrollYProgress,

@@ -144,10 +144,10 @@ export function ProcessSection() {
 
     const { scrollYProgress } = useScroll({
         target: containerRef,
-        offset: ["start end", "end start"],
+        offset: ["start center", "end end"],
     });
 
-    const lineHeight = useTransform(scrollYProgress, [0.1, 0.8], ["0%", "100%"]);
+    const lineHeight = useTransform(scrollYProgress, [0.15, 0.85], ["0%", "100%"]);
 
     return (
         <section
