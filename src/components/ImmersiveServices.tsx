@@ -103,47 +103,6 @@ export function ImmersiveServices() {
                     ))}
                 </motion.div>
 
-                {/* Service Names Navigation */}
-                <div className="absolute top-6 left-0 right-0 z-30 flex justify-center gap-4 md:gap-8 px-6 overflow-x-auto">
-                    {services.map((service, index) => {
-                        const serviceStart = index / services.length;
-                        const serviceEnd = (index + 1) / services.length;
-                        const serviceMid = (serviceStart + serviceEnd) / 2;
-
-                        return (
-                            <motion.button
-                                key={service.id}
-                                className="text-[10px] md:text-xs font-satoshi uppercase tracking-widest transition-colors duration-300 relative whitespace-nowrap"
-                                style={{
-                                    opacity: useTransform(
-                                        scrollYProgress,
-                                        [serviceStart, serviceMid - 0.05, serviceMid, serviceMid + 0.05, serviceEnd],
-                                        [0.3, 0.6, 1, 0.6, 0.3]
-                                    ),
-                                    color: useTransform(
-                                        scrollYProgress,
-                                        [serviceStart, serviceMid, serviceEnd],
-                                        ["rgb(254, 251, 227)", "rgb(254, 251, 227)", "rgb(254, 251, 227)"]
-                                    ),
-                                }}
-                            >
-                                {service.title}
-                                {/* Active indicator line */}
-                                <motion.div
-                                    className="absolute -bottom-1.5 left-0 right-0 h-px bg-beige"
-                                    style={{
-                                        scaleX: useTransform(
-                                            scrollYProgress,
-                                            [serviceStart, serviceMid - 0.1, serviceMid, serviceMid + 0.1, serviceEnd],
-                                            [0, 0.5, 1, 0.5, 0]
-                                        ),
-                                    }}
-                                />
-                            </motion.button>
-                        );
-                    })}
-                </div>
-
                 {/* Main content */}
                 <motion.div
                     className="flex h-full"
