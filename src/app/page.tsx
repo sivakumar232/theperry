@@ -73,7 +73,7 @@ export default function Home() {
           <div className="group">
             <PremiumButton href="/contact" variant="primary" hoverText="Let's Build It">
               <span className="flex items-center gap-2">
-                Book Free Strategy Call
+                Book Your Free Call
               </span>
             </PremiumButton>
           </div>

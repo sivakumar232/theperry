@@ -59,124 +59,130 @@ export function WhyChooseUs() {
                     </p>
                 </motion.div>
 
-                {/* Bento Grid - Row 1 */}
-                <div className="grid grid-cols-1 md:grid-cols-[2fr_2fr_1.5fr] gap-4 mb-4">
-                    {/* Container 1 - Large */}
-                    <motion.div
-                        className="relative h-48 md:h-60 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0 }}
-                    >
-                        <div className="p-4 md:p-5 flex flex-col justify-end h-full">
-                            <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
-                                {cards[0].heading}
-                            </h3>
-                            <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
-                                {cards[0].caption}
-                            </p>
-                        </div>
-                    </motion.div>
+                {/* Bento Grid - 3 Row Layout */}
+                <div className="max-w-5xl mx-auto">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        {/* Row 1 & 2 Combined - Left Side */}
+                        <div className="md:col-span-2 grid grid-rows-2 gap-4">
+                            {/* Row 1 - Horizontal Rectangle (Container 1) */}
+                            <motion.div
+                                className="relative h-48 md:h-56 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.4, delay: 0 }}
+                            >
+                                <div className="p-4 md:p-5 flex flex-col justify-end h-full">
+                                    <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
+                                        {cards[0].heading}
+                                    </h3>
+                                    <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
+                                        {cards[0].caption}
+                                    </p>
+                                </div>
+                            </motion.div>
 
-                    {/* Container 2 - Large */}
-                    <motion.div
-                        className="relative h-48 md:h-60 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.1 }}
-                    >
-                        <div className="p-4 md:p-5 flex flex-col justify-end h-full">
-                            <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
-                                {cards[1].heading}
-                            </h3>
-                            <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
-                                {cards[1].caption}
-                            </p>
-                        </div>
-                    </motion.div>
+                            {/* Row 2 - Two Squares (Containers 2 & 4) */}
+                            <div className="grid grid-cols-2 gap-4">
+                                {/* Container 2 - Square */}
+                                <motion.div
+                                    className="relative h-48 md:h-56 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.4, delay: 0.1 }}
+                                >
+                                    <div className="p-4 md:p-5 flex flex-col justify-end h-full">
+                                        <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
+                                            {cards[1].heading}
+                                        </h3>
+                                        <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
+                                            {cards[1].caption}
+                                        </p>
+                                    </div>
+                                </motion.div>
 
-                    {/* Container 3 - Medium */}
-                    <motion.div
-                        className="relative h-48 md:h-60 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.2 }}
-                    >
-                        {/* SVG Background */}
-                        <div className="absolute inset-0 flex items-start justify-center pt-4 md:pt-6 overflow-hidden">
-                            <PremiumQualitySVG className="w-32 h-32 md:w-36 md:h-36 opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                                {/* Container 4 - Square */}
+                                <motion.div
+                                    className="relative h-48 md:h-56 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.4, delay: 0.2 }}
+                                >
+                                    <div className="p-4 md:p-5 flex flex-col justify-end h-full">
+                                        <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
+                                            {cards[3].heading}
+                                        </h3>
+                                        <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
+                                            {cards[3].caption}
+                                        </p>
+                                    </div>
+                                </motion.div>
+                            </div>
                         </div>
 
-                        {/* Text Content */}
-                        <div className="relative z-10 p-4 md:p-5 flex flex-col justify-end h-full">
-                            <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
-                                {cards[2].heading}
-                            </h3>
-                            <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
-                                {cards[2].caption}
-                            </p>
-                        </div>
-                    </motion.div>
-                </div>
+                        {/* Container 3 - Vertical Rectangle (Spans Row 1 & 2) */}
+                        <motion.div
+                            className="relative h-48 md:h-[calc(2*14rem+1rem)] rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: 0.3 }}
+                        >
+                            {/* SVG Background */}
+                            <div className="absolute inset-0 flex items-center justify-center overflow-hidden">
+                                <PremiumQualitySVG className="w-32 h-32 md:w-40 md:h-40 opacity-60 group-hover:opacity-80 transition-opacity duration-500" />
+                            </div>
 
-                {/* Bento Grid - Row 2 */}
-                <div className="grid grid-cols-1 md:grid-cols-[1.5fr_2fr_2fr] gap-4">
-                    {/* Container 4 - Medium */}
-                    <motion.div
-                        className="relative h-48 md:h-60 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.3 }}
-                    >
-                        <div className="p-4 md:p-5 flex flex-col justify-end h-full">
-                            <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
-                                {cards[3].heading}
-                            </h3>
-                            <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
-                                {cards[3].caption}
-                            </p>
-                        </div>
-                    </motion.div>
+                            {/* Text Content */}
+                            <div className="relative z-10 p-4 md:p-5 flex flex-col justify-end h-full">
+                                <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
+                                    {cards[2].heading}
+                                </h3>
+                                <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
+                                    {cards[2].caption}
+                                </p>
+                            </div>
+                        </motion.div>
 
-                    {/* Container 5 - Large */}
-                    <motion.div
-                        className="relative h-48 md:h-60 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.4 }}
-                    >
-                        <div className="p-4 md:p-5 flex flex-col justify-end h-full">
-                            <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
-                                {cards[4].heading}
-                            </h3>
-                            <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
-                                {cards[4].caption}
-                            </p>
-                        </div>
-                    </motion.div>
+                        {/* Row 3 - Horizontal Rectangle & Square */}
+                        {/* Container 5 - Horizontal Rectangle */}
+                        <motion.div
+                            className="md:col-span-2 relative h-48 md:h-56 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: 0.4 }}
+                        >
+                            <div className="p-4 md:p-5 flex flex-col justify-end h-full">
+                                <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
+                                    {cards[4].heading}
+                                </h3>
+                                <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
+                                    {cards[4].caption}
+                                </p>
+                            </div>
+                        </motion.div>
 
-                    {/* Container 6 - Large */}
-                    <motion.div
-                        className="relative h-48 md:h-60 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.4, delay: 0.5 }}
-                    >
-                        <div className="p-4 md:p-5 flex flex-col justify-end h-full">
-                            <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
-                                {cards[5].heading}
-                            </h3>
-                            <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
-                                {cards[5].caption}
-                            </p>
-                        </div>
-                    </motion.div>
+                        {/* Container 6 - Square */}
+                        <motion.div
+                            className="relative h-48 md:h-56 rounded-2xl bg-white/5 border border-white/10 backdrop-blur-sm overflow-hidden group hover:bg-white/8 hover:border-beige/20 hover:scale-[1.02] transition-all duration-300"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.4, delay: 0.5 }}
+                        >
+                            <div className="p-4 md:p-5 flex flex-col justify-end h-full">
+                                <h3 className="text-base md:text-lg font-bold font-satoshi text-beige mb-1 leading-tight">
+                                    {cards[5].heading}
+                                </h3>
+                                <p className="text-xs text-beige/60 font-satoshi leading-relaxed">
+                                    {cards[5].caption}
+                                </p>
+                            </div>
+                        </motion.div>
+                    </div>
                 </div>
             </ContentContainer>
         </section>

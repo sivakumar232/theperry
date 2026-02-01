@@ -7,43 +7,21 @@ import { ContentContainer } from "./ui/ContentContainer";
 const steps = [
     {
         number: "01",
-        title: "Strategy & Discovery",
+        title: "Share Your Idea",
         caption: "Understand Your Vision",
         description: "Deep dive into your business goals, target audience, and competitive landscape. We align on strategy before touching design.",
-        icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <circle cx="11" cy="11" r="8" />
-                <path d="m21 21-4.3-4.3" />
-            </svg>
-        ),
     },
     {
         number: "02",
-        title: "Design & Build",
+        title: "We Build It",
         caption: "Craft Your Experience",
         description: "Custom designs that capture your brand, then built with performance-first code. You see everything before launch.",
-        icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 19l7-7 3 3-7 7-3-3z" />
-                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
-                <path d="M2 2l7.586 7.586" />
-                <circle cx="11" cy="11" r="2" />
-            </svg>
-        ),
     },
     {
         number: "03",
-        title: "Launch & Grow",
+        title: "Ship It",
         caption: "Go Live with Confidence",
         description: "Seamless deployment, final testing, and 30 days of support. We ensure you launch strong and keep winning.",
-        icon: (
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z" />
-                <path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z" />
-                <path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0" />
-                <path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5" />
-            </svg>
-        ),
     },
 ];
 
@@ -102,34 +80,10 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
             {/* Content */}
             <div className="flex-1 pb-6">
                 <div className="py-1">
-                    {/* Icon & Title Row */}
-                    <div className="flex items-center gap-2 mb-1">
-                        <motion.div
-                            className="text-2xl"
-                            animate={{
-                                rotate: activeState ? [0, -10, 10, -10, 0] : 0,
-                                scale: activeState ? 1.1 : 1
-                            }}
-                            transition={{ duration: 0.5 }}
-                            style={{
-                                color: useTransform(isActive, [0, 0.5, 1], ["rgba(254, 251, 227, 0.4)", "rgb(254, 251, 227)", "rgb(254, 251, 227)"])
-                            }}
-                        >
-                            {/* Animated Icon Drawing */}
-                            {React.cloneElement(step.icon as any, {
-                                className: "w-6 h-6",
-                                initial: { pathLength: 0, opacity: 0.5 },
-                                animate: {
-                                    pathLength: activeState ? 1 : 0,
-                                    opacity: activeState ? 1 : 0.5
-                                },
-                                transition: { duration: 0.8, ease: "easeInOut" }
-                            })}
-                        </motion.div>
-                        <h3 className="text-lg md:text-xl font-bold font-satoshi text-beige">
-                            {step.title}
-                        </h3>
-                    </div>
+                    {/* Title */}
+                    <h3 className="text-lg md:text-xl font-bold font-satoshi text-beige mb-1">
+                        {step.title}
+                    </h3>
 
                     {/* Caption */}
                     <motion.p

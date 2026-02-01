@@ -66,7 +66,7 @@ export function FinalCTA() {
                                     href="/contact"
                                     className="inline-flex items-center gap-2 px-6 py-3 bg-beige text-background font-satoshi font-semibold text-sm rounded-full hover:bg-beige/90 transition-colors group"
                                 >
-                                    Book Your Free Strategy Call
+                                    Book Your Free Call
                                     <svg
                                         width="16"
                                         height="16"

@@ -6,7 +6,7 @@ import Link from "next/link";
 import { FlipWords } from "./ui/flip-words";
 import { MagneticButton } from "./ui/magnetic-button";
 import { ContentContainer } from "./ui/ContentContainer";
-
+import { ShineButton } from "./ui/shine-button";
 const footerLinks = {
     services: [
         { label: "Web Development", href: "#services" },
@@ -172,9 +172,9 @@ export function Footer() {
                                 Available for projects worldwide
                             </li>
                         </ul>
-                        <button className="mt-6 px-6 py-3 bg-background text-beige font-satoshi font-semibold text-sm rounded-full hover:bg-background/90 transition-all duration-300 hover:scale-105">
-                            Start a Project
-                        </button>
+            <ShineButton className="mt-6 px-6 py-3 bg-background text-beige font-satoshi font-semibold text-sm rounded-full ">
+            Start a Project
+          </ShineButton>
                     </motion.div>
                 </div>
 
