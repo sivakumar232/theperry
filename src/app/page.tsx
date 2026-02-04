@@ -14,6 +14,8 @@ import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { PremiumButton } from "@/components/ui/premium-button";
+import Threads from "@/components/ui/Threads";
+
 
 export default function Home() {
   const flipWords = ["Perform.", "Scale.", "Convert."];
@@ -23,13 +25,20 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section - Clean Dark Theme */}
-      <section id="hero" className="relative isolate flex flex-col items-center justify-center min-h-screen px-6 overflow-hidden bg-black">
-
+      <section id="hero" className="relative isolate flex flex-col items-center pt-32 md:pt-48 min-h-screen px-6 overflow-hidden bg-black">
+        <div className="absolute inset-0 w-full h-full z-0">
+          <Threads
+            amplitude={2}
+            distance={0}
+            enableMouseInteraction={true}
+            color={[1.1, 1.1, 1.1]}
+          />
+        </div>
 
         {/* Clean Headline */}
+        {/* Clean Headline */}
         <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-white text-center leading-tight tracking-tight mb-6 relative z-10">
-          We Build Websites That{" "}
-          <span className="text-gray-300 font-normal italic">Actually</span>
+          We Build Websites That Actually{" "}
           <br />
           <FlipWords words={flipWords} className="text-white" />
         </h1>
