@@ -37,7 +37,7 @@ export function ContentContainer({
                             left: `calc((100vw - ${maxWidth === "7xl" ? "1280px" : maxWidth === "6xl" ? "1152px" : maxWidth === "5xl" ? "1024px" : maxWidth === "4xl" ? "896px" : maxWidth === "3xl" ? "768px" : "672px"}) / 2)`,
                         }}
                     >
-                        <div className="w-px h-full border-l-2 border-dotted border-beige/20" />
+                        <div className="w-px h-full border-l-2 border-dotted border-border" />
                     </div>
 
                     {/* Right margin line */}
@@ -47,7 +47,7 @@ export function ContentContainer({
                             right: `calc((100vw - ${maxWidth === "7xl" ? "1280px" : maxWidth === "6xl" ? "1152px" : maxWidth === "5xl" ? "1024px" : maxWidth === "4xl" ? "896px" : maxWidth === "3xl" ? "768px" : "672px"}) / 2)`,
                         }}
                     >
-                        <div className="w-px h-full border-r-2 border-dotted border-beige/20" />
+                        <div className="w-px h-full border-r-2 border-dotted border-border" />
                     </div>
                 </>
             )}

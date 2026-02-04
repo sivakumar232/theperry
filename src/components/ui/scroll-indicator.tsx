@@ -6,7 +6,7 @@ export function ScrollIndicator({ href }: { href: string }) {
     return (
         <motion.a
             href={href}
-            className="mt-12 inline-flex flex-col items-center gap-2 text-beige/40 hover:text-beige/60 transition-colors"
+            className="mt-12 inline-flex flex-col items-center gap-2 text-text-tertiary hover:text-text-secondary transition-colors"
             animate={{ y: [0, 8, 0] }}
             transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
         >
