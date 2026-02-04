@@ -73,7 +73,7 @@ export function PremiumButton({
 
             {/* Glow effect */}
             <motion.div
-                className="absolute inset-0 rounded-full pointer-events-none -z-10"
+                className="absolute inset-0 rounded-xl pointer-events-none -z-10"
                 animate={{
                     boxShadow: isHovered
                         ? variant === "primary"

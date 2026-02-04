@@ -14,7 +14,7 @@ import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { PremiumButton } from "@/components/ui/premium-button";
-import Threads from "@/components/ui/Threads";
+import DarkVeil from "@/components/ui/DarkVeil";
 
 
 export default function Home() {
@@ -25,19 +25,21 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section - Clean Dark Theme */}
-      <section id="hero" className="relative isolate flex flex-col items-center pt-32 md:pt-48 min-h-screen px-6 overflow-hidden bg-black">
+      <section id="hero" className="relative isolate flex flex-col items-center pt-32 md:pt-48 min-h-[70vh] px-6 overflow-hidden bg-black">
         <div className="absolute inset-0 w-full h-full z-0">
-          <Threads
-            amplitude={2}
-            distance={0}
-            enableMouseInteraction={true}
-            color={[1.1, 1.1, 1.1]}
+          <DarkVeil
+            hueShift={0}
+            noiseIntensity={0}
+            scanlineIntensity={0}
+            speed={0.5}
+            scanlineFrequency={0}
+            warpAmount={0}
           />
         </div>
 
         {/* Clean Headline */}
         {/* Clean Headline */}
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-white text-center leading-tight tracking-tight mb-6 relative z-10">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-satoshi text-stone-100 text-center leading-tight tracking-tight mb-6 relative z-10">
           We Build Websites That Actually{" "}
           <br />
           <FlipWords words={flipWords} className="text-white" />
@@ -61,8 +63,11 @@ export default function Home() {
           </div>
         </div>
 
-        <div className="h-30 md:h-32" />
+        <div className="h-8 md:h-10" />
       </section>
+
+      {/* Separator */}
+      <div className="w-full border-b border-dashed border-white/10" />
 
       {/* Branding Text */}
       <BrandingText />

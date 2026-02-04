@@ -13,7 +13,7 @@ export function BrandingText() {
                             text="Reshaping what exists, we're here to help you stand out — with clarity, creativity, and edge."
                             tag="h2"
                             className="text-xl md:text-3xl lg:text-4xl xl:text-5xl font-satoshi font-bold leading-tight"
-                            startColor="#666666"
+                            startColor="#000000"
                             endColor="#FFFFFF"
                             staggerDelay={0.04}
                             scrollOffset={["start 0.8", "start 0.2"]}

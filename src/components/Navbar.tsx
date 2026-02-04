@@ -104,8 +104,8 @@ export default function Navbar() {
                                 href="/contact"
                                 className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-300
                                 ${isScrolled
-                                        ? "bg-black/50 border border-white/20 text-white hover:bg-black/70"
-                                        : "bg-black/95 border border-white/20 text-white hover:bg-black"
+                                        ? "bg-white text-black hover:bg-gray-100 border-transparent shadow-sm"
+                                        : "bg-white text-black hover:bg-gray-200 border-transparent shadow-sm"
                                     }`}
                             >
                                 Let's Talk
