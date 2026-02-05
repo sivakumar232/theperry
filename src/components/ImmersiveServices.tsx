@@ -3,6 +3,7 @@
 import React, { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
+import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 
 const services = [
     {
@@ -102,14 +103,20 @@ export function ImmersiveServices() {
     return (
         <section className="py-24 md:py-32 bg-black relative">
             <ContentContainer>
-                {/* Section Header */}
-                <div className="text-center mb-16 md:mb-24">
-                    <h2 className="text-3xl md:text-5xl font-bold font-satoshi text-white mb-4">
-                        Our <span className="text-zinc-500 italic font-normal">Services</span>
-                    </h2>
-                    <p className="text-lg text-zinc-400 font-satoshi max-w-2xl mx-auto">
-                        Everything you need to build and grow your digital presence
-                    </p>
+
+                {/* Section Header - Above the sticky content */}
+                <div className="py-16 md:py-24 bg-black">
+                    <div className="max-w-7xl mx-auto px-6 text-center">
+                        <span className="block text-sm font-medium font-satoshi text-zinc-500 mb-3">(Our Services)</span>
+                        <CinematicBlurReveal
+                            text="Our Services"
+                            as="h2"
+                            className="text-3xl md:text-5xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
+                        />
+                        <p className="text-base text-zinc-400 font-satoshi max-w-xl mx-auto">
+                            Everything you need to build and grow your digital presence
+                        </p>
+                    </div>
                 </div>
 
                 {/* Grid Layout */}

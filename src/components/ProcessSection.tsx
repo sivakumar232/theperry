@@ -3,6 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll, useTransform } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
+import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 
 const steps = [
     {
@@ -179,21 +180,18 @@ export function ProcessSection() {
         >
             <ContentContainer className="w-full">
                 {/* Section Header */}
-                <motion.div
-                    className="text-center mb-12"
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5 }}
-                >
-                    <h2 className="text-3xl md:text-5xl font-bold font-satoshi text-white mb-3">
-                        How We{" "}
-                        <span className="text-zinc-500 italic font-normal">Work Together</span>
-                    </h2>
+                {/* Section Header */}
+                <div className="text-center mb-12">
+                    <span className="block text-sm font-medium font-satoshi text-zinc-500 mb-3">(How We Work)</span>
+                    <CinematicBlurReveal
+                        text="How We Work Together"
+                        as="h2"
+                        className="text-3xl md:text-5xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
+                    />
                     <p className="text-base text-zinc-400 font-satoshi font-normal max-w-xl mx-auto">
                         A streamlined 3-step process designed to deliver exceptional results in 3 weeks.
                     </p>
-                </motion.div>
+                </div>
 
                 {/* Interactive 3D Timeline - Option 1 */}
                 <div className="relative max-w-2xl mx-auto">
