@@ -23,15 +23,16 @@ import { PremiumButton } from "@/components/ui/premium-button";
 import DarkVeil from "@/components/ui/DarkVeil";
 
 
+const flipWords = ["Stand Out", "Scale", "Performs"];
+
 export default function Home() {
-  const flipWords = ["Stand Out", "Scale", "Performs"];
 
   return (
     <main className="min-h-screen bg-black text-white tracking-tight">
       <Navbar />
 
       {/* Hero Section - Clean Dark Theme */}
-      <section id="hero" className="relative isolate flex flex-col items-center pt-32 md:pt-48 min-h-[70vh] px-6 overflow-hidden bg-black">
+      <section id="hero" className="relative isolate flex flex-col items-center justify-center pt-32 md:pt-48 pb-20 min-h-[90vh] md:min-h-[70vh] px-6 overflow-hidden bg-black">
         <div className="absolute inset-0 w-full h-full z-0">
           <DarkVeil
             hueShift={0}
@@ -48,7 +49,7 @@ export default function Home() {
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-satoshi text-[#F2F2F2] text-center leading-tight tracking-tight mb-6 relative z-10">
           <CinematicBlurReveal as="span" text="We Turn Your " className="inline-block" delay={0} />
           <span className="text-zinc-300"><CinematicBlurReveal as="span" text="Vision" className="inline-block" delay={0.4} /></span>
-          <span className="inline-flex items-center justify-center align-middle ml-4 mr-2 relative z-20">
+          <span className="hidden md:inline-flex items-center justify-center align-middle ml-4 mr-2 relative z-20">
             <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={4} xOffset={-4} duration={2.5} ease="easeOut">
               <div className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl border-4 border-slate-500/70 shadow-2xl shadow-black/50 overflow-hidden relative bg-[#010101] bg-clip-padding inline-block align-middle transform transition-transform">
                 <img
@@ -60,8 +61,8 @@ export default function Home() {
             </FloatingElement>
           </span>{" "}
           <CinematicBlurReveal as="span" text="Into" className="inline-block" delay={0.8} />
-          <br />
-          <span className="inline-flex items-center justify-center align-middle mx-2 relative z-20">
+          <br className="hidden md:block" />
+          <span className="hidden md:inline-flex items-center justify-center align-middle mx-2 relative z-20">
             <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={4} xOffset={-4} duration={2.5} ease="easeOut">
               <div className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl border-4 border-slate-500/70 shadow-2xl shadow-black/50 overflow-hidden relative bg-[#8B5CF6] bg-clip-padding inline-block align-middle transform transition-transform">
                 <img

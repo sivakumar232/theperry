@@ -1,5 +1,5 @@
 "use client";
-import { useRef, useEffect } from 'react';
+import { useRef, useEffect, memo } from 'react';
 import { Renderer, Program, Mesh, Triangle, Vec2 } from 'ogl';
 import './DarkVeil.css';
 
@@ -85,7 +85,7 @@ interface DarkVeilProps {
     resolutionScale?: number;
 }
 
-export default function DarkVeil({
+const DarkVeil = memo(function DarkVeil({
     hueShift = 0,
     noiseIntensity = 0,
     scanlineIntensity = 0,
@@ -158,4 +158,6 @@ export default function DarkVeil({
         };
     }, [hueShift, noiseIntensity, scanlineIntensity, speed, scanlineFrequency, warpAmount, resolutionScale]);
     return <canvas ref={ref} className="darkveil-canvas" />;
-}
+});
+
+export default DarkVeil;

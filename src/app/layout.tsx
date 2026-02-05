@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { SmoothScrollProvider } from "@/components/ui/smooth-scroll";
 import { CircularCTA } from "@/components/CircularCTA";
 
 const inter = Inter({
   variable: "--font-inter",
+  subsets: ["latin"],
+  display: "swap",
+});
+
+const dancingScript = Dancing_Script({
+  variable: "--font-cursive",
   subsets: ["latin"],
   display: "swap",
 });
@@ -114,7 +120,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} antialiased`}>
+      <body className={`${inter.variable} ${dancingScript.variable} antialiased`}>
         <SmoothScrollProvider>{children}</SmoothScrollProvider>
       </body>
     </html>
