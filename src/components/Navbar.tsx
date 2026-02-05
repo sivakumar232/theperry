@@ -2,7 +2,7 @@
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
 import { PremiumButton } from "@/components/ui/premium-button";
-import { ArrowUpRight, Menu, X } from "lucide-react";
+import { ArrowUpRight, ArrowRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 
 
@@ -102,13 +102,14 @@ export default function Navbar() {
                         <div className="hidden md:flex justify-end flex-1">
                             <Link
                                 href="/contact"
-                                className={`px-6 py-2.5 text-sm font-medium rounded-lg transition-all duration-300
+                                className={`group flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-300
                                 ${isScrolled
-                                        ? "bg-white text-black hover:bg-gray-100 border-transparent shadow-sm"
-                                        : "bg-white text-black hover:bg-gray-200 border-transparent shadow-sm"
+                                        ? "bg-white text-black  border-transparent shadow-sm"
+                                        : "bg-white text-black border-transparent shadow-sm"
                                     }`}
                             >
                                 Let's Talk
+                                <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                             </Link>
                         </div>
 

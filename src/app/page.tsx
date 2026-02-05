@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import { FlipWords } from "@/components/ui/flip-words";
 import Image from "next/image";
 import { FloatingElement } from "@/components/ui/floating-element";
+import { PhoneCall } from "lucide-react";
 
 import { BrandingText } from "@/components/BrandingText";
 import { FounderSection } from "@/components/FounderSection";
@@ -16,7 +17,6 @@ import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { PremiumButton } from "@/components/ui/premium-button";
-import { OrbitalBorderButton } from "@/components/ui/orbital-border-button";
 import DarkVeil from "@/components/ui/DarkVeil";
 
 
@@ -74,16 +74,17 @@ export default function Home() {
 
         {/* Clean Subheadline */}
         <p className="text-base md:text-lg text-gray-300 font-switcher font-medium text-center max-w-2xl leading-relaxed relative z-10">
-          We partner with startups and B2B enterprises that refuse to blend in, turning ideas into <span className="text-white font-semibold">standout</span> digital products and platforms.
+          We partner with startups and B2B enterprises that refuse to blend in, shaping ideas into  digital products and platforms.
         </p>
 
         {/* Clean CTA */}
         <div className="flex justify-center mt-8 z-10">
-          <OrbitalBorderButton onClick={() => window.location.href = '/contact'}>
-            <span className="flex items-center gap-2">
-              Book Your Free Call
+          <button className="group bg-black px-4 py-2.5 text-white rounded-xl font-semibold text-md border-b border-white/40 shadow-[0_4px_20px_rgba(255,255,255,0.1)] hover:bg-zinc-900 transition-all duration-300 active:scale-95 hover:shadow-[0_4px_25px_rgba(255,255,255,0.2)]">
+            <span className="flex items-center gap-0">
+              Book a 30-Minute Call
+              <PhoneCall className="w-0 opacity-0 transition-all duration-300 group-hover:w-5 group-hover:ml-2 group-hover:opacity-100" />
             </span>
-          </OrbitalBorderButton>
+          </button>
         </div>
 
         <div className="h-8 md:h-10" />
