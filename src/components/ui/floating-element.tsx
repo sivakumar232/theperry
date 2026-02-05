@@ -10,6 +10,7 @@ interface FloatingElementProps {
     yOffset?: number;
     xOffset?: number;
     rotation?: number;
+    ease?: any;
 }
 
 export function FloatingElement({
@@ -19,6 +20,7 @@ export function FloatingElement({
     yOffset = 0,
     xOffset = 0,
     rotation = 0,
+    ease = "easeInOut",
 }: FloatingElementProps) {
     return (
         <motion.div
@@ -31,7 +33,7 @@ export function FloatingElement({
             transition={{
                 duration: duration,
                 repeat: Infinity,
-                ease: "easeInOut",
+                ease: ease,
             }}
         >
             {children}
