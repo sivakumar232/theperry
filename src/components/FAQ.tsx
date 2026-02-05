@@ -4,6 +4,7 @@ import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
 import { Plus, Minus } from "lucide-react";
+import { BlurRevealText } from "./ui/blur-reveal-text";
 
 const faqs = [
     {
@@ -70,7 +71,7 @@ function AccordionItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
                         {faq.question}
                     </span>
                     <div
-                        className="flex-shrink-0 p-1.5 rounded-full bg-white text-black"
+                        className="flex-shrink-0 p-0.5 rounded-full bg-white text-black"
                     >
                         {isOpen ? (
                             <Minus className="w-3 h-3 md:w-3.5 md:h-3.5" />
@@ -115,9 +116,16 @@ export function FAQ() {
                         transition={{ duration: 0.5 }}
                     >
                         <span className="block text-sm font-medium font-satoshi text-gray-500 mb-3">(FAQs)</span>
-                        <h2 className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6">
-                            Your Questions, Answered
-                        </h2>
+                        <BlurRevealText
+                            text="Your Questions, Answered"
+                            tag="h2"
+                            className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
+                            startColor="rgba(255,255,255,0.3)"
+                            endColor="#FFFFFF"
+                            staggerDelay={0.00}
+                            scrollOffset={["start 0.8", "start 0.2"]}
+                            direction="down"
+                        />
                         <p className="text-md text-gray-400 font-satoshi max-w-xl mx-auto leading-relaxed">
                             Helping you understand our process and offerings at Agero.
                         </p>

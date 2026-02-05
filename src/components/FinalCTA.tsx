@@ -22,12 +22,12 @@ export function FinalCTA() {
             </div>
 
             <ContentContainer>
-                <div className="max-w-3xl mx-auto relative z-10">
+                <div className="max-w-4xl mx-auto relative z-10">
                     <div className="text-center">
                         {/* Headline with word-by-word scroll trigger */}
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-satoshi mb-4 leading-tight">
                             <ScrollRevealWord
-                                text="Ready to Build "
+                                text="Ready to Build"
                                 scrollProgress={scrollYProgress}
                                 startOffset={0.2}
                                 endOffset={0.35}
@@ -38,7 +38,7 @@ export function FinalCTA() {
                                 scrollProgress={scrollYProgress}
                                 startOffset={0.32}
                                 endOffset={0.5}
-                                className="text-gray-300 italic font-normal"
+                                className="text-white"
                             />
                         </h2>
 

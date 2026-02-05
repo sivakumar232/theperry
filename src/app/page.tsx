@@ -3,6 +3,8 @@
 
 import Navbar from "@/components/Navbar";
 import { FlipWords } from "@/components/ui/flip-words";
+import Image from "next/image";
+import { FloatingElement } from "@/components/ui/floating-element";
 
 import { BrandingText } from "@/components/BrandingText";
 import { FounderSection } from "@/components/FounderSection";
@@ -18,14 +20,14 @@ import DarkVeil from "@/components/ui/DarkVeil";
 
 
 export default function Home() {
-  const flipWords = ["Perform.", "Scale.", "Convert."];
+  const flipWords = ["Stand Out", "Scale", "Performs"];
 
   return (
     <main className="min-h-screen bg-black text-white tracking-tight">
       <Navbar />
 
       {/* Hero Section - Clean Dark Theme */}
-      <section id="hero" className="relative isolate flex flex-col items-center pt-32 md:pt-48 min-h-[70vh] px-6 overflow-hidden bg-black">
+      <section id="hero" className="relative isolate flex flex-col items-center pt-40 md:pt-64 min-h-[70vh] px-6 overflow-hidden bg-black">
         <div className="absolute inset-0 w-full h-full z-0">
           <DarkVeil
             hueShift={0}
@@ -40,9 +42,21 @@ export default function Home() {
         {/* Clean Headline */}
         {/* Clean Headline */}
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-satoshi text-stone-100 text-center leading-tight tracking-tight mb-6 relative z-10">
-          We Build Websites That Actually{" "}
+          We Turn Your{" "}
+          <span className="inline-flex items-center justify-center align-middle mx-2 relative z-20">
+            <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={0} duration={2.5}>
+              <div className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl border-4 border-white/20 shadow-2xl shadow-black/50 overflow-hidden relative bg-zinc-900 inline-block align-middle rotate-45 transform transition-transform">
+                <img
+                  src="/hero-hand.jpg"
+                  alt="Hero Icon"
+                  className="w-full h-full object-contain -rotate-45"
+                />
+              </div>
+            </FloatingElement>
+          </span>{" "}
+          Vision Into
           <br />
-          <FlipWords words={flipWords} className="text-white" />
+          Products that <FlipWords words={flipWords} className="text-white" />
         </h1>
 
         {/* Clean Subheadline */}
@@ -66,8 +80,7 @@ export default function Home() {
         <div className="h-8 md:h-10" />
       </section>
 
-      {/* Separator */}
-      <div className="w-full border-b border-dashed border-white/10" />
+
 
       {/* Branding Text */}
       <BrandingText />
