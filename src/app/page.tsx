@@ -16,6 +16,7 @@ import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { PremiumButton } from "@/components/ui/premium-button";
+import { OrbitalBorderButton } from "@/components/ui/orbital-border-button";
 import DarkVeil from "@/components/ui/DarkVeil";
 
 
@@ -41,40 +42,48 @@ export default function Home() {
 
         {/* Clean Headline */}
         {/* Clean Headline */}
-        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-satoshi text-stone-100 text-center leading-tight tracking-tight mb-6 relative z-10">
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-satoshi text-[#F2F2F2] text-center leading-tight tracking-tight mb-6 relative z-10">
           We Turn Your{" "}
-          <span className="inline-flex items-center justify-center align-middle mx-2 relative z-20">
-            <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={0} duration={2.5}>
-              <div className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl border-4 border-white/20 shadow-2xl shadow-black/50 overflow-hidden relative bg-zinc-900 inline-block align-middle rotate-45 transform transition-transform">
+          <span className="text-zinc-300">Vision</span>
+          <span className="inline-flex items-center justify-center align-middle ml-4 mr-2 relative z-20">
+            <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={4} xOffset={-4} duration={2.5} ease="easeOut">
+              <div className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl border-4 border-slate-500/70 shadow-2xl shadow-black/50 overflow-hidden relative bg-[#010101] bg-clip-padding inline-block align-middle transform transition-transform">
                 <img
                   src="/hero-hand.jpg"
                   alt="Hero Icon"
-                  className="w-full h-full object-contain -rotate-45"
+                  className="w-full h-full object-contain"
                 />
               </div>
             </FloatingElement>
           </span>{" "}
-          Vision Into
+          Into
           <br />
-          Products that <FlipWords words={flipWords} className="text-white" />
+          <span className="inline-flex items-center justify-center align-middle mx-2 relative z-20">
+            <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={4} xOffset={-4} duration={2.5} ease="easeOut">
+              <div className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl border-4 border-slate-500/70 shadow-2xl shadow-black/50 overflow-hidden relative bg-[#8B5CF6] bg-clip-padding inline-block align-middle transform transition-transform">
+                <img
+                  src="/hero-mobile.jpg"
+                  alt="Mobile Icon"
+                  className="w-full h-full object-contain"
+                />
+              </div>
+            </FloatingElement>
+          </span>
+          <span className="text-[#8B5CF6]">Products</span> that <FlipWords words={flipWords} className="text-white" />
         </h1>
 
         {/* Clean Subheadline */}
-        <p className="text-base md:text-lg text-gray-300 font-satoshi font-medium text-center max-w-2xl leading-relaxed relative z-10">
-          Launch-ready in 3 weeks. Premium design. Performance guaranteed.
-          <br className="hidden md:block" />
-          <span className="text-gray-400 font-normal">For startups and growing businesses who refuse to look average.</span>
+        <p className="text-base md:text-lg text-gray-300 font-switcher font-medium text-center max-w-2xl leading-relaxed relative z-10">
+          We partner with startups and B2B enterprises that refuse to blend in, turning ideas into <span className="text-white font-semibold">standout</span> digital products and platforms.
         </p>
 
         {/* Clean CTA */}
-        <div className="flex justify-center mt-8">
-          <div className="group">
-            <PremiumButton href="/contact" variant="primary" hoverText="Let's Build It">
-              <span className="flex items-center gap-2">
-                Book Your Free Call
-              </span>
-            </PremiumButton>
-          </div>
+        <div className="flex justify-center mt-8 z-10">
+          <OrbitalBorderButton onClick={() => window.location.href = '/contact'}>
+            <span className="flex items-center gap-2">
+              Book Your Free Call
+            </span>
+          </OrbitalBorderButton>
         </div>
 
         <div className="h-8 md:h-10" />
