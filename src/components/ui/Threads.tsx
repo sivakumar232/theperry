@@ -123,7 +123,7 @@ void main() {
 
 const Threads = ({ color = [1, 1, 1], amplitude = 1, distance = 0, enableMouseInteraction = false, ...rest }: any) => {
     const containerRef = useRef<HTMLDivElement>(null);
-    const animationFrameId = useRef<number>();
+    const animationFrameId = useRef<number | null>(null);
 
     useEffect(() => {
         if (!containerRef.current) return;
