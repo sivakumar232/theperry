@@ -60,7 +60,7 @@ export default function Home() {
               </div>
             </FloatingElement>
           </span>{" "}
-          <CinematicBlurReveal as="span" text="Into" className="inline-block" delay={0.8} />
+          <CinematicBlurReveal as="span" text="Into" className="inline-block mr-2 md:mr-0" delay={0.8} />
           <br className="hidden md:block" />
           <span className="hidden md:inline-flex items-center justify-center align-middle mx-2 relative z-20">
             <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={4} xOffset={-4} duration={2.5} ease="easeOut">

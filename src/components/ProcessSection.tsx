@@ -99,11 +99,11 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
                 </motion.div>
             </div>
 
-            {/* Content Card - Bright White Background */}
+            {/* Content Card - Dark Theme */}
             <div className="flex-1 pb-6">
-                <div className="py-4 px-4 rounded-lg bg-white border border-border hover:bg-bg-surface hover:border-accent-tertiary hover:shadow-sm transition-all duration-300 cursor-pointer shadow-sm">
+                <div className="py-4 px-4 rounded-lg bg-zinc-900 border border-zinc-800 hover:bg-zinc-800 hover:border-purple-500/30 hover:shadow-lg transition-all duration-300 cursor-pointer shadow-black/50">
                     {/* Title */}
-                    <h3 className="text-lg md:text-xl font-bold font-satoshi text-text-primary mb-1">
+                    <h3 className="text-lg md:text-xl font-bold font-satoshi text-white mb-1">
                         {step.title}
                     </h3>
 
@@ -111,14 +111,14 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
                     <motion.p
                         className="text-xs font-satoshi font-medium uppercase tracking-wider mb-2"
                         style={{
-                            color: useTransform(isActive, [0, 0.5, 1], ["var(--text-tertiary)", "var(--text-secondary)", "var(--accent-primary)"])
+                            color: useTransform(isActive, [0, 0.5, 1], ["#52525b", "#a1a1aa", "#c084fc"]) // zinc-600, zinc-400, purple-400
                         }}
                     >
                         {step.caption}
                     </motion.p>
 
                     {/* Description - Staggered Reveal */}
-                    <div className="text-sm text-text-secondary font-satoshi leading-relaxed relative min-h-[48px]">
+                    <div className="text-sm text-zinc-400 font-satoshi leading-relaxed relative min-h-[48px]">
                         {/* Static fallback for layout */}
                         <p className={activeState ? "opacity-0 absolute inset-0" : "opacity-100 transition-opacity duration-300"}>
                             {step.description}
@@ -147,7 +147,7 @@ function ProcessStep({ step, index, scrollProgress }: { step: typeof steps[0]; i
                                             hidden: { opacity: 0, y: 5 },
                                             visible: { opacity: 1, y: 0 }
                                         }}
-                                        className="inline-block mr-1 text-text-primary"
+                                        className="inline-block mr-1 text-white"
                                     >
                                         {word}
                                     </motion.span>
@@ -175,7 +175,7 @@ export function ProcessSection() {
         <section
             id="process"
             ref={containerRef}
-            className="relative py-16 md:py-24 bg-bg-primary"
+            className="relative py-16 md:py-24 bg-black"
         >
             <ContentContainer className="w-full">
                 {/* Section Header */}
@@ -186,11 +186,11 @@ export function ProcessSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                 >
-                    <h2 className="text-3xl md:text-5xl font-bold font-satoshi text-text-primary mb-3">
+                    <h2 className="text-3xl md:text-5xl font-bold font-satoshi text-white mb-3">
                         How We{" "}
-                        <span className="text-text-secondary italic font-normal">Work Together</span>
+                        <span className="text-zinc-500 italic font-normal">Work Together</span>
                     </h2>
-                    <p className="text-base text-text-tertiary font-satoshi font-normal max-w-xl mx-auto">
+                    <p className="text-base text-zinc-400 font-satoshi font-normal max-w-xl mx-auto">
                         A streamlined 3-step process designed to deliver exceptional results in 3 weeks.
                     </p>
                 </motion.div>
@@ -198,11 +198,11 @@ export function ProcessSection() {
                 {/* Interactive 3D Timeline - Option 1 */}
                 <div className="relative max-w-2xl mx-auto">
                     {/* Background Line */}
-                    <div className="absolute left-5 md:left-6 top-0 bottom-0 w-px bg-border" />
+                    <div className="absolute left-5 md:left-6 top-0 bottom-0 w-px bg-zinc-800" />
 
                     {/* Animated Progress Line */}
                     <motion.div
-                        className="absolute left-5 md:left-6 top-0 w-px bg-gradient-to-b from-accent-primary via-accent-secondary to-transparent origin-top"
+                        className="absolute left-5 md:left-6 top-0 w-px bg-gradient-to-b from-purple-500 via-purple-400 to-transparent origin-top"
                         style={{ height: lineHeight }}
                     />
 
@@ -228,7 +228,7 @@ export function ProcessSection() {
                 >
                     <motion.a
                         href="/contact"
-                        className="inline-flex items-center gap-2 px-6 py-3 bg-accent-primary text-bg-primary font-satoshi font-semibold text-sm rounded-full hover:bg-accent-secondary transition-colors"
+                        className="inline-flex items-center gap-2 px-6 py-3 bg-white text-black font-satoshi font-semibold text-sm rounded-full hover:bg-zinc-200 transition-colors"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                     >

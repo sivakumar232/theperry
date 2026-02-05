@@ -3,7 +3,7 @@
 import React, { useRef } from "react";
 import { motion, useScroll } from "motion/react";
 import { MagneticButton } from "./ui/magnetic-button";
-import { ScrollRevealWord } from "./ui/scroll-reveal-word";
+import { ScrollBlurReveal } from "./ui/scroll-blur-reveal";
 import { ContentContainer } from "./ui/ContentContainer";
 
 export function FinalCTA() {
@@ -25,33 +25,22 @@ export function FinalCTA() {
                 <div className="max-w-4xl mx-auto relative z-10">
                     <div className="text-center">
                         {/* Headline with word-by-word scroll trigger */}
-                        <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-satoshi mb-4 leading-tight">
-                            <ScrollRevealWord
-                                text="Ready to Build"
-                                scrollProgress={scrollYProgress}
-                                startOffset={0.2}
-                                endOffset={0.35}
-                                className="text-white"
+                        <div className="mb-4">
+                            <ScrollBlurReveal
+                                text="Ready to Build Something Amazing?"
+                                className="text-3xl md:text-4xl lg:text-5xl font-bold font-satoshi leading-tight text-white mb-4"
+                                stepOffset={0.02}
                             />
-                            <ScrollRevealWord
-                                text="Something Amazing?"
-                                scrollProgress={scrollYProgress}
-                                startOffset={0.32}
-                                endOffset={0.5}
-                                className="text-white"
-                            />
-                        </h2>
+                        </div>
 
                         {/* Subheadline with word-by-word scroll trigger */}
-                        <p className="text-base md:text-lg font-satoshi max-w-xl mx-auto mb-8 leading-relaxed">
-                            <ScrollRevealWord
+                        <div className="text-base md:text-lg font-satoshi max-w-xl mx-auto mb-8 leading-relaxed">
+                            <ScrollBlurReveal
                                 text="Let's discuss your project. No pressure, no obligation. Just a friendly conversation about your goals and how we can help."
-                                scrollProgress={scrollYProgress}
-                                startOffset={0.4}
-                                endOffset={0.65}
                                 className="text-gray-300"
+                                stepOffset={0.005}
                             />
-                        </p>
+                        </div>
 
                         {/* CTA Buttons */}
                         <motion.div
