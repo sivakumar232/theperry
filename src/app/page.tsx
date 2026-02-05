@@ -6,6 +6,7 @@ import { FlipWords } from "@/components/ui/flip-words";
 import Image from "next/image";
 import { FloatingElement } from "@/components/ui/floating-element";
 import { PhoneCall } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { BrandingText } from "@/components/BrandingText";
 import { FounderSection } from "@/components/FounderSection";
@@ -79,8 +80,8 @@ export default function Home() {
 
         {/* Clean CTA */}
         <div className="flex justify-center mt-8 z-10">
-          <button className="group bg-black px-4 py-2.5 text-white rounded-xl font-semibold text-md border-b border-white/40 shadow-[0_4px_20px_rgba(255,255,255,0.1)] hover:bg-zinc-900 transition-all duration-300 active:scale-95 hover:shadow-[0_4px_25px_rgba(255,255,255,0.2)]">
-            <span className="flex items-center gap-0">
+          <button className="group relative bg-black px-4 py-2.5 text-white rounded-xl font-semibold text-md border border-white/40 shadow-[0_4px_20px_rgba(255,255,255,0.1)] hover:bg-zinc-900 transition-all duration-300 active:scale-95 hover:shadow-none">
+            <span className="flex items-center gap-0 relative z-10">
               Book a 30-Minute Call
               <PhoneCall className="w-0 opacity-0 transition-all duration-300 group-hover:w-5 group-hover:ml-2 group-hover:opacity-100" />
             </span>
