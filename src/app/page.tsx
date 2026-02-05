@@ -16,6 +16,7 @@ import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { PremiumButton } from "@/components/ui/premium-button";
+import { OrbitalBorderButton } from "@/components/ui/orbital-border-button";
 import DarkVeil from "@/components/ui/DarkVeil";
 
 
@@ -78,11 +79,11 @@ export default function Home() {
 
         {/* Clean CTA */}
         <div className="flex justify-center mt-8 z-10">
-          <button className="bg-black px-4 py-2.5 text-white rounded-xl font-semibold text-md border-b border-white/40 shadow-[0_4px_20px_rgba(255,255,255,0.1)] hover:bg-zinc-900 transition-all duration-300 active:scale-95">
+          <OrbitalBorderButton onClick={() => window.location.href = '/contact'}>
             <span className="flex items-center gap-2">
               Book Your Free Call
             </span>
-          </button>
+          </OrbitalBorderButton>
         </div>
 
         <div className="h-8 md:h-10" />
