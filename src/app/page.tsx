@@ -3,8 +3,10 @@
 
 import Navbar from "@/components/Navbar";
 import { FlipWords } from "@/components/ui/flip-words";
+import { CinematicBlurReveal } from "@/components/ui/cinematic-blur-reveal";
 import Image from "next/image";
 import { FloatingElement } from "@/components/ui/floating-element";
+import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -29,7 +31,7 @@ export default function Home() {
       <Navbar />
 
       {/* Hero Section - Clean Dark Theme */}
-      <section id="hero" className="relative isolate flex flex-col items-center pt-40 md:pt-64 min-h-[70vh] px-6 overflow-hidden bg-black">
+      <section id="hero" className="relative isolate flex flex-col items-center pt-32 md:pt-48 min-h-[70vh] px-6 overflow-hidden bg-black">
         <div className="absolute inset-0 w-full h-full z-0">
           <DarkVeil
             hueShift={0}
@@ -44,8 +46,8 @@ export default function Home() {
         {/* Clean Headline */}
         {/* Clean Headline */}
         <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-satoshi text-[#F2F2F2] text-center leading-tight tracking-tight mb-6 relative z-10">
-          We Turn Your{" "}
-          <span className="text-zinc-300">Vision</span>
+          <CinematicBlurReveal as="span" text="We Turn Your " className="inline-block" delay={0} />
+          <span className="text-zinc-300"><CinematicBlurReveal as="span" text="Vision" className="inline-block" delay={0.4} /></span>
           <span className="inline-flex items-center justify-center align-middle ml-4 mr-2 relative z-20">
             <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={4} xOffset={-4} duration={2.5} ease="easeOut">
               <div className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl border-4 border-slate-500/70 shadow-2xl shadow-black/50 overflow-hidden relative bg-[#010101] bg-clip-padding inline-block align-middle transform transition-transform">
@@ -57,7 +59,7 @@ export default function Home() {
               </div>
             </FloatingElement>
           </span>{" "}
-          Into
+          <CinematicBlurReveal as="span" text="Into" className="inline-block" delay={0.8} />
           <br />
           <span className="inline-flex items-center justify-center align-middle mx-2 relative z-20">
             <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={4} xOffset={-4} duration={2.5} ease="easeOut">
@@ -70,7 +72,7 @@ export default function Home() {
               </div>
             </FloatingElement>
           </span>
-          <span className="text-[#8B5CF6]">Products</span> that <FlipWords words={flipWords} className="text-white" />
+          <span className="text-[#8B5CF6]"><CinematicBlurReveal as="span" text="Products" className="inline-block" delay={1.2} /></span> <span className="inline-block mr-2"><CinematicBlurReveal as="span" text="that" className="inline-block" delay={1.5} /></span> <FlipWords words={flipWords} className="text-white inline-block" delay={1.8} />
         </h1>
 
         {/* Clean Subheadline */}
@@ -80,12 +82,14 @@ export default function Home() {
 
         {/* Clean CTA */}
         <div className="flex justify-center mt-8 z-10">
-          <button className="group relative bg-black px-4 py-2.5 text-white rounded-xl font-semibold text-md border border-white/40 shadow-[0_4px_20px_rgba(255,255,255,0.1)] hover:bg-zinc-900 transition-all duration-300 active:scale-95 hover:shadow-none">
-            <span className="flex items-center gap-0 relative z-10">
-              Book a 30-Minute Call
-              <PhoneCall className="w-0 opacity-0 transition-all duration-300 group-hover:w-5 group-hover:ml-2 group-hover:opacity-100" />
-            </span>
-          </button>
+          <HoverBorderGradient
+            containerClassName="rounded-xl group"
+            as="button"
+            className="bg-black text-white flex items-center space-x-0"
+          >
+            <span>Book a 30-Minute Call</span>
+            <PhoneCall className="w-0 opacity-0 transition-all duration-300 group-hover:w-5 group-hover:ml-2 group-hover:opacity-100" />
+          </HoverBorderGradient>
         </div>
 
         <div className="h-8 md:h-10" />

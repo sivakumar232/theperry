@@ -7,20 +7,34 @@ export const FlipWords = ({
   words,
   duration = 2500,
   className,
+  delay = 0,
 }: {
   words: string[];
   duration?: number;
   className?: string;
+  delay?: number;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isStarted, setIsStarted] = useState(false);
   const currentWord = words[currentIndex];
 
   useEffect(() => {
+    // Start flipping only after the initial delay + initial word duration
+    const startTimer = setTimeout(() => {
+      setIsStarted(true);
+    }, delay * 1000 + 1000); // Wait for initial reveal + buffer
+
+    return () => clearTimeout(startTimer);
+  }, [delay]);
+
+  useEffect(() => {
+    if (!isStarted) return;
+
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % words.length);
     }, duration);
     return () => clearInterval(timer);
-  }, [words.length, duration]);
+  }, [words.length, duration, isStarted]);
 
   return (
     <span className="inline-flex relative align-baseline">
@@ -33,12 +47,12 @@ export const FlipWords = ({
       <AnimatePresence mode="popLayout">
         <motion.span
           key={currentWord}
-          initial={{ opacity: 0, y: 10, filter: "blur(4px)" }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-          exit={{ opacity: 0, y: -10, filter: "blur(4px)" }}
+          initial={{ opacity: 0, y: 10, filter: "blur(20px)", scale: 1.05 }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
+          exit={{ opacity: 0, y: -10, filter: "blur(20px)", scale: 0.95 }}
           transition={{
-            duration: 0.3,
-            ease: "easeOut",
+            duration: 0.6,
+            ease: [0.25, 0.4, 0.25, 1],
           }}
           className={cn(
             "absolute left-0 top-0 whitespace-nowrap",
@@ -48,11 +62,12 @@ export const FlipWords = ({
           {currentWord.split("").map((letter, i) => (
             <motion.span
               key={`${currentWord}-${i}`}
-              initial={{ opacity: 0, y: 8, filter: "blur(4px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+              initial={{ opacity: 0, y: 10, filter: "blur(20px)", scale: 1.05 }}
+              animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
               transition={{
-                delay: i * 0.025,
-                duration: 0.15,
+                delay: i * 0.03 + (!isStarted && currentIndex === 0 ? delay : 0),
+                duration: 0.6,
+                ease: [0.25, 0.4, 0.25, 1],
               }}
               className="inline-block"
             >
