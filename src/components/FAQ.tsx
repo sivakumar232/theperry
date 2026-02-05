@@ -1,134 +1,156 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
+import { Plus, Minus } from "lucide-react";
+import { BlurRevealText } from "./ui/blur-reveal-text";
 
 const faqs = [
     {
+        id: 1,
         question: "How long does it take to build a website?",
         answer: "Typically, a fully custom website takes 3-4 weeks depending on complexity. We'll provide a detailed timeline during our initial consultation based on your specific requirements.",
+        badge: "Popular",
     },
     {
+        id: 2,
         question: "What technologies do you use?",
         answer: "We use modern, industry-leading technologies including Next.js, React, TypeScript, and Tailwind CSS. Our tech stack ensures your site is fast, secure, and future-proof.",
+        badge: "Technical",
     },
     {
+        id: 3,
         question: "Do you provide ongoing support?",
         answer: "Absolutely! We offer support and maintenance packages. After launch, we're still here to help with updates, fixes, and improvements whenever you need them.",
+        badge: "Popular",
     },
     {
+        id: 4,
         question: "What's included in your pricing?",
         answer: "Our pricing includes design, development, testing, deployment, and initial SEO optimization. We provide transparent quotes with no hidden fees—what you see is what you get.",
+        badge: "Pricing",
     },
     {
+        id: 5,
         question: "Can you help with existing websites?",
         answer: "Yes! We work on redesigns, performance optimization, and feature additions for existing sites. We'll audit your current setup and recommend the best path forward.",
+        badge: null,
     },
     {
+        id: 6,
         question: "How do we get started?",
         answer: "Simply reach out through our contact form or schedule a free consultation. We'll discuss your vision, goals, and budget to create a tailored plan for your project.",
+        badge: "Getting Started",
     },
 ];
 
-function FAQItem({ question, answer, isOpen, onClick }: { question: string; answer: string; isOpen: boolean; onClick: () => void }) {
+function AccordionItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
+    const [isOpen, setIsOpen] = useState(false);
+
     return (
         <motion.div
-            className="border-b border-white/10 last:border-b-0"
-            initial={{ opacity: 0, y: 16 }}
+            initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
+            transition={{ delay: index * 0.1, duration: 0.5 }}
+            className="h-fit"
         >
-            <button
-                className="w-full py-4 flex items-center justify-between text-left group"
-                onClick={onClick}
+            <div
+                className={`group rounded-2xl border transition-all duration-300 overflow-hidden
+                ${isOpen
+                        ? "bg-zinc-900/80 border-white/20 shadow-lg shadow-black/20"
+                        : "bg-zinc-900/40 border-white/10 hover:border-white/20 hover:bg-zinc-900/60"
+                    }`}
             >
-                <span className="text-base md:text-lg font-satoshi font-medium text-beige group-hover:text-beige/80 transition-colors duration-300">
-                    {question}
-                </span>
-                <motion.div
-                    className="flex-shrink-0 ml-3 w-7 h-7 rounded-full bg-white/10 flex items-center justify-center group-hover:bg-beige/20 transition-colors duration-300"
-                    animate={{ rotate: isOpen ? 45 : 0 }}
-                    transition={{ duration: 0.25 }}
+                <button
+                    onClick={() => setIsOpen(!isOpen)}
+                    className="w-full flex items-center justify-between p-6 md:p-7 text-left outline-none cursor-pointer"
                 >
-                    <svg
-                        width="14"
-                        height="14"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="text-beige/70 group-hover:text-beige transition-colors duration-300"
+                    <span className="text-lg md:text-xl font-satoshi font-medium text-white group-hover:text-gray-100 transition-colors pr-8">
+                        {faq.question}
+                    </span>
+                    <div
+                        className="flex-shrink-0 p-0.5 rounded-full bg-white text-black"
                     >
-                        <line x1="12" y1="5" x2="12" y2="19" />
-                        <line x1="5" y1="12" x2="19" y2="12" />
-                    </svg>
-                </motion.div>
-            </button>
-            <AnimatePresence>
-                {isOpen && (
-                    <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.25, ease: "easeInOut" }}
-                        className="overflow-hidden"
-                    >
-                        <p className="pb-4 text-sm text-beige/50 font-satoshi leading-relaxed pr-10">
-                            {answer}
-                        </p>
-                    </motion.div>
-                )}
-            </AnimatePresence>
+                        {isOpen ? (
+                            <Minus className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                        ) : (
+                            <Plus className="w-3 h-3 md:w-3.5 md:h-3.5" />
+                        )}
+                    </div>
+                </button>
+
+                <AnimatePresence>
+                    {isOpen && (
+                        <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.3, ease: "easeInOut" }}
+                        >
+                            <div className="px-6 md:px-7 pb-6 md:pb-7">
+                                <p className="text-base md:text-lg text-gray-400 font-satoshi leading-relaxed max-w-3xl">
+                                    {faq.answer}
+                                </p>
+                            </div>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </div>
         </motion.div>
     );
 }
 
 export function FAQ() {
-    const [openIndex, setOpenIndex] = useState<number | null>(0);
-
     return (
-        <section id="faq" className="py-16 md:py-24">
+        <section id="faq" className="py-24 md:py-32 relative overflow-hidden bg-black">
             <ContentContainer>
-                <div className="max-w-3xl mx-auto">
+                <div className="max-w-6xl mx-auto relative px-4 md:px-0">
                     {/* Section Header */}
                     <motion.div
-                        className="text-center mb-10"
+                        className="text-center mb-16 md:mb-20"
                         initial={{ opacity: 0, y: 16 }}
                         whileInView={{ opacity: 1, y: 0 }}
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <h2 className="text-3xl md:text-5xl font-bold font-satoshi text-beige mb-3">
-                            Frequently Asked <span className="text-beige/70 italic font-normal">Questions</span>
-                        </h2>
-                        <p className="text-base text-beige/50 font-satoshi max-w-xl mx-auto">
-                            Got questions? We&apos;ve got answers. If you don&apos;t see what you&apos;re looking for, reach out!
+                        <span className="block text-sm font-medium font-satoshi text-gray-500 mb-3">(FAQs)</span>
+                        <BlurRevealText
+                            text="Your Questions, Answered"
+                            tag="h2"
+                            className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
+                            startColor="rgba(255,255,255,0.3)"
+                            endColor="#FFFFFF"
+                            staggerDelay={0.00}
+                            scrollOffset={["start 0.8", "start 0.2"]}
+                            direction="down"
+                        />
+                        <p className="text-md text-gray-400 font-satoshi max-w-xl mx-auto leading-relaxed">
+                            Helping you understand our process and offerings at Agero.
                         </p>
                     </motion.div>
 
-                    {/* FAQ Items */}
-                    <motion.div
-                        className="bg-white/5 border border-white/10 rounded-xl backdrop-blur-sm p-4 md:p-5"
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ duration: 0.5, delay: 0.1 }}
-                    >
-                        {faqs.map((faq, index) => (
-                            <FAQItem
-                                key={index}
-                                question={faq.question}
-                                answer={faq.answer}
-                                isOpen={openIndex === index}
-                                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                            />
-                        ))}
-                    </motion.div>
+                    {/* Accordion Container (Masonry Layout) */}
+                    <div className="flex flex-col md:flex-row gap-4 items-start">
+                        {/* Column 1 */}
+                        <div className="flex-1 w-full space-y-4">
+                            {faqs.filter((_, i) => i % 2 === 0).map((faq, i) => (
+                                <AccordionItem key={faq.id} faq={faq} index={i * 2} />
+                            ))}
+                        </div>
+                        {/* Column 2 */}
+                        <div className="flex-1 w-full space-y-4">
+                            {faqs.filter((_, i) => i % 2 !== 0).map((faq, i) => (
+                                <AccordionItem key={faq.id} faq={faq} index={i * 2 + 1} />
+                            ))}
+                        </div>
+                    </div>
+
+                    {/* CTA Footer */}
+
                 </div>
             </ContentContainer>
-        </section>
+        </section >
     );
 }

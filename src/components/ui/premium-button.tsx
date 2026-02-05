@@ -54,9 +54,9 @@ export function PremiumButton({
     const baseStyles = "relative inline-flex items-center justify-center gap-2 px-8 py-4 font-satoshi font-bold text-sm rounded-full overflow-hidden transition-all duration-300 isolate";
 
     const variantStyles = {
-        primary: "bg-beige text-background hover:shadow-[0_0_40px_rgba(254,251,227,0.4)]",
-        secondary: "bg-white/10 text-beige border border-white/20 hover:bg-white/15 hover:border-white/30",
-        outline: "bg-transparent text-beige border border-beige/40 hover:border-beige hover:bg-beige/5",
+        primary: "bg-white text-black hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]",
+        secondary: "bg-gray-800 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-500",
+        outline: "bg-transparent text-white border border-gray-600 hover:border-white hover:bg-gray-900",
     };
 
     const ButtonContent = (
@@ -65,7 +65,7 @@ export function PremiumButton({
             <motion.div
                 className="absolute inset-0 pointer-events-none z-20"
                 style={{
-                    background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.6), transparent)",
+                    background: "linear-gradient(90deg, transparent, rgba(0,0,0,0.3), transparent)",
                     x: useTransform(shineX, (v) => `${v}%`),
                 }}
                 transition={{ duration: 0.7, ease: "easeOut" }}
@@ -73,14 +73,14 @@ export function PremiumButton({
 
             {/* Glow effect */}
             <motion.div
-                className="absolute inset-0 rounded-full pointer-events-none -z-10"
+                className="absolute inset-0 rounded-xl pointer-events-none -z-10"
                 animate={{
                     boxShadow: isHovered
                         ? variant === "primary"
-                            ? "0 0 50px rgba(254,251,227,0.5), inset 0 0 20px rgba(255,255,255,0.2)"
-                            : "0 0 30px rgba(254,251,227,0.2)"
+                            ? "0 0 50px rgba(255,255,255,0.3), inset 0 0 20px rgba(0,0,0,0.1)"
+                            : "0 0 30px rgba(255,255,255,0.1)"
                         : isIdle && variant === "primary"
-                            ? ["0 0 0px rgba(254,251,227,0)", "0 0 15px rgba(254,251,227,0.3)", "0 0 0px rgba(254,251,227,0)"]
+                            ? ["0 0 0px rgba(255,255,255,0)", "0 0 15px rgba(255,255,255,0.2)", "0 0 0px rgba(255,255,255,0)"]
                             : "0 0 0px transparent",
                 }}
                 transition={{

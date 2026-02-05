@@ -38,7 +38,7 @@ export const ShinyButton = ({
             whileTap={{ scale: 0.95 }}
             className={cn(
                 "relative inline-flex items-center justify-center px-6 py-3 rounded-full",
-                "bg-beige text-neutral-900 font-medium font-satoshi text-sm",
+                "bg-accent-primary text-bg-primary font-medium font-satoshi text-sm",
                 className
             )}
         >

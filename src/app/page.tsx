@@ -1,9 +1,12 @@
+'use client';
+
 
 import Navbar from "@/components/Navbar";
 import { FlipWords } from "@/components/ui/flip-words";
+import Image from "next/image";
+import { FloatingElement } from "@/components/ui/floating-element";
 
-import { TrustBar } from "@/components/TrustBar";
-
+import { BrandingText } from "@/components/BrandingText";
 import { FounderSection } from "@/components/FounderSection";
 import { ProcessSection } from "@/components/ProcessSection";
 import { ImmersiveServices } from "@/components/ImmersiveServices";
@@ -13,63 +16,58 @@ import { FAQ } from "@/components/FAQ";
 import { FinalCTA } from "@/components/FinalCTA";
 import { Footer } from "@/components/Footer";
 import { PremiumButton } from "@/components/ui/premium-button";
-import { ShineButton } from "@/components/ui/shine-button";
+import DarkVeil from "@/components/ui/DarkVeil";
+
 
 export default function Home() {
-  const flipWords = ["Perform.", "Scale.", "Convert."];
+  const flipWords = ["Stand Out", "Scale", "Performs"];
 
   return (
-    <main className="min-h-screen bg-background text-foreground tracking-tight">
+    <main className="min-h-screen bg-black text-white tracking-tight">
       <Navbar />
 
-      {/* Spacer for fixed navbar */}
-      <div className="h-35" />
-
-      {/* Hero Section - Green accents only here */}
-      <section id="hero" className="relative isolate flex flex-col items-center justify-center min-h-[55vh] px-6 overflow-hidden">
-
-
-
-        {/* Grid Background with Fade */}
-        <div className="absolute inset-0 -z-10 bg-black/40">
-          {/* Subtle Noise Texture */}
-          <div
-            className="absolute inset-0 opacity-[0.04] pointer-events-none mix-blend-overlay"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E")`
-            }}
-          ></div>
-
-
-          {/* Fade overlay - transparent at top, dark at bottom */}
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-background" />
+      {/* Hero Section - Clean Dark Theme */}
+      <section id="hero" className="relative isolate flex flex-col items-center pt-40 md:pt-64 min-h-[70vh] px-6 overflow-hidden bg-black">
+        <div className="absolute inset-0 w-full h-full z-0">
+          <DarkVeil
+            hueShift={0}
+            noiseIntensity={0}
+            scanlineIntensity={0}
+            speed={0.5}
+            scanlineFrequency={0}
+            warpAmount={0}
+          />
         </div>
 
-        {/* Availability Badge */}
-        <div className="mb-6">
-          <span className="inline-flex items-center gap-2 px-3 py-1.5 bg-white/5 border border-white/20 rounded-full text-xs font-satoshi text-beige/70 backdrop-blur-sm transition-all duration-300 hover:bg-white/10 hover:border-white/30 cursor-default">
-            <span className="relative flex h-1.5 w-1.5">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-green-400 opacity-75"></span>
-              <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-green-500"></span>
-            </span>
-            Accepting projects for February
-          </span>
-        </div>
-
-        <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-beige text-center leading-tight tracking-tight">
-          We Build Websites That{" "}
-          <span className="text-green-300 font-normal italic">Actually</span>
+        {/* Clean Headline */}
+        {/* Clean Headline */}
+        <h1 className="text-4xl md:text-5xl lg:text-7xl font-bold font-satoshi text-stone-100 text-center leading-tight tracking-tight mb-6 relative z-10">
+          We Turn Your{" "}
+          <span className="inline-flex items-center justify-center align-middle mx-2 relative z-20">
+            <FloatingElement className="inline-block rotate-12 -translate-y-3" yOffset={0} duration={2.5}>
+              <div className="w-8 h-8 md:w-12 md:h-12 lg:w-16 lg:h-16 rounded-xl border-4 border-white/20 shadow-2xl shadow-black/50 overflow-hidden relative bg-zinc-900 inline-block align-middle rotate-45 transform transition-transform">
+                <img
+                  src="/hero-hand.jpg"
+                  alt="Hero Icon"
+                  className="w-full h-full object-contain -rotate-45"
+                />
+              </div>
+            </FloatingElement>
+          </span>{" "}
+          Vision Into
           <br />
-          <FlipWords words={flipWords} className="text-beige" />
+          Products that <FlipWords words={flipWords} className="text-white" />
         </h1>
-        <p className="mt-4 text-base md:text-lg text-beige/60 font-satoshi font-medium text-center max-w-2xl">
+
+        {/* Clean Subheadline */}
+        <p className="text-base md:text-lg text-gray-300 font-satoshi font-medium text-center max-w-2xl leading-relaxed relative z-10">
           Launch-ready in 3 weeks. Premium design. Performance guaranteed.
           <br className="hidden md:block" />
-          <span className="text-beige/40">For startups and growing businesses who refuse to look average.</span>
+          <span className="text-gray-400 font-normal">For startups and growing businesses who refuse to look average.</span>
         </p>
 
-        {/* Dual CTA */}
-        <div className="flex flex-col sm:flex-row items-center gap-4 mt-8">
+        {/* Clean CTA */}
+        <div className="flex justify-center mt-8">
           <div className="group">
             <PremiumButton href="/contact" variant="primary" hoverText="Let's Build It">
               <span className="flex items-center gap-2">
@@ -77,17 +75,15 @@ export default function Home() {
               </span>
             </PremiumButton>
           </div>
-          <ShineButton href="#process" className="!bg-transparent !border-beige/40 !text-beige hover:!border-beige">
-            See Our Process
-          </ShineButton>
         </div>
 
-        <div className="h-30 md:h-32" />
-
-
+        <div className="h-8 md:h-10" />
       </section>
 
-      {/* Trust Bar */}
+
+
+      {/* Branding Text */}
+      <BrandingText />
 
       {/* Why Choose Us */}
       <WhyChooseUs />

@@ -15,30 +15,30 @@ export function FinalCTA() {
     });
 
     return (
-        <section ref={containerRef} className="py-16 md:py-24 relative overflow-hidden">
+        <section ref={containerRef} className="py-16 md:py-24 relative overflow-hidden bg-black">
             {/* Background decoration */}
             <div className="absolute inset-0 pointer-events-none">
-                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-beige/5 rounded-full blur-[120px]" />
+                <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-accent-primary/5 rounded-full blur-[120px]" />
             </div>
 
             <ContentContainer>
-                <div className="max-w-3xl mx-auto relative z-10">
+                <div className="max-w-4xl mx-auto relative z-10">
                     <div className="text-center">
                         {/* Headline with word-by-word scroll trigger */}
                         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold font-satoshi mb-4 leading-tight">
                             <ScrollRevealWord
-                                text="Ready to Build "
+                                text="Ready to Build"
                                 scrollProgress={scrollYProgress}
                                 startOffset={0.2}
                                 endOffset={0.35}
-                                className="text-beige"
+                                className="text-white"
                             />
                             <ScrollRevealWord
                                 text="Something Amazing?"
                                 scrollProgress={scrollYProgress}
                                 startOffset={0.32}
                                 endOffset={0.5}
-                                className="text-beige/70 italic font-normal"
+                                className="text-white"
                             />
                         </h2>
 
@@ -49,7 +49,7 @@ export function FinalCTA() {
                                 scrollProgress={scrollYProgress}
                                 startOffset={0.4}
                                 endOffset={0.65}
-                                className="text-beige/50"
+                                className="text-gray-300"
                             />
                         </p>
 
@@ -64,7 +64,7 @@ export function FinalCTA() {
                             <MagneticButton>
                                 <a
                                     href="/contact"
-                                    className="inline-flex items-center gap-2 px-6 py-3 bg-beige text-background font-satoshi font-semibold text-sm rounded-full hover:bg-beige/90 transition-colors group"
+                                    className="inline-flex items-center gap-2 px-6 py-3 bg-accent-primary text-bg-primary font-satoshi font-semibold text-sm rounded-full hover:bg-accent-secondary transition-colors group"
                                 >
                                     Book Your Free Call
                                     <svg
@@ -81,11 +81,11 @@ export function FinalCTA() {
                                 </a>
                             </MagneticButton>
 
-                            <span className="text-beige/30 font-satoshi text-sm">or</span>
+                            <span className="text-gray-400 font-satoshi text-sm">or</span>
 
                             <a
                                 href="mailto:hello@theperry.com"
-                                className="text-beige/60 font-satoshi text-sm hover:text-beige transition-colors underline underline-offset-4"
+                                className="text-gray-300 font-satoshi text-sm hover:text-white transition-colors underline underline-offset-4"
                             >
                                 hello@theperry.com
                             </a>
@@ -93,7 +93,7 @@ export function FinalCTA() {
 
                         {/* Social Proof */}
                         <motion.p
-                            className="text-xs text-beige/40 font-satoshi"
+                            className="text-xs text-gray-400 font-satoshi"
                             initial={{ opacity: 0 }}
                             whileInView={{ opacity: 1 }}
                             viewport={{ once: true }}
