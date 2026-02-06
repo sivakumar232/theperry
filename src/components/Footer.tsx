@@ -1,12 +1,9 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "motion/react";
 import Link from "next/link";
 import { FlipWords } from "./ui/flip-words";
 import { MagneticButton } from "./ui/magnetic-button";
-import { ContentContainer } from "./ui/ContentContainer";
-import { ShineButton } from "./ui/shine-button";
 
 const footerLinks = {
     services: [
@@ -79,23 +76,24 @@ export function Footer() {
     };
 
     return (
-        <footer className="relative py-20 md:py-28 px-6 bg-black border-t border-gray-800">
-            <ContentContainer>
-                {/* Black Footer with White Text */}
+        <footer className="relative py-8 md:py-12 bg-black flex justify-center">
+            <div className="w-[calc(100%-30px)] mx-auto bg-white rounded-[2.5rem] overflow-hidden p-8 md:p-12 shadow-2xl relative z-10">
+
+                {/* Main Grid */}
                 <div className="grid md:grid-cols-4 gap-12 md:gap-14 mb-16">
                     {/* Brand Column */}
                     <div className="md:col-span-1">
                         <Link href="/" className="inline-block mb-4">
-                            <span className="text-2xl font-bold font-satoshi text-white hover:scale-105 transition-transform duration-200 inline-block">
+                            <span className="text-2xl font-bold font-satoshi text-black hover:scale-105 transition-transform duration-200 inline-block">
                                 theperry.
                             </span>
                         </Link>
-                        <div className="text-gray-300 font-satoshi text-sm leading-relaxed mb-6">
+                        <div className="text-neutral-600 font-satoshi text-sm leading-relaxed mb-6">
                             Building digital <br />
-                            <FlipWords words={rotateWords} className="text-white font-bold px-0 ml-0" /> <br />
+                            <FlipWords words={rotateWords} className="text-black font-bold px-0 ml-0" /> <br />
                             that convert and scale.
                         </div>
-                        
+
                         {/* Social Links */}
                         <div className="flex gap-2">
                             {footerLinks.social.map((social, index) => (
@@ -105,7 +103,7 @@ export function Footer() {
                                             href={social.href}
                                             target="_blank"
                                             rel="noopener noreferrer"
-                                            className="w-9 h-9 rounded-full bg-gray-900 border border-gray-700 flex items-center justify-center text-gray-400 hover:text-black hover:bg-white hover:border-white hover:scale-110 hover:rotate-12 transition-all duration-300"
+                                            className="w-9 h-9 rounded-full bg-neutral-100 border border-neutral-200 flex items-center justify-center text-neutral-500 hover:text-black hover:bg-white hover:border-black hover:scale-110 hover:rotate-12 transition-all duration-300"
                                             aria-label={social.label}
                                         >
                                             {social.icon}
@@ -118,13 +116,13 @@ export function Footer() {
 
                     {/* Services Column */}
                     <div>
-                        <h3 className="text-white font-satoshi font-semibold text-base mb-4">Services</h3>
+                        <h3 className="text-black font-satoshi font-semibold text-base mb-4">Services</h3>
                         <ul className="space-y-2.5">
                             {footerLinks.services.map((link, index) => (
                                 <li key={link.label}>
                                     <a
                                         href={link.href}
-                                        className="text-gray-400 font-satoshi text-sm transition-colors duration-300 hover:text-white"
+                                        className="text-neutral-500 font-satoshi text-sm transition-colors duration-300 hover:text-black"
                                     >
                                         {link.label}
                                     </a>
@@ -135,13 +133,13 @@ export function Footer() {
 
                     {/* Company Column */}
                     <div>
-                        <h3 className="text-white font-satoshi font-semibold text-base mb-4">Company</h3>
+                        <h3 className="text-black font-satoshi font-semibold text-base mb-4">Company</h3>
                         <ul className="space-y-2.5">
                             {footerLinks.company.map((link, index) => (
                                 <li key={link.label}>
                                     <a
                                         href={link.href}
-                                        className="text-gray-400 font-satoshi text-sm transition-colors duration-300 hover:text-white"
+                                        className="text-neutral-500 font-satoshi text-sm transition-colors duration-300 hover:text-black"
                                     >
                                         {link.label}
                                     </a>
@@ -152,26 +150,23 @@ export function Footer() {
 
                     {/* Contact Column */}
                     <div>
-                        <h3 className="text-white font-satoshi font-semibold text-base mb-4">Get In Touch</h3>
+                        <h3 className="text-black font-satoshi font-semibold text-base mb-4">Get In Touch</h3>
                         <ul className="space-y-3">
                             <li>
                                 <a
                                     href="mailto:hello@theperry.com"
-                                    className="text-gray-400 font-satoshi text-sm transition-colors duration-300 hover:text-white"
+                                    className="text-neutral-500 font-satoshi text-sm transition-colors duration-300 hover:text-black"
                                 >
                                     hello@theperry.com
                                 </a>
                             </li>
-                            <li className="text-gray-400 font-satoshi text-sm">
+                            <li className="text-neutral-500 font-satoshi text-sm">
                                 Available for projects worldwide
                             </li>
                         </ul>
-                        
+
                         <div className="mt-6">
-                            {/* <ShineButton className="px-6 py-3 bg-white text-black font-satoshi font-semibold text-sm rounded-full hover:bg-gray-100 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
-                                Start a Project
-                            </ShineButton> */}
-                            <button className="px-6 py-3 bg-white text-black font-satoshi font-semibold text-sm rounded-full hover:bg-gray-100 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
+                            <button className="px-6 py-3 bg-black text-white font-satoshi font-semibold text-sm rounded-full hover:bg-neutral-800 hover:scale-105 transition-all duration-200 shadow-lg hover:shadow-xl">
                                 Start a Project
                             </button>
                         </div>
@@ -179,20 +174,20 @@ export function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="pt-8 border-t border-gray-800 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-gray-500 font-satoshi text-xs">
+                <div className="pt-8 border-t border-neutral-200 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p className="text-neutral-500 font-satoshi text-xs">
                         © {currentYear} theperry. All rights reserved.
                     </p>
                     <div className="flex gap-6">
-                        <a 
-                            href="#" 
-                            className="text-gray-500 font-satoshi text-xs transition-colors duration-300 hover:text-gray-300"
+                        <a
+                            href="#"
+                            className="text-neutral-500 font-satoshi text-xs transition-colors duration-300 hover:text-neutral-800"
                         >
                             Privacy Policy
                         </a>
-                        <a 
-                            href="#" 
-                            className="text-gray-500 font-satoshi text-xs transition-colors duration-300 hover:text-gray-300"
+                        <a
+                            href="#"
+                            className="text-neutral-500 font-satoshi text-xs transition-colors duration-300 hover:text-neutral-800"
                         >
                             Terms of Service
                         </a>
@@ -202,15 +197,14 @@ export function Footer() {
                 {/* Scroll to Top Button */}
                 <button
                     onClick={scrollToTop}
-                    className={`fixed bottom-8 right-8 w-12 h-12 bg-white text-black rounded-full shadow-lg z-50 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl ${
-                        showScrollTop ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
-                    }`}
+                    className={`fixed bottom-8 right-8 w-12 h-12 bg-black text-white rounded-full shadow-lg z-50 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-xl ${showScrollTop ? 'opacity-100 scale-100' : 'opacity-0 scale-0'
+                        }`}
                 >
                     <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-                        <path d="M18 15l-6-6-6 6"/>
+                        <path d="M18 15l-6-6-6 6" />
                     </svg>
                 </button>
-            </ContentContainer>
+            </div>
         </footer>
     );
 }
