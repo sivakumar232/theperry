@@ -1,6 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useState, useRef, useEffect } from "react";
+import { useScrollPosition } from "@/hooks/useScrollPosition";
 import { PremiumButton } from "@/components/ui/premium-button";
 import { ArrowUpRight, ArrowRight, Menu, X } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
@@ -11,15 +12,7 @@ export default function Navbar() {
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
     const [backgroundStyle, setBackgroundStyle] = useState({});
     const navRef = useRef<HTMLDivElement>(null);
-    const [isScrolled, setIsScrolled] = useState(false);
-
-    useEffect(() => {
-        const handleScroll = () => {
-            setIsScrolled(window.scrollY > 20);
-        };
-        window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
-    }, []);
+    const isScrolled = useScrollPosition(20);
 
     const navItems = [
         { name: "Home", href: "#hero" },

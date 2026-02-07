@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
 import { Plus, Minus } from "lucide-react";
@@ -45,7 +45,7 @@ const faqs = [
     },
 ];
 
-function AccordionItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
+const AccordionItem = React.memo(function AccordionItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -100,7 +100,7 @@ function AccordionItem({ faq, index }: { faq: typeof faqs[0]; index: number }) {
             </div>
         </motion.div>
     );
-}
+});
 
 export function FAQ() {
     return (

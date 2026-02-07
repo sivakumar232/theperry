@@ -33,7 +33,7 @@ const services = [
 ];
 
 // Service Card Component with Hover Reveal
-function ServiceCard({ service, index }: { service: typeof services[0], index: number }) {
+const ServiceCard = React.memo(function ServiceCard({ service, index }: { service: typeof services[0], index: number }) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
@@ -97,7 +97,7 @@ function ServiceCard({ service, index }: { service: typeof services[0], index: n
             </div>
         </motion.div>
     );
-}
+});
 
 export function ImmersiveServices() {
     return (

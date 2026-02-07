@@ -43,15 +43,15 @@ export const FlipWords = ({
         {words.reduce((a, b) => (a.length > b.length ? a : b), "")}
       </span>
 
-      {/* Animated word positioned absolutely */}
+      {/* Animated word positioned absolutely - OPTIMIZED: single element instead of character-by-character */}
       <AnimatePresence mode="popLayout">
         <motion.span
           key={currentWord}
-          initial={{ opacity: 0, y: 10, filter: "blur(20px)", scale: 1.05 }}
-          animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-          exit={{ opacity: 0, y: -10, filter: "blur(20px)", scale: 0.95 }}
+          initial={{ opacity: 0, y: 10, filter: "blur(8px)" }}
+          animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+          exit={{ opacity: 0, y: -10, filter: "blur(8px)" }}
           transition={{
-            duration: 0.6,
+            duration: 0.4,
             ease: [0.25, 0.4, 0.25, 1],
           }}
           className={cn(
@@ -59,21 +59,7 @@ export const FlipWords = ({
             className
           )}
         >
-          {currentWord.split("").map((letter, i) => (
-            <motion.span
-              key={`${currentWord}-${i}`}
-              initial={{ opacity: 0, y: 10, filter: "blur(20px)", scale: 1.05 }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)", scale: 1 }}
-              transition={{
-                delay: i * 0.03 + (!isStarted && currentIndex === 0 ? delay : 0),
-                duration: 0.6,
-                ease: [0.25, 0.4, 0.25, 1],
-              }}
-              className="inline-block"
-            >
-              {letter}
-            </motion.span>
-          ))}
+          {currentWord}
         </motion.span>
       </AnimatePresence>
     </span>

@@ -19,17 +19,29 @@ export function FounderSection() {
         <section id="about" className="py-16 md:py-24 px-6 bg-black relative">
             <div className="max-w-6xl mx-auto relative z-10">
                 {/* Section Header */}
-                <div className="text-center mb-12">
+                <motion.div
+                    className="text-center mb-12"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                >
                     <h2 className="text-2xl md:text-3xl font-bold font-satoshi text-white mb-3">
                         The Story Behind{" "}
                         <span className="text-gray-300 italic font-normal">ThePerry</span>
                     </h2>
-                </div>
+                </motion.div>
 
                 {/* Content Grid */}
                 <div className="grid md:grid-cols-2 gap-10 md:gap-12 items-center">
                     {/* Photo Side */}
-                    <div className="relative">
+                    <motion.div
+                        className="relative"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, ease: "easeOut", delay: 0.1 }}
+                    >
                         <div className="relative aspect-square max-w-sm mx-auto">
                             {/* Decorative background */}
                             <div className="absolute inset-0 bg-gradient-to-br from-bg-surface to-transparent rounded-xl -rotate-3" />
@@ -50,10 +62,15 @@ export function FounderSection() {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
 
                     {/* Story Side */}
-                    <div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+                    >
                         <div className="space-y-4">
                             <p className="text-base md:text-lg font-satoshi text-white leading-relaxed">
                                 Hi, I&apos;m the founder of ThePerry.
@@ -102,7 +119,7 @@ export function FounderSection() {
                                 ))}
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 </div>
             </div>
         </section>

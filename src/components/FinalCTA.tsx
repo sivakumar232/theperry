@@ -2,7 +2,6 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { Marquee } from "./ui/marquee";
 
 export function FinalCTA() {
     return (
@@ -90,21 +89,6 @@ export function FinalCTA() {
                         </motion.form>
                     </div>
 
-                </div>
-
-                {/* Large Marquee at the bottom of the card */}
-                <div className="w-full mt-12 md:mt-20 border-t border-neutral-100 pt-8 md:pt-12">
-                    <Marquee className="py-2" pauseOnHover speed={60}>
-                        <span className="text-4xl md:text-6xl font-bold font-satoshi text-neutral-300 hover:text-[#8B5CF6] transition-colors duration-300 mx-8">
-                            hello@theperry.com
-                        </span>
-                        <span className="text-4xl md:text-6xl font-bold font-satoshi text-neutral-300 hover:text-[#8B5CF6] transition-colors duration-300 mx-8">
-                            hello@theperry.com
-                        </span>
-                        <span className="text-4xl md:text-6xl font-bold font-satoshi text-neutral-300 hover:text-[#8B5CF6] transition-colors duration-300 mx-8">
-                            hello@theperry.com
-                        </span>
-                    </Marquee>
                 </div>
             </div>
         </section>

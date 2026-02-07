@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 import { motion } from "motion/react";
@@ -37,18 +38,25 @@ const cards = [
     },
 ];
 
-const Card = ({ title, body }: { title: string; body: string }) => {
+const Card = React.memo(({ title, body, index }: { title: string; body: string; index: number }) => {
     return (
-        <div className="relative h-64 w-full bg-black border-2 border-white/20 p-8 flex flex-col justify-end overflow-hidden group hover:border-white/40 transition-colors">
-            <h3 className="text-lg font-bold font-satoshi text-white mb-2 leading-tight group-hover:text-gray-300 transition-colors">
-                {title}
-            </h3>
-            <p className="text-sm text-gray-400 font-satoshi leading-relaxed">
-                {body}
-            </p>
-        </div>
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
+        >
+            <div className="relative h-64 w-full bg-black border-2 border-white/20 p-8 flex flex-col justify-end overflow-hidden group hover:border-white/40 transition-colors">
+                <h3 className="text-lg font-bold font-satoshi text-white mb-2 leading-tight group-hover:text-gray-300 transition-colors">
+                    {title}
+                </h3>
+                <p className="text-sm text-gray-400 font-satoshi leading-relaxed">
+                    {body}
+                </p>
+            </div>
+        </motion.div>
     );
-};
+});
 
 export function WhyChooseUs() {
     return (
@@ -78,8 +86,8 @@ export function WhyChooseUs() {
             {/* Static Grid Grid Section */}
             <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-10">
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {cards.map((card) => (
-                        <Card key={card.id} title={card.heading} body={card.caption} />
+                    {cards.map((card, index) => (
+                        <Card key={card.id} title={card.heading} body={card.caption} index={index} />
                     ))}
                 </div>
             </div>
