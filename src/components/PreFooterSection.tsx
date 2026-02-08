@@ -19,7 +19,7 @@ export function PreFooterSection() {
     const sectionRef = useRef<HTMLElement>(null);
     const [isVisible, setIsVisible] = useState(false);
 
-    // Intersection Observer to pause rendering when not visible
+    // Intersection Observer with large buffer to start rendering early
     useEffect(() => {
         if (!sectionRef.current) return;
 
@@ -28,7 +28,7 @@ export function PreFooterSection() {
                 setIsVisible(entry.isIntersecting);
             },
             {
-                rootMargin: '200px', // Start rendering before visible
+                rootMargin: '400px', // Start rendering 400px before section is visible
                 threshold: 0
             }
         );
@@ -59,9 +59,9 @@ export function PreFooterSection() {
                                 fov={45}
                             >
                                 <ShaderGradient
-                                    brightness={1.2}
-                                    cAzimuthAngle={180}
-                                    cDistance={3.61}
+                                    brightness={1.3}
+                                    cAzimuthAngle={120}
+                                    cDistance={1}
                                     cPolarAngle={90}
                                     cameraZoom={1}
                                     color1="#64b4ff"
@@ -80,8 +80,8 @@ export function PreFooterSection() {
                                     type="waterPlane"
                                     uAmplitude={1}
                                     uDensity={1.3}
-                                    uFrequency={5.5}
-                                    uSpeed={0.3}
+                                    uFrequency={1}
+                                    uSpeed={0.08}
                                     uStrength={4}
                                 />
                             </ShaderGradientCanvas>
