@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
 
 const steps = [
@@ -45,26 +44,22 @@ export function ProcessSection() {
                         {steps.map((step, index) => (
                             <div
                                 key={index}
-                                className={`cursor-pointer p-6 rounded-xl transition-all duration-300 ${activeStep === index
+                                className={`cursor-pointer p-6 rounded-xl transition-all duration-200 will-change-auto ${activeStep === index
                                     ? 'bg-zinc-900 border border-zinc-700 scale-105'
                                     : 'bg-zinc-900/30 border border-transparent hover:bg-zinc-900/50'
                                     }`}
                                 onMouseEnter={() => setActiveStep(index)}
                             >
-                                {/* Step Title */}
-                                <motion.h3
-                                    className={`text-2xl font-bold font-satoshi mb-2 transition-colors duration-300 ${activeStep === index ? 'text-white' : 'text-gray-500'
+                                {/* Step Title - Removed whileInView animation */}
+                                <h3
+                                    className={`text-2xl font-bold font-satoshi mb-2 transition-colors duration-200 ${activeStep === index ? 'text-white' : 'text-gray-500'
                                         }`}
-                                    initial={{ opacity: 0, x: -20 }}
-                                    whileInView={{ opacity: 1, x: 0 }}
-                                    viewport={{ once: true }}
-                                    transition={{ duration: 0.5, delay: index * 0.1 }}
                                 >
                                     {step.title}
-                                </motion.h3>
+                                </h3>
 
                                 {/* Step Description - Always visible */}
-                                <p className={`text-base font-satoshi leading-relaxed max-w-sm transition-colors duration-300 ${activeStep === index ? 'text-gray-300' : 'text-gray-600'
+                                <p className={`text-base font-satoshi leading-relaxed max-w-sm transition-colors duration-200 ${activeStep === index ? 'text-gray-300' : 'text-gray-600'
                                     }`}>
                                     {step.description}
                                 </p>
@@ -76,18 +71,12 @@ export function ProcessSection() {
                     <div className="relative w-full">
                         <div className="relative w-full aspect-[4/3] max-w-md mx-auto lg:mx-0">
                             {steps.map((step, index) => (
-                                <motion.div
+                                <div
                                     key={index}
-                                    className="absolute inset-0 rounded-xl overflow-hidden border border-zinc-800"
-                                    initial={{ opacity: 0, y: 100 }}
-                                    animate={{
-                                        opacity: activeStep === index ? 1 : 0,
-                                        y: activeStep === index ? 0 : 100,
-                                        scale: activeStep === index ? 1 : 0.9
-                                    }}
-                                    transition={{
-                                        duration: 0.6,
-                                        ease: [0.25, 0.4, 0.25, 1]
+                                    className={`absolute inset-0 rounded-xl overflow-hidden border border-zinc-800 transition-all duration-300 ease-out ${activeStep === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
+                                        }`}
+                                    style={{
+                                        transform: activeStep === index ? 'translateY(0)' : 'translateY(50px)'
                                     }}
                                 >
                                     {/* Placeholder gradient - replace with actual images */}
@@ -106,7 +95,7 @@ export function ProcessSection() {
                                             </span>
                                         </div>
                                     </div>
-                                </motion.div>
+                                </div>
                             ))}
                         </div>
                     </div>

@@ -1,7 +1,6 @@
 "use client";
 
-import React, { useRef, useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import React, { useState } from "react";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 
@@ -37,14 +36,10 @@ const ServiceCard = React.memo(function ServiceCard({ service, index }: { servic
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <motion.div
-            className="flex flex-col h-full bg-zinc-900/50 border border-white/10 rounded-3xl p-8 hover:bg-zinc-900 hover:border-white/20 transition-all duration-300 group"
-            onHoverStart={() => setIsHovered(true)}
-            onHoverEnd={() => setIsHovered(false)}
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: index * 0.1 }}
+        <div
+            className="flex flex-col h-full bg-zinc-900/50 border border-white/10 rounded-3xl p-8 hover:bg-zinc-900 hover:border-white/20 transition-colors duration-200 group"
+            onMouseEnter={() => setIsHovered(true)}
+            onMouseLeave={() => setIsHovered(false)}
         >
             {/* Animated Counter */}
             <p className="text-xs font-satoshi text-zinc-500 uppercase tracking-widest mb-6">
@@ -66,27 +61,22 @@ const ServiceCard = React.memo(function ServiceCard({ service, index }: { servic
                 {service.description}
             </p>
 
-            {/* Hover Reveal Details */}
+            {/* Hover Reveal Details - CSS Grid transition instead of AnimatePresence */}
             <div className="mt-auto">
-                <AnimatePresence>
-                    {isHovered && (
-                        <motion.div
-                            initial={{ opacity: 0, height: 0 }}
-                            animate={{ opacity: 1, height: 'auto' }}
-                            exit={{ opacity: 0, height: 0 }}
-                            className="overflow-hidden"
-                        >
-                            <ul className="space-y-2 mb-6 pt-4 border-t border-white/10">
-                                {service.details.map((detail, i) => (
-                                    <li key={i} className="text-sm text-zinc-300 flex items-center">
-                                        <span className="w-1.5 h-1.5 bg-purple-500 rounded-full mr-2" />
-                                        {detail}
-                                    </li>
-                                ))}
-                            </ul>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                <div
+                    className={`grid transition-all duration-200 ease-out ${isHovered ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                >
+                    <div className="overflow-hidden">
+                        <ul className="space-y-2 mb-6 pt-4 border-t border-white/10">
+                            {service.details.map((detail, i) => (
+                                <li key={i} className="text-sm text-zinc-300 flex items-center">
+                                    <span className="w-1.5 h-1.5 bg-purple-500 rounded-full mr-2" />
+                                    {detail}
+                                </li>
+                            ))}
+                        </ul>
+                    </div>
+                </div>
 
                 <button className="flex items-center gap-2 text-sm font-medium text-white group/btn">
                     Explore Service
@@ -95,7 +85,7 @@ const ServiceCard = React.memo(function ServiceCard({ service, index }: { servic
                     </svg>
                 </button>
             </div>
-        </motion.div>
+        </div>
     );
 });
 
