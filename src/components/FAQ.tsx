@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion, AnimatePresence } from "motion/react";
+import { motion } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
 import { Plus, Minus } from "lucide-react";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
@@ -49,17 +49,11 @@ const AccordionItem = React.memo(function AccordionItem({ faq, index }: { faq: t
     const [isOpen, setIsOpen] = useState(false);
 
     return (
-        <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ delay: index * 0.1, duration: 0.5 }}
-            className="h-fit"
-        >
+        <div className="h-fit">
             <div
-                className={`group rounded-2xl border transition-all duration-300 overflow-hidden
+                className={`group rounded-2xl border transition-colors duration-200 overflow-hidden will-change-auto
                 ${isOpen
-                        ? "bg-zinc-900/80 border-white/20 shadow-lg shadow-black/20"
+                        ? "bg-zinc-900/80 border-white/20"
                         : "bg-zinc-900/40 border-white/10 hover:border-white/20 hover:bg-zinc-900/60"
                     }`}
             >
@@ -71,7 +65,7 @@ const AccordionItem = React.memo(function AccordionItem({ faq, index }: { faq: t
                         {faq.question}
                     </span>
                     <div
-                        className="flex-shrink-0 p-0.5 rounded-full bg-white text-black"
+                        className={`flex-shrink-0 p-0.5 rounded-full bg-white text-black transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
                     >
                         {isOpen ? (
                             <Minus className="w-3 h-3 md:w-3.5 md:h-3.5" />
@@ -81,24 +75,19 @@ const AccordionItem = React.memo(function AccordionItem({ faq, index }: { faq: t
                     </div>
                 </button>
 
-                <AnimatePresence>
-                    {isOpen && (
-                        <motion.div
-                            initial={{ height: 0, opacity: 0 }}
-                            animate={{ height: "auto", opacity: 1 }}
-                            exit={{ height: 0, opacity: 0 }}
-                            transition={{ duration: 0.3, ease: "easeInOut" }}
-                        >
-                            <div className="px-6 md:px-7 pb-6 md:pb-7">
-                                <p className="text-base md:text-lg text-gray-400 font-satoshi leading-relaxed max-w-3xl">
-                                    {faq.answer}
-                                </p>
-                            </div>
-                        </motion.div>
-                    )}
-                </AnimatePresence>
+                <div
+                    className={`grid transition-all duration-200 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                >
+                    <div className="overflow-hidden">
+                        <div className="px-6 md:px-7 pb-6 md:pb-7">
+                            <p className="text-base md:text-lg text-gray-400 font-satoshi leading-relaxed max-w-3xl">
+                                {faq.answer}
+                            </p>
+                        </div>
+                    </div>
+                </div>
             </div>
-        </motion.div>
+        </div>
     );
 });
 

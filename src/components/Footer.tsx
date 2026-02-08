@@ -61,124 +61,64 @@ const footerLinks = {
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
-    const rotateWords = ["Experiences", "Brands", "Futures", "Success"];
 
     return (
-        <footer className="relative py-12 md:py-16 bg-black">
-            <div className="max-w-7xl mx-auto px-6 md:px-8">
+        <footer className="relative min-h-[60vh] w-full overflow-hidden bg-white">
+            {/* Content */}
+            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-24 md:py-32">
+                {/* Main Footer Content - All Centered and Stacked */}
+                <div className="text-center">
+                    {/* Logo */}
+                    <Link href="/" className="inline-block mb-6">
+                        <span className="text-3xl md:text-4xl font-bold font-satoshi text-black">
+                            theperry.
+                        </span>
+                    </Link>
 
-                {/* Main Grid */}
-                <div className="grid md:grid-cols-4 gap-12 md:gap-14 mb-12">
-                    {/* Brand Column */}
-                    <div className="md:col-span-1">
-                        <Link href="/" className="inline-block mb-4">
-                            <span className="text-2xl font-bold font-satoshi text-white hover:scale-105 transition-transform duration-200 inline-block">
-                                theperry.
-                            </span>
-                        </Link>
-                        <div className="text-gray-400 font-satoshi text-sm leading-relaxed mb-6">
-                            Building digital <br />
-                            <FlipWords words={rotateWords} className="text-white font-bold px-0 ml-0" /> <br />
-                            that convert and scale.
-                        </div>
-
-                        {/* Social Links */}
-                        <div className="flex gap-2">
-                            {footerLinks.social.map((social, index) => (
-                                <div key={social.label}>
-                                    <MagneticButton>
-                                        <a
-                                            href={social.href}
-                                            target="_blank"
-                                            rel="noopener noreferrer"
-                                            className="w-9 h-9 rounded-full bg-zinc-900 border border-zinc-800 flex items-center justify-center text-gray-400 hover:text-white hover:bg-zinc-800 hover:border-zinc-700 hover:scale-110 hover:rotate-12 transition-all duration-300"
-                                            aria-label={social.label}
-                                        >
-                                            {social.icon}
-                                        </a>
-                                    </MagneticButton>
-                                </div>
-                            ))}
-                        </div>
+                    {/* Quick Links - Single Line */}
+                    <div className="flex flex-wrap gap-6 justify-center mb-8 text-gray-800 font-satoshi text-base font-semibold">
+                        <a href="#" className="hover:text-black transition-colors">Home</a>
+                        <a href="#" className="hover:text-black transition-colors">Services</a>
+                        <a href="#" className="hover:text-black transition-colors">About</a>
+                        <a href="#" className="hover:text-black transition-colors">Contact</a>
                     </div>
 
-                    {/* Services Column */}
-                    <div>
-                        <h3 className="text-white font-satoshi font-semibold text-base mb-4">Services</h3>
-                        <ul className="space-y-2.5">
-                            {footerLinks.services.map((link, index) => (
-                                <li key={link.label}>
-                                    <a
-                                        href={link.href}
-                                        className="text-gray-400 font-satoshi text-sm transition-colors duration-300 hover:text-white"
-                                    >
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
+                    {/* Social Links - Simple without borders */}
+                    <div className="flex gap-4 justify-center mb-8">
+                        {footerLinks.social.map((social) => (
+                            <a
+                                key={social.label}
+                                href={social.href}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="text-gray-600 hover:text-black transition-colors"
+                                aria-label={social.label}
+                            >
+                                {social.icon}
+                            </a>
+                        ))}
                     </div>
 
-                    {/* Company Column */}
-                    <div>
-                        <h3 className="text-white font-satoshi font-semibold text-base mb-4">Company</h3>
-                        <ul className="space-y-2.5">
-                            {footerLinks.company.map((link, index) => (
-                                <li key={link.label}>
-                                    <a
-                                        href={link.href}
-                                        className="text-gray-400 font-satoshi text-sm transition-colors duration-300 hover:text-white"
-                                    >
-                                        {link.label}
-                                    </a>
-                                </li>
-                            ))}
-                        </ul>
-                    </div>
-
-                    {/* Contact Column */}
-                    <div>
-                        <h3 className="text-white font-satoshi font-semibold text-base mb-4">Get In Touch</h3>
-                        <ul className="space-y-3">
-                            <li>
-                                <a
-                                    href="mailto:hello@theperry.com"
-                                    className="text-gray-400 font-satoshi text-sm transition-colors duration-300 hover:text-white"
-                                >
-                                    hello@theperry.com
-                                </a>
-                            </li>
-                            <li className="text-gray-400 font-satoshi text-sm">
-                                Available for projects worldwide
-                            </li>
-                        </ul>
-
-                        <div className="mt-6">
-                            <button className="px-6 py-3 bg-white text-black font-satoshi font-semibold text-sm rounded-full hover:bg-gray-200 hover:scale-105 transition-all duration-200 shadow-lg">
-                                Start a Project
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                {/* Bottom Bar */}
-                <div className="pt-8 border-t border-zinc-800 flex flex-col md:flex-row items-center justify-between gap-4">
-                    <p className="text-gray-500 font-satoshi text-xs">
-                        © {currentYear} theperry. All rights reserved.
-                    </p>
-                    <div className="flex gap-6">
-                        <a
-                            href="#"
-                            className="text-gray-500 font-satoshi text-xs transition-colors duration-300 hover:text-gray-300"
-                        >
-                            Privacy Policy
+                    {/* All Links - Email stacked, Privacy/Terms in one line */}
+                    <div className="flex flex-col items-center gap-3 text-gray-600 font-satoshi text-sm mb-6">
+                        <a href="mailto:hello@theperry.com" className="hover:text-black transition-colors">
+                            hello@theperry.com
                         </a>
-                        <a
-                            href="#"
-                            className="text-gray-500 font-satoshi text-xs transition-colors duration-300 hover:text-gray-300"
-                        >
-                            Terms of Service
-                        </a>
+                        <div className="flex gap-4">
+                            <a href="#" className="hover:text-black transition-colors">
+                                Privacy Policy
+                            </a>
+                            <span>•</span>
+                            <a href="#" className="hover:text-black transition-colors">
+                                Terms & Conditions
+                            </a>
+                        </div>
+                    </div>
+
+                    {/* Copyright */}
+                    <div className="text-gray-600 font-satoshi text-sm space-y-2">
+                        <p>Copyright © {currentYear} theperry.</p>
+                        <p>All rights reserved.</p>
                     </div>
                 </div>
             </div>

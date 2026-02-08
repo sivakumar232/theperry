@@ -7,7 +7,7 @@ import { ScrollBlurReveal } from "./ui/scroll-blur-reveal";
 
 export function BrandingText() {
     return (
-        <section className="py-48 md:py-64 bg-black relative">
+        <section className="py-18 md:py-26 bg-black relative">
             <ContentContainer>
                 <div className="max-w-2xl mx-auto text-center">
                     <motion.p

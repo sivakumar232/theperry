@@ -26,9 +26,8 @@ export function FounderSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                    <h2 className="text-2xl md:text-3xl font-bold font-satoshi text-white mb-3">
-                        The Story Behind{" "}
-                        <span className="text-gray-300 italic font-normal">ThePerry</span>
+                    <h2 className="text-4xl md:text-5xl font-bold font-satoshi text-white mb-3">
+                        The Story Behind theperry
                     </h2>
                 </motion.div>
 

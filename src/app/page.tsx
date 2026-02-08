@@ -17,7 +17,7 @@ import { ImmersiveServices } from "@/components/ImmersiveServices";
 
 import { WhyChooseUs } from "@/components/WhyChooseUs";
 import { FAQ } from "@/components/FAQ";
-import { FinalCTA } from "@/components/FinalCTA";
+import { PreFooterSection } from "@/components/PreFooterSection";
 import { Footer } from "@/components/Footer";
 import { PremiumButton } from "@/components/ui/premium-button";
 import DarkVeil from "@/components/ui/DarkVeil";
@@ -116,8 +116,8 @@ export default function Home() {
       {/* Founder Section - Story Behind */}
       <FounderSection />
 
-      {/* Final CTA - Ready to Build */}
-      <FinalCTA />
+      {/* Pre-Footer Section - Get Started */}
+      <PreFooterSection />
 
       {/* Footer */}
       <Footer />
