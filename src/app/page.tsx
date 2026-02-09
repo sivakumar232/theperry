@@ -121,7 +121,7 @@ export default function Home() {
       <FounderSection />
 
       {/* Pre-Footer Section - Get Started */}
-      <PreFooterSection />
+      {/* <PreFooterSection /> */}
 
 
       {/* Footer */}
