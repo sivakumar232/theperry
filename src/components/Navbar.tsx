@@ -75,7 +75,7 @@ export default function Navbar() {
                         >
                             {/* Animated Background */}
                             <div
-                                className="absolute top-0 left-0 h-full bg-white/10 rounded-full transition-all duration-300 ease-out pointer-events-none"
+                                className="absolute top-0 left-0 h-full bg-white/20 rounded-full transition-all duration-300 ease-out pointer-events-none"
                                 style={backgroundStyle}
                             />
 

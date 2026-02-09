@@ -9,6 +9,7 @@ import { FloatingElement } from "@/components/ui/floating-element";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { PhoneCall } from "lucide-react";
 import { motion } from "framer-motion";
+import { useEffect } from "react";
 
 import { BrandingText } from "@/components/BrandingText";
 import { FounderSection } from "@/components/FounderSection";
@@ -26,6 +27,10 @@ import DarkVeil from "@/components/ui/DarkVeil";
 const flipWords = ["Stand Out", "Scale", "Performs"];
 
 export default function Home() {
+  // Preload shader gradient module immediately on page load
+  useEffect(() => {
+    import('@shadergradient/react');
+  }, []);
 
   return (
     <main className="min-h-screen bg-black text-white tracking-tight">
@@ -100,7 +105,6 @@ export default function Home() {
 
       {/* Branding Text */}
       <BrandingText />
-
       {/* Why Choose Us */}
       <WhyChooseUs />
 
@@ -118,6 +122,7 @@ export default function Home() {
 
       {/* Pre-Footer Section - Get Started */}
       <PreFooterSection />
+
 
       {/* Footer */}
       <Footer />

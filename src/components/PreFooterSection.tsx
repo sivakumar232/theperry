@@ -3,7 +3,7 @@
 import { motion } from 'framer-motion';
 import dynamic from 'next/dynamic';
 import { PhoneCall, Mail } from 'lucide-react';
-import { Suspense, useRef, useState, useEffect } from 'react';
+import { Suspense, useEffect } from 'react';
 
 // Lazy load ShaderGradient for better performance
 const ShaderGradientCanvas = dynamic(
@@ -16,79 +16,58 @@ const ShaderGradient = dynamic(
 );
 
 export function PreFooterSection() {
-    const sectionRef = useRef<HTMLElement>(null);
-    const [isVisible, setIsVisible] = useState(false);
-
-    // Intersection Observer with large buffer to start rendering early
+    // Preload shader module immediately on mount
     useEffect(() => {
-        if (!sectionRef.current) return;
-
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                setIsVisible(entry.isIntersecting);
-            },
-            {
-                rootMargin: '400px', // Start rendering 400px before section is visible
-                threshold: 0
-            }
-        );
-
-        observer.observe(sectionRef.current);
-
-        return () => observer.disconnect();
+        import('@shadergradient/react');
     }, []);
-
     return (
-        <section ref={sectionRef} className="py-24 md:py-32 bg-black">
+        <section className="py-24 md:py-32 bg-black">
             {/* White Container with Margins and Shader Background */}
             <div className="mx-6 md:mx-12 lg:mx-16 rounded-3xl p-12 md:p-16 lg:p-24 relative overflow-hidden">
                 {/* Shader Gradient Background */}
                 <div className="absolute inset-0 rounded-3xl overflow-hidden">
-                    {isVisible ? (
-                        <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-gray-500 to-purple-300" />}>
-                            <ShaderGradientCanvas
-                                style={{
-                                    position: 'absolute',
-                                    top: 0,
-                                    left: 0,
-                                    width: '100%',
-                                    height: '100%',
-                                    pointerEvents: 'none',
-                                }}
-                                pixelDensity={0.8}
-                                fov={45}
-                            >
-                                <ShaderGradient
-                                    brightness={1.3}
-                                    cAzimuthAngle={120}
-                                    cDistance={1}
-                                    cPolarAngle={90}
-                                    cameraZoom={1}
-                                    color1="#64b4ff"
-                                    color2="#5c6c7c"
-                                    color3="#d0bce1"
-                                    envPreset="city"
-                                    grain="on"
-                                    lightType="3d"
-                                    positionX={-1.4}
-                                    positionY={0}
-                                    positionZ={0}
-                                    reflection={0.1}
-                                    rotationX={0}
-                                    rotationY={10}
-                                    rotationZ={50}
-                                    type="waterPlane"
-                                    uAmplitude={1}
-                                    uDensity={1.3}
-                                    uFrequency={1}
-                                    uSpeed={0.08}
-                                    uStrength={4}
-                                />
-                            </ShaderGradientCanvas>
-                        </Suspense>
-                    ) : (
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-gray-500 to-purple-300" />
-                    )}
+                    <Suspense fallback={<div className="absolute inset-0 bg-gradient-to-br from-blue-500 via-gray-500 to-purple-300" />}>
+                        <ShaderGradientCanvas
+                            style={{
+                                position: 'absolute',
+                                top: 0,
+                                left: 0,
+                                width: '100%',
+                                height: '100%',
+                                pointerEvents: 'none',
+                                animation: 'fadeIn 2s ease-out forwards',
+                            }}
+                            pixelDensity={0.8}
+                            fov={45}
+                        >
+                            <ShaderGradient
+                                brightness={1.3}
+                                cAzimuthAngle={180}
+                                cDistance={1}
+                                cPolarAngle={90}
+                                cameraZoom={1}
+                                color1="#64b4ff"
+                                color2="#5c6c7c"
+                                color3="#d0bce1"
+                                envPreset="city"
+                                grain="on"
+                                lightType="3d"
+                                positionX={1}
+                                positionY={-2}
+                                positionZ={2}
+                                reflection={0.1}
+                                rotationX={0}
+                                rotationY={10}
+                                rotationZ={50}
+                                type="plane"
+                                uAmplitude={1}
+                                uDensity={1.3}
+                                uFrequency={1}
+                                uSpeed={0.08}
+                                uStrength={4}
+                            />
+                        </ShaderGradientCanvas>
+                    </Suspense>
                 </div>
 
                 {/* Content Layer */}

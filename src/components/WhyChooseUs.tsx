@@ -4,41 +4,52 @@ import React from "react";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 import { motion } from "motion/react";
+import { Zap, ShieldCheck } from "lucide-react";
+import { AnimatedEyeIcon } from "./ui/animated-icons";
+import { AnimatedCollabIcon } from "./ui/AnimatedCollabIcon";
+import { AnimatedImpactIcon } from "./ui/AnimatedImpactIcon";
+import { AnimatedHandshakeIcon } from "./ui/AnimatedHandshakeIcon";
 
 const cards = [
     {
         id: 1,
-        heading: "Modern Digital Products",
-        caption: "We replace outdated websites and apps with fast, reliable products.",
+        heading: "Built for Real Impact",
+        caption: "We don’t just code features. We build products to create real business impact.",
+        icon: <AnimatedImpactIcon />,
     },
     {
         id: 2,
-        heading: "Streamlined Workflows",
-        caption: "We build focused tools that simplify operations and remove friction.",
+        heading: "A True Technical Partner",
+        caption: "No in-house tech team? Work directly with experienced engineers — zero layers, zero noise.",
+        icon: <AnimatedHandshakeIcon />,
     },
     {
         id: 3,
-        heading: "Clear Scope, Clear Pricing",
-        caption: "Defined deliverables, honest timelines, and pricing aligned to work.",
+        heading: "Fast & Reliable Delivery",
+        caption: "Get high-quality results in days or weeks, not months.",
+        icon: <Zap className="w-8 h-8 md:w-10 md:h-10 text-white mb-4 group-hover:text-gray-300 transition-colors" />,
     },
     {
         id: 4,
-        heading: "Consistent Experience",
-        caption: "Your website, app, and tools will feel cohesive and professional.",
+        heading: "Visibility by Design",
+        caption: "Exceptional UI, engineered for speed, designed to scale, and built to be seen.",
+        icon: <AnimatedEyeIcon />,
     },
     {
         id: 5,
-        heading: "Built for Visibility",
-        caption: "Our work is structured for performance, SEO, and discoverability.",
+        heading: "Post Launch Support",
+        caption: "Launch is just the start. We maintain, improve, and evolve. Built for the long run.",
+        icon: <ShieldCheck className="w-8 h-8 md:w-10 md:h-10 text-white mb-4 group-hover:text-gray-300 transition-colors" />,
     },
     {
         id: 6,
-        heading: "Long-Term Support",
-        caption: "We stay involved after launch to improve performance and fix issues.",
+        heading: "Smooth Collaboration",
+        caption: "Clear communication, transparent process, consistent progress - Pricing tailored for you.",
+        icon: <AnimatedCollabIcon />,
     },
 ];
 
-const Card = React.memo(({ title, body, index }: { title: string; body: string; index: number }) => {
+const Card = React.memo(({ title, body, icon, index }: { title: string; body: string; icon: React.ReactNode; index: number }) => {
     return (
         <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -46,11 +57,14 @@ const Card = React.memo(({ title, body, index }: { title: string; body: string; 
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
         >
-            <div className="relative h-64 w-full bg-black border-2 border-white/20 p-8 flex flex-col justify-end overflow-hidden group hover:border-white/40 transition-colors">
-                <h3 className="text-lg font-bold font-satoshi text-white mb-2 leading-tight group-hover:text-gray-300 transition-colors">
+            <div className="relative h-64  border-neutral-800/80 w-full  bg-neutral-950  p-6 flex flex-col items-center text-center overflow-hidden transition-colors">
+                <div className="mb-4">
+                    {icon}
+                </div>
+                <h3 className="text-[24px] font-semibold font-satoshi text-neutral-100 mb-4 leading-tight transition-colors">
                     {title}
                 </h3>
-                <p className="text-sm text-gray-400 font-satoshi leading-relaxed">
+                <p className="text-md   text-neutral-400 font-satoshi font-medium">
                     {body}
                 </p>
             </div>
@@ -77,17 +91,15 @@ export function WhyChooseUs() {
                         as="h2"
                         className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
                     />
-                    <p className="text-lg text-zinc-400 font-satoshi max-w-xl mx-auto leading-relaxed">
-                        Six reasons clients trust us with their digital presence
-                    </p>
-                </motion.div>
+                    <p className="text-md text-zinc-400 font-satoshi max-w-xl mx-auto leading-relaxed">
+                        Where real needs meet the right execution, meaningful products take shape. </p>                </motion.div>
             </ContentContainer>
             {/* Marquee section moved outside ContentContainer for full width */}
             {/* Static Grid Grid Section */}
-            <div className="relative z-10 max-w-7xl mx-auto px-4 md:px-6 py-10">
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="relative z-10 max-w-[1070px] mx-auto px-3 md:px-6 py-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-14 gap-x-6">
                     {cards.map((card, index) => (
-                        <Card key={card.id} title={card.heading} body={card.caption} index={index} />
+                        <Card key={card.id} title={card.heading} body={card.caption} icon={card.icon} index={index} />
                     ))}
                 </div>
             </div>
