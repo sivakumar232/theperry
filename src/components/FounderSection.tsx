@@ -16,7 +16,7 @@ const skills = [
 
 export function FounderSection() {
     return (
-        <section id="about" className="py-16 md:py-24 px-6 bg-black relative">
+        <section id="about" className="py-24 md:py-32 px-6 bg-black relative">
             <div className="max-w-6xl mx-auto relative z-10">
                 {/* Section Header */}
                 <motion.div
@@ -26,7 +26,7 @@ export function FounderSection() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5, ease: "easeOut" }}
                 >
-                    <h2 className="text-4xl md:text-5xl font-bold font-satoshi text-white mb-3">
+                    <h2 className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-3">
                         theperry
                     </h2>
                 </motion.div>

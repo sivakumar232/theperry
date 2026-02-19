@@ -40,18 +40,20 @@ export function Footer() {
         <>
             {/* Pre-Footer CTA Card */}
             <section className="py-12 md:py-16 bg-black px-6 md:px-12 lg:px-16">
-                <div className="relative rounded-3xl overflow-hidden">
-                    <div className="absolute inset-0 bg-[#0a0a0a]" />
+                <div
+                    className="relative rounded-3xl overflow-hidden"
+                    style={{ willChange: 'transform', transform: 'translateZ(0)' }}
+                >
+                    {/* Single performant gradient bg — no blur filter */}
                     <div
-                        className="absolute -top-24 -right-24 w-80 h-80 rounded-full opacity-60 blur-3xl pointer-events-none"
-                        style={{ background: 'radial-gradient(circle, rgba(20,180,80,0.55) 0%, rgba(10,90,40,0.2) 60%, transparent 100%)' }}
+                        className="absolute inset-0"
+                        style={{
+                            background: 'radial-gradient(ellipse 80% 60% at 90% 10%, rgba(20,180,80,0.28) 0%, rgba(10,90,40,0.10) 50%, transparent 80%), #0a0a0a',
+                        }}
                     />
+                    {/* Dot pattern */}
                     <div
-                        className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full opacity-30 blur-3xl pointer-events-none"
-                        style={{ background: 'radial-gradient(circle, rgba(20,160,70,0.4) 0%, transparent 70%)' }}
-                    />
-                    <div
-                        className="absolute inset-0 pointer-events-none opacity-30"
+                        className="absolute inset-0 pointer-events-none opacity-25"
                         style={{
                             backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
                             backgroundSize: '28px 28px',

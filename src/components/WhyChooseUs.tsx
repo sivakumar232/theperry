@@ -89,7 +89,7 @@ const Card = React.memo(({ title, body, icon, index }: { title: string; body: st
 
 export function WhyChooseUs() {
     return (
-        <section id="why-us" className="py-24 bg-black relative overflow-hidden">
+        <section id="why-us" className="py-24 md:py-32 bg-black relative overflow-hidden">
             <ContentContainer>
                 {/* Section Header */}
                 {/* Section Header */}

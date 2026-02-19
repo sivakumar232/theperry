@@ -47,17 +47,17 @@ const ServiceCard = React.memo(function ServiceCard({ service, index }: { servic
             </p>
 
             {/* Title */}
-            <h3 className="text-2xl md:text-3xl font-bold font-satoshi text-white mb-2 group-hover:text-purple-400 transition-colors">
+            <h3 className="text-2xl md:text-3xl font-bold font-satoshi text-white mb-2 transition-colors">
                 {service.title}
             </h3>
 
             {/* Tagline */}
-            <p className="text-lg font-medium text-zinc-400 italic mb-6">
+            <p className="text-lg font-medium font-satoshi text-neutral-400 italic mb-6">
                 {service.tagline}
             </p>
 
             {/* Description */}
-            <p className="text-sm text-zinc-400 leading-relaxed mb-8 flex-grow">
+            <p className="text-sm font-satoshi text-neutral-400 leading-relaxed mb-8 flex-grow">
                 {service.description}
             </p>
 
@@ -69,8 +69,8 @@ const ServiceCard = React.memo(function ServiceCard({ service, index }: { servic
                     <div className="overflow-hidden">
                         <ul className="space-y-2 mb-6 pt-4 border-t border-white/10">
                             {service.details.map((detail, i) => (
-                                <li key={i} className="text-sm text-zinc-300 flex items-center">
-                                    <span className="w-1.5 h-1.5 bg-purple-500 rounded-full mr-2" />
+                                <li key={i} className="text-sm font-satoshi text-neutral-300 flex items-center">
+                                    <span className="w-1.5 h-1.5 bg-white rounded-full mr-2" />
                                     {detail}
                                 </li>
                             ))}
@@ -91,19 +91,18 @@ const ServiceCard = React.memo(function ServiceCard({ service, index }: { servic
 
 export function ImmersiveServices() {
     return (
-        <section className="py-24 md:py-32 bg-black relative">
+        <section id="services" className="py-24 md:py-32 bg-black relative">
             <ContentContainer>
 
-                {/* Section Header - Above the sticky content */}
-                <div className="py-16 md:py-24 bg-black">
+                <div className="text-center mb-16">
                     <div className="max-w-7xl mx-auto px-6 text-center">
-                        <span className="block text-sm font-medium font-satoshi text-zinc-500 mb-3">(Our Services)</span>
+                        <span className="block text-sm font-medium font-satoshi text-neutral-500 mb-3">(Our Services)</span>
                         <CinematicBlurReveal
                             text="Our Services"
                             as="h2"
-                            className="text-3xl md:text-5xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
+                            className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
                         />
-                        <p className="text-base text-zinc-400 font-satoshi max-w-xl mx-auto">
+                        <p className="text-md text-neutral-400 font-satoshi max-w-xl mx-auto leading-relaxed">
                             Everything you need to build and grow your digital presence
                         </p>
                     </div>
