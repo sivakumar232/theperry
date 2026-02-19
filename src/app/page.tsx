@@ -82,7 +82,7 @@ export default function Home() {
         </h1>
 
         {/* Clean Subheadline */}
-        <p className="text-base md:text-lg text-gray-300 font-switcher font-medium text-center max-w-2xl leading-relaxed relative z-10">
+        <p className="text-base md:text-lg text-neutral-300 font-switcher font-medium text-center max-w-2xl leading-relaxed relative z-10">
           We partner with startups and B2B enterprises that refuse to blend in, shaping ideas into  digital products and platforms.
         </p>
 
@@ -117,10 +117,7 @@ export default function Home() {
       {/* FAQ Section */}
       <FAQ />
 
-      {/* Founder Section - Story Behind */}
-      <FounderSection />
-
-      {/* Pre-Footer Section - Get Started */}
+      {/* Pre-Footer Section - now embedded inside Footer */}
       {/* <PreFooterSection /> */}
 
 

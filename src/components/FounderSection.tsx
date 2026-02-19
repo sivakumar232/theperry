@@ -27,7 +27,7 @@ export function FounderSection() {
                     transition={{ duration: 0.5, ease: "easeOut" }}
                 >
                     <h2 className="text-4xl md:text-5xl font-bold font-satoshi text-white mb-3">
-                        The Story Behind theperry
+                        theperry
                     </h2>
                 </motion.div>
 
@@ -75,7 +75,7 @@ export function FounderSection() {
                                 Hi, I&apos;m the founder of ThePerry.
                             </p>
 
-                            <p className="text-sm text-gray-300 font-satoshi leading-relaxed">
+                            <p className="text-sm text-neutral-300 font-satoshi leading-relaxed">
                                 After years of working in the tech industry, I noticed something that
                                 frustrated me: small businesses and startups were getting the short end
                                 of the stick. They were stuck choosing between expensive agencies that
@@ -83,35 +83,35 @@ export function FounderSection() {
                                 look like everyone else.
                             </p>
 
-                            <p className="text-sm text-gray-300 font-satoshi leading-relaxed">
+                            <p className="text-sm text-neutral-300 font-satoshi leading-relaxed">
                                 I started ThePerry to change that. We bring enterprise-level quality
                                 to ambitious startups and growing businesses. No templates. No bloat.
                                 Just premium, handcrafted work delivered fast.
                             </p>
 
-                            <p className="text-sm text-gray-300 font-satoshi leading-relaxed">
+                            <p className="text-sm text-neutral-300 font-satoshi leading-relaxed">
                                 We obsess over every pixel, every line of code, every conversion.
                                 Because your success is our reputation.
                             </p>
 
                             {/* Signature */}
                             <div className="pt-2">
-                                <p className="text-gray-300 font-satoshi italic text-base">
+                                <p className="text-neutral-300 font-satoshi italic text-base">
                                     — ThePerry Team
                                 </p>
                             </div>
                         </div>
 
                         {/* Skills */}
-                        <div className="mt-8 pt-6 border-t border-gray-700">
-                            <p className="text-xs font-satoshi text-gray-400 uppercase tracking-widest mb-3">
+                        <div className="mt-8 pt-6 border-t border-neutral-700">
+                            <p className="text-xs font-satoshi text-neutral-400 uppercase tracking-widest mb-3">
                                 Our Expertise
                             </p>
                             <div className="flex flex-wrap gap-2">
                                 {skills.map((skill) => (
                                     <span
                                         key={skill}
-                                        className="px-2.5 py-1 text-xs font-satoshi text-gray-300 bg-gray-800 border border-gray-600 rounded-full hover:bg-gray-700 hover:border-gray-500 transition-colors cursor-default shadow-sm"
+                                        className="px-2.5 py-1 text-xs font-satoshi text-neutral-300 bg-neutral-800 border border-neutral-600 rounded-full hover:bg-neutral-700 hover:border-neutral-500 transition-colors cursor-default shadow-sm"
                                     >
                                         {skill}
                                     </span>

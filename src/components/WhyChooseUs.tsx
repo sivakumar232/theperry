@@ -1,13 +1,16 @@
 "use client";
 
 import React from "react";
+import Lottie from "lottie-react";
+import goalAnimation from "./goal.json";
+import supportAnimation from "./support.json";
+import flightmodeAnimation from "./flightmode.json";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 import { motion } from "motion/react";
-import { Zap, ShieldCheck } from "lucide-react";
 import { AnimatedEyeIcon } from "./ui/animated-icons";
 import { AnimatedCollabIcon } from "./ui/AnimatedCollabIcon";
-import { AnimatedImpactIcon } from "./ui/AnimatedImpactIcon";
+
 import { AnimatedHandshakeIcon } from "./ui/AnimatedHandshakeIcon";
 
 const cards = [
@@ -15,7 +18,11 @@ const cards = [
         id: 1,
         heading: "Built for Real Impact",
         caption: "We don’t just code features. We build products to create real business impact.",
-        icon: <AnimatedImpactIcon />,
+        icon: (
+            <div className="w-10 h-10 md:w-14 md:h-14">
+                <Lottie animationData={goalAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
+            </div>
+        ),
     },
     {
         id: 2,
@@ -27,7 +34,11 @@ const cards = [
         id: 3,
         heading: "Fast & Reliable Delivery",
         caption: "Get high-quality results in days or weeks, not months.",
-        icon: <Zap className="w-8 h-8 md:w-10 md:h-10 text-white mb-4 group-hover:text-gray-300 transition-colors" />,
+        icon: (
+            <div className="w-10 h-10 md:w-14 md:h-14">
+                <Lottie animationData={flightmodeAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
+            </div>
+        ),
     },
     {
         id: 4,
@@ -39,7 +50,11 @@ const cards = [
         id: 5,
         heading: "Post Launch Support",
         caption: "Launch is just the start. We maintain, improve, and evolve. Built for the long run.",
-        icon: <ShieldCheck className="w-8 h-8 md:w-10 md:h-10 text-white mb-4 group-hover:text-gray-300 transition-colors" />,
+        icon: (
+            <div className="w-10 h-10 md:w-14 md:h-14">
+                <Lottie animationData={supportAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
+            </div>
+        ),
     },
     {
         id: 6,
@@ -85,7 +100,7 @@ export function WhyChooseUs() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                 >
-                    <span className="block text-sm font-medium font-satoshi text-gray-500 mb-3">(Why Us)</span>
+                    <span className="block text-sm font-medium font-satoshi text-neutral-500 mb-3">(Why Us)</span>
                     <CinematicBlurReveal
                         text="Why Choose theperry"
                         as="h2"

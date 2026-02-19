@@ -1,106 +1,116 @@
 "use client";
 
-import React, { useState } from "react";
+import React from "react";
+import Lottie from "lottie-react";
+import brainstormAnimation from "./brainstorm.json";
+import trainingAnimation from "./training.json";
+import missionAnimation from "./mission.json";
 import { ContentContainer } from "./ui/ContentContainer";
+import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
+import { motion } from "motion/react";
 
 const steps = [
     {
-        title: "Discovery & Strategy",
-        description: "We start by understanding your vision, goals, and challenges. Through collaborative sessions, we define the project scope and create a strategic roadmap.",
-        image: "/process-1.jpg"
+        id: 1,
+        step: "Step 1",
+        title: "Understand the Vision",
+        description:
+            "Share what's on your mind — your goals, ideas, or even rough thoughts. We listen, understand, and move forward only after everything is clear.",
+        icon: (
+            <div className="w-10 h-10 md:w-14 md:h-14">
+                <Lottie animationData={brainstormAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
+            </div>
+        ),
     },
     {
-        title: "Design & Development",
-        description: "Our team brings your vision to life with modern design and clean code. We iterate quickly, keeping you involved at every stage.",
-        image: "/process-2.jpg"
+        id: 2,
+        step: "Step 2",
+        title: "Shape the Solution",
+        description:
+            "We define the scope, design the strategy, and map the right approach for your project. You review everything, we refine together, and move ahead only after your approval.",
+        icon: (
+            <div className="w-10 h-10 md:w-14 md:h-14">
+                <Lottie animationData={trainingAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
+            </div>
+        ),
     },
     {
-        title: "Launch & Growth",
-        description: "We deploy your product with confidence and continue optimizing for performance and user experience. Your success is our success.",
-        image: "/process-3.jpg"
-    }
+        id: 3,
+        step: "Step 3",
+        title: "Bring It to Life",
+        description:
+            "Our experts get to work, keep you updated throughout the process, and build with precision. Everything is prepared for a smooth, confident launch.",
+        icon: (
+            <div className="w-10 h-10 md:w-14 md:h-14">
+                <Lottie animationData={missionAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
+            </div>
+        ),
+    },
 ];
 
-export function ProcessSection() {
-    const [activeStep, setActiveStep] = useState(0);
-
+const StepCard = React.memo(({ step, index }: { step: typeof steps[0]; index: number }) => {
     return (
-        <section className="py-24 md:py-32 bg-black relative">
+        <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
+        >
+            <div className="relative h-64 border-neutral-800/80 w-full bg-neutral-950 p-6 flex flex-col items-center text-center overflow-hidden transition-colors">
+                <div className="mb-4">
+                    {step.icon}
+                </div>
+                <p className="text-xs font-medium font-satoshi text-neutral-500 uppercase tracking-widest mb-4">
+                    {step.step}
+                </p>
+                <h3 className="text-[24px] font-semibold font-satoshi text-neutral-100 mb-4 leading-tight transition-colors">
+                    {step.title}
+                </h3>
+                <p className="text-md text-neutral-400 font-satoshi font-medium">
+                    {step.description}
+                </p>
+            </div>
+        </motion.div>
+    );
+});
+
+StepCard.displayName = "StepCard";
+
+export function ProcessSection() {
+    return (
+        <section className="py-24 bg-black relative overflow-hidden">
             <ContentContainer>
                 {/* Section Header */}
-                <div className="text-center mb-20">
-                    <h2 className="text-4xl md:text-5xl font-bold font-satoshi text-white mb-4">
-                        How We Work Together
-                    </h2>
-                    <p className="text-lg text-gray-400 font-satoshi max-w-2xl mx-auto">
-                        A simple, collaborative process that turns your ideas into reality
+                <motion.div
+                    className="text-center mb-16"
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5 }}
+                >
+                    <span className="block text-sm font-medium font-satoshi text-neutral-500 mb-3">(Process)</span>
+                    <CinematicBlurReveal
+                        text="How We Work Together"
+                        as="h2"
+                        className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
+                    />
+                    <p className="text-md text-zinc-400 font-satoshi max-w-xl mx-auto leading-relaxed">
+                        A simple, collaborative process that turns your ideas into reality.
                     </p>
-                </div>
-
-                {/* Content Grid */}
-                <div className="grid lg:grid-cols-2 gap-16 lg:gap-24 items-start max-w-5xl mx-auto justify-items-center">
-                    {/* Left Side - Steps */}
-                    <div className="space-y-4 w-full">
-                        {steps.map((step, index) => (
-                            <div
-                                key={index}
-                                className={`cursor-pointer p-6 rounded-xl transition-all duration-200 will-change-auto ${activeStep === index
-                                    ? 'bg-zinc-900 border border-zinc-700 scale-105'
-                                    : 'bg-zinc-900/30 border border-transparent hover:bg-zinc-900/50'
-                                    }`}
-                                onMouseEnter={() => setActiveStep(index)}
-                            >
-                                {/* Step Title - Removed whileInView animation */}
-                                <h3
-                                    className={`text-2xl font-bold font-satoshi mb-2 transition-colors duration-200 ${activeStep === index ? 'text-white' : 'text-gray-500'
-                                        }`}
-                                >
-                                    {step.title}
-                                </h3>
-
-                                {/* Step Description - Always visible */}
-                                <p className={`text-base font-satoshi leading-relaxed max-w-sm transition-colors duration-200 ${activeStep === index ? 'text-gray-300' : 'text-gray-600'
-                                    }`}>
-                                    {step.description}
-                                </p>
-                            </div>
-                        ))}
-                    </div>
-
-                    {/* Right Side - Dynamic Image */}
-                    <div className="relative w-full">
-                        <div className="relative w-full aspect-[4/3] max-w-md mx-auto lg:mx-0">
-                            {steps.map((step, index) => (
-                                <div
-                                    key={index}
-                                    className={`absolute inset-0 rounded-xl overflow-hidden border border-zinc-800 transition-all duration-300 ease-out ${activeStep === index ? 'opacity-100 scale-100' : 'opacity-0 scale-95 pointer-events-none'
-                                        }`}
-                                    style={{
-                                        transform: activeStep === index ? 'translateY(0)' : 'translateY(50px)'
-                                    }}
-                                >
-                                    {/* Placeholder gradient - replace with actual images */}
-                                    <div
-                                        className="w-full h-full"
-                                        style={{
-                                            background: `linear-gradient(135deg, 
-                                                ${index === 0 ? '#6366f1, #8b5cf6' :
-                                                    index === 1 ? '#8b5cf6, #ec4899' :
-                                                        '#ec4899, #f59e0b'})`
-                                        }}
-                                    >
-                                        <div className="w-full h-full flex items-center justify-center">
-                                            <span className="text-white/10 text-7xl font-bold">
-                                                {index + 1}
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-                </div>
+                </motion.div>
             </ContentContainer>
+
+            {/* Cards Grid */}
+            <div className="relative z-10 max-w-[1070px] mx-auto px-3 md:px-6 py-10">
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-y-14 gap-x-6">
+                    {steps.map((step, index) => (
+                        <StepCard key={step.id} step={step} index={index} />
+                    ))}
+                </div>
+            </div>
+
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black via-black/50 to-transparent z-0" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black via-black/50 to-transparent z-0" />
         </section>
     );
 }

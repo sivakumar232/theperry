@@ -55,8 +55,8 @@ export function PremiumButton({
 
     const variantStyles = {
         primary: "bg-white text-black hover:shadow-[0_0_40px_rgba(255,255,255,0.3)]",
-        secondary: "bg-gray-800 text-white border border-gray-600 hover:bg-gray-700 hover:border-gray-500",
-        outline: "bg-transparent text-white border border-gray-600 hover:border-white hover:bg-gray-900",
+        secondary: "bg-neutral-800 text-white border border-neutral-600 hover:bg-neutral-700 hover:border-neutral-500",
+        outline: "bg-transparent text-white border border-neutral-600 hover:border-white hover:bg-neutral-900",
     };
 
     const ButtonContent = (

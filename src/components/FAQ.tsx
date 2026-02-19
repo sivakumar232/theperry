@@ -61,7 +61,7 @@ const AccordionItem = React.memo(function AccordionItem({ faq, index }: { faq: t
                     onClick={() => setIsOpen(!isOpen)}
                     className="w-full flex items-center justify-between p-6 md:p-7 text-left outline-none cursor-pointer"
                 >
-                    <span className="text-lg md:text-xl font-satoshi font-medium text-white group-hover:text-gray-100 transition-colors pr-8">
+                    <span className="text-lg md:text-xl font-satoshi font-medium text-white group-hover:text-neutral-100 transition-colors pr-8">
                         {faq.question}
                     </span>
                     <div
@@ -80,7 +80,7 @@ const AccordionItem = React.memo(function AccordionItem({ faq, index }: { faq: t
                 >
                     <div className="overflow-hidden">
                         <div className="px-6 md:px-7 pb-6 md:pb-7">
-                            <p className="text-base md:text-lg text-gray-400 font-satoshi leading-relaxed max-w-3xl">
+                            <p className="text-base md:text-lg text-neutral-400 font-satoshi leading-relaxed max-w-3xl">
                                 {faq.answer}
                             </p>
                         </div>
@@ -104,12 +104,12 @@ export function FAQ() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <span className="block text-sm font-medium font-satoshi text-gray-500 mb-3">(FAQs)</span>
+                        <span className="block text-sm font-medium font-satoshi text-neutral-500 mb-3">(FAQs)</span>
                         <CinematicBlurReveal
                             text="Your Questions, Answered"
                             className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
                         />
-                        <p className="text-md text-gray-400 font-satoshi max-w-xl mx-auto leading-relaxed">
+                        <p className="text-md text-neutral-400 font-satoshi max-w-xl mx-auto leading-relaxed">
                             Helping you understand our process and offerings at Agero.
                         </p>
                     </motion.div>

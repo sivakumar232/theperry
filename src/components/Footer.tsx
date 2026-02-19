@@ -2,11 +2,17 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
-import { useScrollPosition } from "@/hooks/useScrollPosition";
-import { FlipWords } from "./ui/flip-words";
-import { MagneticButton } from "./ui/magnetic-button";
+import { motion } from "framer-motion";
+import { PhoneCall } from "lucide-react";
 
-const footerLinks = {
+const navLinks = {
+    navigate: [
+        { label: "Home", href: "#hero" },
+        { label: "Why Us", href: "#why-us" },
+        { label: "Services", href: "#services" },
+        { label: "Process", href: "#process" },
+        { label: "FAQ", href: "#faq" },
+    ],
     services: [
         { label: "Web Development", href: "#services" },
         { label: "UI/UX Design", href: "#services" },
@@ -14,114 +20,229 @@ const footerLinks = {
         { label: "Growth Strategy", href: "#services" },
     ],
     company: [
-        { label: "About Us", href: "#about" },
-        { label: "Process", href: "#process" },
-        { label: "FAQ", href: "#faq" },
-        { label: "Contact", href: "/contact" },
+        { label: "Contact us", href: "/contact" },
+        { label: "Privacy Policy", href: "#" },
+        { label: "Terms & Conditions", href: "#" },
     ],
     social: [
-        {
-            label: "Twitter",
-            href: "https://twitter.com",
-            icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
-                </svg>
-            ),
-        },
-        {
-            label: "LinkedIn",
-            href: "https://linkedin.com",
-            icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
-                </svg>
-            ),
-        },
-        {
-            label: "Instagram",
-            href: "https://instagram.com",
-            icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 100 12.324 6.162 6.162 0 000-12.324zM12 16a4 4 0 110-8 4 4 0 010 8zm6.406-11.845a1.44 1.44 0 100 2.881 1.44 1.44 0 000-2.881z" />
-                </svg>
-            ),
-        },
-        {
-            label: "GitHub",
-            href: "https://github.com",
-            icon: (
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
-                    <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
-                </svg>
-            ),
-        },
+        { label: "Twitter / X", href: "https://twitter.com" },
+        { label: "LinkedIn", href: "https://linkedin.com" },
+        { label: "Instagram", href: "https://instagram.com" },
+        { label: "GitHub", href: "https://github.com" },
     ],
 };
 
 export function Footer() {
     const currentYear = new Date().getFullYear();
+    const [email, setEmail] = useState("");
 
     return (
-        <footer className="relative min-h-[60vh] w-full overflow-hidden bg-white">
-            {/* Content */}
-            <div className="relative z-10 max-w-7xl mx-auto px-6 md:px-8 py-24 md:py-32">
-                {/* Main Footer Content - All Centered and Stacked */}
-                <div className="text-center">
-                    {/* Logo */}
-                    <Link href="/" className="inline-block mb-6">
-                        <span className="text-3xl md:text-4xl font-bold font-satoshi text-black">
-                            theperry.
-                        </span>
-                    </Link>
-
-                    {/* Quick Links - Single Line */}
-                    <div className="flex flex-wrap gap-6 justify-center mb-8 text-gray-800 font-satoshi text-base font-semibold">
-                        <a href="#" className="hover:text-black transition-colors">Home</a>
-                        <a href="#" className="hover:text-black transition-colors">Services</a>
-                        <a href="#" className="hover:text-black transition-colors">About</a>
-                        <a href="#" className="hover:text-black transition-colors">Contact</a>
-                    </div>
-
-                    {/* Social Links - Simple without borders */}
-                    <div className="flex gap-4 justify-center mb-8">
-                        {footerLinks.social.map((social) => (
-                            <a
-                                key={social.label}
-                                href={social.href}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                className="text-gray-600 hover:text-black transition-colors"
-                                aria-label={social.label}
-                            >
-                                {social.icon}
-                            </a>
-                        ))}
-                    </div>
-
-                    {/* All Links - Email stacked, Privacy/Terms in one line */}
-                    <div className="flex flex-col items-center gap-3 text-gray-600 font-satoshi text-sm mb-6">
-                        <a href="mailto:hello@theperry.com" className="hover:text-black transition-colors">
-                            hello@theperry.com
-                        </a>
-                        <div className="flex gap-4">
-                            <a href="#" className="hover:text-black transition-colors">
-                                Privacy Policy
-                            </a>
-                            <span>•</span>
-                            <a href="#" className="hover:text-black transition-colors">
-                                Terms & Conditions
-                            </a>
-                        </div>
-                    </div>
-
-                    {/* Copyright */}
-                    <div className="text-gray-600 font-satoshi text-sm space-y-2">
-                        <p>Copyright © {currentYear} theperry.</p>
-                        <p>All rights reserved.</p>
+        <>
+            {/* Pre-Footer CTA Card */}
+            <section className="py-12 md:py-16 bg-black px-6 md:px-12 lg:px-16">
+                <div className="relative rounded-3xl overflow-hidden">
+                    <div className="absolute inset-0 bg-[#0a0a0a]" />
+                    <div
+                        className="absolute -top-24 -right-24 w-80 h-80 rounded-full opacity-60 blur-3xl pointer-events-none"
+                        style={{ background: 'radial-gradient(circle, rgba(20,180,80,0.55) 0%, rgba(10,90,40,0.2) 60%, transparent 100%)' }}
+                    />
+                    <div
+                        className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full opacity-30 blur-3xl pointer-events-none"
+                        style={{ background: 'radial-gradient(circle, rgba(20,160,70,0.4) 0%, transparent 70%)' }}
+                    />
+                    <div
+                        className="absolute inset-0 pointer-events-none opacity-30"
+                        style={{
+                            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
+                            backgroundSize: '28px 28px',
+                        }}
+                    />
+                    <div className="relative z-10 py-24 md:py-32 px-8 md:px-16 text-center">
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.6 }}
+                            className="space-y-6 max-w-2xl mx-auto"
+                        >
+                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-white leading-tight">
+                                Ready to dive in?
+                            </h2>
+                            <p className="text-base md:text-lg text-neutral-300 font-satoshi">
+                                Let&apos;s build something great together — fast, precise, and built for impact.
+                            </p>
+                            <div className="pt-2">
+                                <button className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black text-sm font-semibold font-satoshi rounded-full hover:bg-neutral-100 transition-colors shadow-lg">
+                                    <PhoneCall className="w-4 h-4" />
+                                    Book a Free Call
+                                </button>
+                            </div>
+                        </motion.div>
                     </div>
                 </div>
-            </div>
-        </footer>
+            </section>
+
+            <footer className="relative w-full overflow-hidden bg-[#080808]">
+                {/* Dot pattern background */}
+                <div
+                    className="pointer-events-none absolute inset-0 z-0"
+                    style={{
+                        backgroundImage:
+                            "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
+                        backgroundSize: "28px 28px",
+                    }}
+                />
+
+                {/* Newsletter Section */}
+                <div className="relative z-10">
+                    <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20 grid md:grid-cols-2 gap-12 items-center">
+                        {/* Left — big branding text */}
+                        <div>
+                            <span className="flex items-center gap-2 text-xs font-semibold font-satoshi text-neutral-500 uppercase tracking-widest mb-5">
+                                <span className="w-2 h-2 rounded-full bg-white inline-block" />
+                                Get in touch
+                            </span>
+                            <p className="text-4xl md:text-5xl font-bold font-satoshi text-white leading-[1.15]">
+                                The fastest way to build your{" "}
+                                <span className="text-neutral-400">digital presence.</span>
+                            </p>
+                        </div>
+
+                        {/* Right — email input aligned to bottom */}
+                        <div className="flex flex-col justify-end">
+                            <span className="flex items-center gap-2 text-xs font-semibold font-satoshi text-neutral-500 uppercase tracking-widest mb-4">
+                                <span className="w-2 h-2 rounded-full bg-white inline-block" />
+                                E-MAIL
+                            </span>
+                            <div className="flex gap-3">
+                                <input
+                                    type="email"
+                                    placeholder="Enter your email"
+                                    value={email}
+                                    onChange={(e) => setEmail(e.target.value)}
+                                    className="flex-1 bg-neutral-900 border border-neutral-700 rounded-lg px-4 py-3 text-sm font-satoshi text-white placeholder-neutral-500 focus:outline-none focus:border-neutral-500 transition-colors"
+                                />
+                                <button
+                                    className="px-5 py-3 bg-white text-black text-sm font-semibold font-satoshi rounded-lg hover:bg-neutral-100 transition-colors whitespace-nowrap"
+                                    onClick={() => setEmail("")}
+                                >
+                                    Subscribe →
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Nav Columns */}
+                <div className="relative z-10">
+                    <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 grid grid-cols-2 md:grid-cols-5 gap-10">
+                        {/* Logo */}
+                        <div className="col-span-2 md:col-span-1">
+                            <Link href="/" className="inline-block mb-3">
+                                <span className="text-2xl font-bold font-satoshi text-white">
+                                    theperry.
+                                </span>
+                            </Link>
+                            <p className="text-xs text-neutral-500 font-satoshi leading-relaxed max-w-[160px]">
+                                Premium digital products for ambitious teams.
+                            </p>
+                        </div>
+
+                        {/* Navigate */}
+                        <div>
+                            <p className="text-xs font-semibold font-satoshi text-white uppercase tracking-widest mb-5">
+                                Navigate
+                            </p>
+                            <ul className="space-y-3">
+                                {navLinks.navigate.map((link) => (
+                                    <li key={link.label}>
+                                        <a
+                                            href={link.href}
+                                            className="text-sm font-satoshi text-neutral-400 hover:text-white transition-colors"
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Services */}
+                        <div>
+                            <p className="text-xs font-semibold font-satoshi text-white uppercase tracking-widest mb-5">
+                                Services
+                            </p>
+                            <ul className="space-y-3">
+                                {navLinks.services.map((link) => (
+                                    <li key={link.label}>
+                                        <a
+                                            href={link.href}
+                                            className="text-sm font-satoshi text-neutral-400 hover:text-white transition-colors"
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Company */}
+                        <div>
+                            <p className="text-xs font-semibold font-satoshi text-white uppercase tracking-widest mb-5">
+                                Company
+                            </p>
+                            <ul className="space-y-3">
+                                {navLinks.company.map((link) => (
+                                    <li key={link.label}>
+                                        <a
+                                            href={link.href}
+                                            className="text-sm font-satoshi text-neutral-400 hover:text-white transition-colors"
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+
+                        {/* Social */}
+                        <div>
+                            <p className="text-xs font-semibold font-satoshi text-white uppercase tracking-widest mb-5">
+                                Social media
+                            </p>
+                            <ul className="space-y-3">
+                                {navLinks.social.map((link) => (
+                                    <li key={link.label}>
+                                        <a
+                                            href={link.href}
+                                            target="_blank"
+                                            rel="noopener noreferrer"
+                                            className="text-sm font-satoshi text-neutral-400 hover:text-white transition-colors"
+                                        >
+                                            {link.label}
+                                        </a>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                {/* Bottom Bar */}
+                <div className="relative z-10">
+                    <div className="max-w-7xl mx-auto px-6 md:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3">
+                        <p className="text-sm font-satoshi text-white">
+                            © {currentYear} theperry. All rights reserved.
+                        </p>
+                        <a
+                            href="mailto:hello@theperry.com"
+                            className="text-sm font-satoshi text-white transition-colors"
+                        >
+                            hello@theperry.com
+                        </a>
+                    </div>
+                </div>
+            </footer>
+        </>
     );
 }
