@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Dancing_Script } from "next/font/google";
 import "./globals.css";
-import { SmoothScrollProvider } from "@/components/ui/smooth-scroll";
+// import { SmoothScrollProvider } from "@/components/ui/smooth-scroll";
 import { CircularCTA } from "@/components/CircularCTA";
 
 const inter = Inter({
@@ -121,7 +121,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${dancingScript.variable} antialiased`}>
-        <SmoothScrollProvider>{children}</SmoothScrollProvider>
+        {/* <SmoothScrollProvider> */}{children}{/* </SmoothScrollProvider> */}
       </body>
     </html>
   );
