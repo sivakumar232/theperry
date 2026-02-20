@@ -20,7 +20,7 @@ const navLinks = {
         { label: "Growth Strategy", href: "#services" },
     ],
     company: [
-        { label: "Contact us", href: "/contact" },
+        { label: "Contact us", href: "https://cal.com/theperry/30min" },
         { label: "Privacy Policy", href: "#" },
         { label: "Terms & Conditions", href: "#" },
     ],
@@ -73,10 +73,15 @@ export function Footer() {
                                 Let&apos;s build something great together — fast, precise, and built for impact.
                             </p>
                             <div className="pt-2">
-                                <button className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black text-sm font-semibold font-satoshi rounded-full hover:bg-neutral-100 transition-colors shadow-lg">
+                                <a
+                                    href="https://cal.com/theperry/30min"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                    className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black text-sm font-semibold font-satoshi rounded-full hover:bg-neutral-100 transition-colors shadow-lg"
+                                >
                                     <PhoneCall className="w-4 h-4" />
                                     Book a Free Call
-                                </button>
+                                </a>
                             </div>
                         </motion.div>
                     </div>
@@ -197,6 +202,7 @@ export function Footer() {
                                     <li key={link.label}>
                                         <a
                                             href={link.href}
+                                            {...(link.href.includes("cal.com") ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                                             className="text-sm font-satoshi text-neutral-400 hover:text-white transition-colors"
                                         >
                                             {link.label}

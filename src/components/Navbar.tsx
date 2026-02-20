@@ -15,12 +15,10 @@ export default function Navbar() {
     const isScrolled = useScrollPosition(20);
 
     const navItems = [
-        { name: "Home", href: "#hero" },
-        { name: "Services", href: "#services" },
         { name: "Process", href: "#process" },
-        { name: "About", href: "#about" },
+        { name: "Services", href: "#services" },
         { name: "FAQ", href: "#faq" },
-        { name: "Contact", href: "#contact" }
+        { name: "Why Us", href: "#why-us" }
     ];
 
     useEffect(() => {
@@ -49,16 +47,17 @@ export default function Navbar() {
     return (
         <>
             <nav
-                className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 rounded-xl border-2 transition-all duration-300 max-w-4xl w-[calc(100%-2rem)] md:w-full shadow-lg
+                className={`fixed top-4 left-1/2 transform -translate-x-1/2 z-50 rounded-xl border-2 transition-all duration-300 max-w-2xl w-[calc(100%-2rem)] md:w-full shadow-lg
                 ${isScrolled
                         ? "bg-black/50 backdrop-blur-md border-white/20 shadow-black/10"
                         : "bg-black/95 backdrop-blur-sm border-white/20 shadow-black/5"
                     }`}
             >
-                <div className="px-6">
-                    <div className="flex items-center justify-center h-16 md:h-14 relative">
-                        {/* Logo - Absolute positioned */}
-                        <div className="absolute left-0">
+                <div className="px-4">
+                    <div className="grid grid-cols-3 items-center h-16 md:h-14">
+
+                        {/* Logo - Left column */}
+                        <div className="flex justify-start">
                             <Link
                                 href="/"
                                 className="text-lg font-bold font-satoshi tracking-tight text-white hover:text-white/80 transition-colors duration-200"
@@ -67,23 +66,22 @@ export default function Navbar() {
                             </Link>
                         </div>
 
-                        {/* Desktop Navigation - Centered */}
+                        {/* Desktop Navigation - Center column */}
                         <div
                             ref={navRef}
-                            className="hidden md:flex items-center space-x-1 absolute left-1/2 transform -translate-x-1/2 relative"
+                            className="hidden md:flex items-center justify-center space-x-3 relative"
                             onMouseLeave={() => setHoveredIndex(null)}
                         >
-                            {/* Animated Background */}
+                            {/* Animated hover background pill */}
                             <div
-                                className="absolute top-0 left-0 h-full bg-white/20 rounded-full transition-all duration-300 ease-out pointer-events-none"
+                                className="absolute top-0 left-0 h-full bg-white/10 rounded-full transition-all duration-300 ease-out pointer-events-none"
                                 style={backgroundStyle}
                             />
-
                             {navItems.map((item, index) => (
                                 <Link
                                     key={item.name}
                                     href={item.href}
-                                    className="relative px-2.5 py-2 text-md font-medium text-white hover:text-white/80 transition-colors duration-200 z-10"
+                                    className="relative px-3 py-2 text-sm font-medium text-white hover:text-white/80 transition-colors duration-200 z-10 whitespace-nowrap"
                                     onMouseEnter={() => setHoveredIndex(index)}
                                 >
                                     {item.name}
@@ -91,33 +89,32 @@ export default function Navbar() {
                             ))}
                         </div>
 
-                        {/* Desktop CTA */}
-                        <div className="hidden md:flex justify-end flex-1">
+                        {/* Right column — CTA on desktop, hamburger on mobile */}
+                        <div className="flex justify-end items-center">
+                            {/* Desktop CTA */}
                             <Link
-                                href="/contact"
-                                className={`group flex items-center gap-2 px-4 py-2.5 text-sm font-medium rounded-lg transition-all duration-300
-                                ${isScrolled
-                                        ? "bg-white text-black  border-transparent shadow-sm"
-                                        : "bg-white text-black border-transparent shadow-sm"
-                                    }`}
+                                href="https://cal.com/theperry/30min"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="hidden md:flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-white text-black hover:bg-white/90 transition-all duration-200 shadow-sm group"
                             >
                                 Let's Talk
                                 <ArrowRight className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" />
                             </Link>
-                        </div>
 
-                        {/* Mobile Menu Button */}
-                        <button
-                            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-                            className="absolute right-0 md:hidden p-2 text-white hover:text-white/80 transition-colors"
-                            aria-label="Toggle mobile menu"
-                        >
-                            {isMobileMenuOpen ? (
-                                <X className="w-6 h-6" />
-                            ) : (
-                                <Menu className="w-6 h-6" />
-                            )}
-                        </button>
+                            {/* Mobile Menu Button */}
+                            <button
+                                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                                className="md:hidden p-2 text-white hover:text-white/80 transition-colors"
+                                aria-label="Toggle mobile menu"
+                            >
+                                {isMobileMenuOpen ? (
+                                    <X className="w-6 h-6" />
+                                ) : (
+                                    <Menu className="w-6 h-6" />
+                                )}
+                            </button>
+                        </div>
                     </div>
                 </div>
             </nav>
@@ -174,7 +171,9 @@ export default function Navbar() {
                                     className="pt-2"
                                 >
                                     <Link
-                                        href="/contact"
+                                        href="https://cal.com/theperry/30min"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                         onClick={() => setIsMobileMenuOpen(false)}
                                         className="flex items-center justify-center w-full px-6 py-3 text-base font-medium rounded-xl bg-white text-black hover:bg-white/90 transition-all duration-300"
                                     >

@@ -88,14 +88,16 @@ export default function Home() {
 
         {/* Clean CTA */}
         <div className="flex justify-center mt-8 z-10">
-          <HoverBorderGradient
-            containerClassName="rounded-xl group"
-            as="button"
-            className="bg-black text-white flex items-center space-x-0"
-          >
-            <span>Book a 30-Minute Call</span>
-            <PhoneCall className="w-0 opacity-0 transition-all duration-300 group-hover:w-5 group-hover:ml-2 group-hover:opacity-100" />
-          </HoverBorderGradient>
+          <a href="https://cal.com/theperry/30min" target="_blank" rel="noopener noreferrer">
+            <HoverBorderGradient
+              containerClassName="rounded-xl group"
+              as="div"
+              className="bg-black text-white flex items-center space-x-0 cursor-pointer"
+            >
+              <span>Book a 30-Minute Call</span>
+              <PhoneCall className="w-0 opacity-0 transition-all duration-300 group-hover:w-5 group-hover:ml-2 group-hover:opacity-100" />
+            </HoverBorderGradient>
+          </a>
         </div>
 
         <div className="h-8 md:h-10" />
