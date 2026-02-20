@@ -51,7 +51,7 @@ const AccordionItem = React.memo(function AccordionItem({ faq, index }: { faq: t
     return (
         <div className="h-fit">
             <div
-                className={`group rounded-2xl border transition-colors duration-200 overflow-hidden will-change-auto
+                className={`group rounded-2xl border transition-colors duration-200 overflow-hidden
                 ${isOpen
                         ? "bg-zinc-900/80 border-white/20"
                         : "bg-zinc-900/40 border-white/10 hover:border-white/20 hover:bg-zinc-900/60"
@@ -75,17 +75,24 @@ const AccordionItem = React.memo(function AccordionItem({ faq, index }: { faq: t
                     </div>
                 </button>
 
-                <div
-                    className={`grid transition-all duration-200 ease-out ${isOpen ? 'grid-rows-[1fr] opacity-100' : 'grid-rows-[0fr] opacity-0'}`}
+                <motion.div
+                    initial={false}
+                    animate={{
+                        height: isOpen ? "auto" : 0,
+                        opacity: isOpen ? 1 : 0
+                    }}
+                    transition={{
+                        duration: 0.3,
+                        ease: "easeOut"
+                    }}
+                    className="overflow-hidden"
                 >
-                    <div className="overflow-hidden">
-                        <div className="px-6 md:px-7 pb-6 md:pb-7">
-                            <p className="text-base md:text-lg text-neutral-400 font-satoshi leading-relaxed max-w-3xl">
-                                {faq.answer}
-                            </p>
-                        </div>
+                    <div className="px-6 md:px-7 pb-6 md:pb-7">
+                        <p className="text-base md:text-lg text-neutral-400 font-satoshi leading-relaxed max-w-3xl">
+                            {faq.answer}
+                        </p>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </div>
     );
@@ -104,13 +111,18 @@ export function FAQ() {
                         viewport={{ once: true }}
                         transition={{ duration: 0.5 }}
                     >
-                        <span className="block text-sm font-medium font-satoshi text-neutral-500 mb-3">(FAQs)</span>
+                        {/* Option 1: Glassmorphic with glowing dot (Current) */}
+
+                        <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md mb-6 shadow-[0_4px_24px_-8px_rgba(255,255,255,0.1)]">
+                            <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.4)]" />
+                            <span className="text-[11px] font-semibold font-satoshi text-neutral-300 uppercase tracking-[0.2em] leading-none mt-[1px]">FAQs</span>
+                        </div>
                         <CinematicBlurReveal
                             text="Your Questions, Answered"
                             className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
                         />
                         <p className="text-md text-neutral-400 font-satoshi max-w-xl mx-auto leading-relaxed">
-                            Helping you understand our process and offerings at Agero.
+                            Helping you understand our process and offerings at theperry.
                         </p>
                     </motion.div>
 

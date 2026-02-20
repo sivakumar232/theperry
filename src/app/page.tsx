@@ -43,7 +43,7 @@ export default function Home() {
             hueShift={0}
             noiseIntensity={0}
             scanlineIntensity={0}
-            speed={0.5}
+            speed={0.8}
             scanlineFrequency={0}
             warpAmount={0}
           />

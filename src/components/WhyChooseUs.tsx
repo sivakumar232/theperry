@@ -100,7 +100,10 @@ export function WhyChooseUs() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.5 }}
                 >
-                    <span className="block text-sm font-medium font-satoshi text-neutral-500 mb-3">(Why Us)</span>
+                    <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md mb-6 shadow-[0_4px_24px_-8px_rgba(255,255,255,0.1)]">
+                        <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.4)]" />
+                        <span className="text-[11px] font-semibold font-satoshi text-neutral-300 uppercase tracking-[0.2em] leading-none mt-[1px]">WHY US</span>
+                    </div>
                     <CinematicBlurReveal
                         text="Why Choose theperry"
                         as="h2"

@@ -42,7 +42,6 @@ export function Footer() {
             <section className="py-12 md:py-16 bg-black px-6 md:px-12 lg:px-16">
                 <div
                     className="relative rounded-3xl overflow-hidden"
-                    style={{ willChange: 'transform', transform: 'translateZ(0)' }}
                 >
                     {/* Single performant gradient bg — no blur filter */}
                     <div
