@@ -7,27 +7,27 @@ import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 const services = [
     {
         id: 1,
-        title: "Websites & Digital Presence",
-        tagline: "Let's build your online home",
-        description: "We'll create a beautiful website that feels just right for your brand — one that welcomes visitors and turns them into happy customers.",
-        benefits: ["Business & Corporate Websites", "Startup Websites", "Personal & Portfolio Sites", "Website Redesigns"],
-        details: ["Responsive Design", "Fast Loading", "SEO Optimized", "Mobile-First Approach"]
+        title: "Websites",
+        tagline: "Your brand's home on the web",
+        description: "We build beautiful, high-performing websites that represent your brand and convert visitors into customers.",
+        benefits: ["Brand & Startup websites", "E-commerce platforms", "High-converting landing pages", "Website redesigns"],
+        details: ["Responsive Design", "SEO Optimized", "Mobile-First", "Fast Loading"]
     },
     {
         id: 2,
-        title: "Custom Web Apps",
-        tagline: "Your idea, built right",
-        description: "Got a bigger vision? We love building dashboards, portals, and tools that make life easier for you and your users.",
-        benefits: ["MVP Development", "Dashboards & Admin Panels", "Client / User Portals", "SaaS Platforms", "Backend Systems & APIs"],
+        title: "Custom Tech Products",
+        tagline: "Your idea, engineered to scale",
+        description: "From MVPs to full-scale platforms — we build the software that powers your business and your users' experience.",
+        benefits: ["Full-stack web applications", "SaaS platforms", "CRM & business systems", "Dashboards & client portals"],
         details: ["Scalable Architecture", "User Authentication", "Real-time Features", "API Integration"]
     },
     {
         id: 3,
-        title: "Speed & Performance",
-        tagline: "Fast, reliable, ready to grow",
-        description: "Slow websites lose customers. We'll make sure yours loads quickly, runs smoothly, and can handle whatever growth comes your way.",
-        benefits: ["Website & App Optimization", "Backend & Database Tuning", "Scalability Planning", "Cloud Setup & Deployment"],
-        details: ["Performance Audits", "Code Optimization", "CDN Setup", "Monitoring & Alerts"]
+        title: "AI & Automation",
+        tagline: "Work smarter, not harder",
+        description: "We integrate AI and automation into your workflows and products so your business runs faster with less manual effort.",
+        benefits: ["AI-integrated products", "AI-powered business tools", "Workflow automation systems", "Custom business automations"],
+        details: ["LLM Integration", "Process Automation", "Custom AI Pipelines", "Tool & API Connectivity"]
     },
 ];
 
@@ -51,10 +51,6 @@ const ServiceCard = React.memo(function ServiceCard({ service, index }: { servic
                 {service.title}
             </h3>
 
-            {/* Tagline */}
-            <p className="text-lg font-medium font-satoshi text-neutral-400 italic mb-6">
-                {service.tagline}
-            </p>
 
             {/* Description */}
             <p className="text-sm font-satoshi text-neutral-400 leading-relaxed mb-8 flex-grow">
