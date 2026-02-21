@@ -1,7 +1,7 @@
 "use client";
 
 import Lottie from "lottie-react";
-import collabAnimation from "../collabicon.json";
+import collabAnimation from "@/assets/lottie/collabicon.json";
 
 export const AnimatedCollabIcon = () => {
     return (

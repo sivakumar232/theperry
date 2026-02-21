@@ -9,9 +9,9 @@ export function PreFooterSection() {
         <section className="py-12 md:py-16 bg-black px-6 md:px-12 lg:px-16">
             <div className="relative rounded-3xl overflow-hidden">
 
-                {/* Background image — place your file at public/prefooter-bg.jpeg */}
+                {/* Background image — place your file at public/prefooter-bg.jpg */}
                 <Image
-                    src="/prefooter-bg.jpeg"
+                    src="/prefooter-bg.jpg"
                     alt="Section background"
                     fill
                     className="object-cover"

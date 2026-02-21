@@ -29,7 +29,7 @@ const navLinks = {
         { label: "Twitter / X", href: "https://x.com/theperrydevs" },
         { label: "LinkedIn", href: "https://www.linkedin.com/company/theperry/" },
         { label: "Instagram", href: "https://www.instagram.com/theperrydevs/" },
-        
+
     ],
 };
 
@@ -136,7 +136,7 @@ export function Footer() {
                 </div>
 
                 {/* Nav Columns */}
-                <div className="relative z-10">
+                <div className="relative z-1">
                     <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 grid grid-cols-2 md:grid-cols-5 gap-10">
                         {/* Logo */}
                         <div className="col-span-2 md:col-span-1">
@@ -232,7 +232,7 @@ export function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="relative z-10">
+                <div className="relative z-10 mb-15">
                     <div className="max-w-7xl mx-auto px-6 md:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3">
                         <p className="text-sm font-satoshi text-white">
                             © {currentYear} theperry. All rights reserved.

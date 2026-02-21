@@ -2,9 +2,9 @@
 
 import React from "react";
 import Lottie from "lottie-react";
-import goalAnimation from "./goal.json";
-import supportAnimation from "./support.json";
-import flightmodeAnimation from "./flightmode.json";
+import goalAnimation from "@/assets/lottie/goal.json";
+import supportAnimation from "@/assets/lottie/support.json";
+import flightmodeAnimation from "@/assets/lottie/flightmode.json";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 import { motion } from "motion/react";

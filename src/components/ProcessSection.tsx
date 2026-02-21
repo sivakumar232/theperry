@@ -2,9 +2,9 @@
 
 import React from "react";
 import Lottie from "lottie-react";
-import brainstormAnimation from "./brainstorm.json";
-import trainingAnimation from "./training.json";
-import missionAnimation from "./mission.json";
+import brainstormAnimation from "@/assets/lottie/brainstorm.json";
+import trainingAnimation from "@/assets/lottie/training.json";
+import missionAnimation from "@/assets/lottie/mission.json";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 import { motion } from "motion/react";

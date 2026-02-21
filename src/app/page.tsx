@@ -109,12 +109,12 @@ export default function Home() {
       <BrandingText />
       {/* Why Choose Us */}
       <WhyChooseUs />
+            <ProcessSection />
 
       {/* Services Section - Horizontal Scroll */}
       <ImmersiveServices />
 
       {/* Process Section - How We Work Together */}
-      <ProcessSection />
 
       {/* FAQ Section */}
       <FAQ />

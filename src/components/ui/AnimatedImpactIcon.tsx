@@ -1,7 +1,7 @@
 "use client";
 
 import Lottie from "lottie-react";
-import impactAnimation from "../impacticon.json";
+import impactAnimation from "@/assets/lottie/impacticon.json";
 
 export const AnimatedImpactIcon = () => {
     return (
