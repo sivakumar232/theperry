@@ -15,7 +15,7 @@ const steps = [
         step: "Step 1",
         title: "Understand the Vision",
         description:
-            "Share what's on your mind — your goals, ideas, or even rough thoughts. We listen, understand, and move forward only after everything is clear.",
+            "Share what's on your mind — your goals, ideas, or even rough thoughts. We listen, understand, and move.",
         icon: (
             <div className="w-10 h-10 md:w-14 md:h-14">
                 <Lottie animationData={brainstormAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
@@ -27,7 +27,7 @@ const steps = [
         step: "Step 2",
         title: "Shape the Solution",
         description:
-            "We define the scope, design the strategy, and map the right approach for your project. You review everything, we refine together, and move ahead only after your approval.",
+            "We define the scope, plan the strategy, and map the right approach.\nYou review it, we refine it.",
         icon: (
             <div className="w-10 h-10 md:w-14 md:h-14">
                 <Lottie animationData={trainingAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
@@ -39,7 +39,7 @@ const steps = [
         step: "Step 3",
         title: "Bring It to Life",
         description:
-            "Our experts get to work, keep you updated throughout the process, and build with precision. Everything is prepared for a smooth, confident launch.",
+            "Our experts build with precision, keep you updated throughout the process \nfor a smooth, confident launch.",
         icon: (
             <div className="w-10 h-10 md:w-14 md:h-14">
                 <Lottie animationData={missionAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
@@ -56,7 +56,7 @@ const StepCard = React.memo(({ step, index }: { step: typeof steps[0]; index: nu
             viewport={{ once: true }}
             transition={{ duration: 0.5, ease: "easeOut", delay: index * 0.1 }}
         >
-            <div className="relative h-64 border-neutral-800/80 w-full bg-neutral-950 p-6 flex flex-col items-center text-center overflow-hidden transition-colors">
+            <div className="relative h-70 md:h-86 border-neutral-800/80 w-full bg-neutral-950 p-6 flex flex-col items-center text-center overflow-hidden transition-colors">
                 <div className="mb-4">
                     {step.icon}
                 </div>
@@ -66,7 +66,7 @@ const StepCard = React.memo(({ step, index }: { step: typeof steps[0]; index: nu
                 <h3 className="text-[24px] font-semibold font-satoshi text-neutral-100 mb-4 leading-tight transition-colors">
                     {step.title}
                 </h3>
-                <p className="text-md text-neutral-400 font-satoshi font-medium">
+                <p className="text-md text-neutral-400 font-satoshi font-medium whitespace-pre-line">
                     {step.description}
                 </p>
             </div>
@@ -93,12 +93,12 @@ export function ProcessSection() {
                         <span className="text-[11px] font-semibold font-satoshi text-neutral-300 uppercase tracking-[0.2em] leading-none mt-[1px]">PROCESS</span>
                     </div>
                     <CinematicBlurReveal
-                        text="How We Work Together"
+                        text="Our Way of Building With You"
                         as="h2"
                         className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
                     />
                     <p className="text-md text-zinc-400 font-satoshi max-w-xl mx-auto leading-relaxed">
-                        A simple, collaborative process that turns your ideas into reality.
+                        Simple approach. Real collaboration. Work that moves you forward.
                     </p>
                 </motion.div>
             </ContentContainer>
