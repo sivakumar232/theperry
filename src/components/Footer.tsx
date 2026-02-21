@@ -44,12 +44,7 @@ export function Footer() {
                     className="relative rounded-3xl overflow-hidden"
                 >
                     {/* Single performant gradient bg — no blur filter */}
-                    <div
-                        className="absolute inset-0"
-                        style={{
-                            background: 'radial-gradient(ellipse 80% 60% at 90% 10%, rgba(20,180,80,0.28) 0%, rgba(10,90,40,0.10) 50%, transparent 80%), #0a0a0a',
-                        }}
-                    />
+
                     {/* Dot pattern */}
                     <div
                         className="absolute inset-0 pointer-events-none opacity-25"

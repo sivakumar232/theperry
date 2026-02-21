@@ -120,8 +120,12 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${dancingScript.variable} antialiased`}>
-        {/* <SmoothScrollProvider> */}{children}{/* </SmoothScrollProvider> */}
+      <body className={`${inter.variable} ${dancingScript.variable} antialiased relative`}>
+        {/* Main Content */}
+        {children}
+
+        {/* Sticky bottom blur overlay */}
+        <div className="fixed bottom-0 left-0 right-0 h-30 pointer-events-none z-[100] bg-gradient-to-t from-black via-black/80 to-transparent backdrop-blur-[2px] [mask-image:linear-gradient(to_top,black_20%,transparent_100%)]" />
       </body>
     </html>
   );

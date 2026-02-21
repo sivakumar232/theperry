@@ -2,38 +2,24 @@
 
 import { motion } from 'framer-motion';
 import { PhoneCall } from 'lucide-react';
+import Image from 'next/image';
 
 export function PreFooterSection() {
     return (
         <section className="py-12 md:py-16 bg-black px-6 md:px-12 lg:px-16">
-            {/* Rounded card with dark gradient background */}
             <div className="relative rounded-3xl overflow-hidden">
 
-                {/* Dark background */}
-                <div className="absolute inset-0 bg-[#0a0a0a]" />
-
-                {/* Gradient blobs */}
-                <div
-                    className="absolute -top-24 -right-24 w-80 h-80 rounded-full opacity-60 blur-3xl pointer-events-none"
-                    style={{
-                        background: 'radial-gradient(circle, rgba(20,180,80,0.55) 0%, rgba(10,90,40,0.2) 60%, transparent 100%)',
-                    }}
-                />
-                <div
-                    className="absolute -bottom-20 -left-20 w-64 h-64 rounded-full opacity-30 blur-3xl pointer-events-none"
-                    style={{
-                        background: 'radial-gradient(circle, rgba(20,160,70,0.4) 0%, transparent 70%)',
-                    }}
+                {/* Background image — place your file at public/prefooter-bg.jpeg */}
+                <Image
+                    src="/prefooter-bg.jpeg"
+                    alt="Section background"
+                    fill
+                    className="object-cover"
+                    priority
                 />
 
-                {/* Subtle dot pattern */}
-                <div
-                    className="absolute inset-0 pointer-events-none opacity-30"
-                    style={{
-                        backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
-                        backgroundSize: '28px 28px',
-                    }}
-                />
+                {/* Thin dark overlay so text stays readable */}
+                <div className="absolute inset-0 bg-black/50" />
 
                 {/* Content */}
                 <div className="relative z-10 py-24 md:py-32 px-8 md:px-16 text-center">
