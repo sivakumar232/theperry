@@ -54,7 +54,7 @@ export default function Navbar() {
                     }`}
             >
                 <div className="px-4">
-                    <div className="grid grid-cols-3 items-center h-16 md:h-14">
+                    <div className="grid grid-cols-2 md:grid-cols-3 items-center h-16 md:h-14 w-full">
 
                         {/* Logo - Left column */}
                         <div className="flex justify-start">
