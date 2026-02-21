@@ -11,14 +11,14 @@ const services = [
         num: "01",
         label: "Websites",
         description:
-            "We build beautiful, high-performing websites that represent your brand and convert visitors into customers.",
+            "We build beautiful, stunning websites that represent your brand and convert visitors into customers.",
         gradient: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2d1b69 100%)",
         accent: "#7c3aed",
     },
     {
         id: 1,
         num: "02",
-        label: "Tech Products",
+        label: "Custom Tech Products",
         description:
             "From MVPs to full-scale platforms — we build the software that powers your business and users' experience.",
         gradient: "linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #0c4a6e 100%)",
@@ -74,10 +74,13 @@ export function ImmersiveServices() {
                         </span>
                     </div>
                     <CinematicBlurReveal
-                        text="Our Services"
+                        text="Powering Your Next Stage"
                         as="h2"
                         className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
                     />
+                    <p className="text-md text-zinc-400 font-satoshi max-w-xl mx-auto leading-relaxed">
+                        Explore our solutions — crafted for reliability, scalability, and success.
+                    </p>
                 </div>
 
                 {/* ── 3D Card Deck — perspective enables the rotateY depth ── */}
