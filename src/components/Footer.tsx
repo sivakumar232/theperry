@@ -14,21 +14,22 @@ const navLinks = {
         { label: "FAQ", href: "#faq" },
     ],
     services: [
-        { label: "Web Development", href: "#services" },
-        { label: "UI/UX Design", href: "#services" },
-        { label: "SEO Optimization", href: "#services" },
-        { label: "Growth Strategy", href: "#services" },
+        { label: "Brand & Startup websites", href: "#services" },
+        { label: "Full-stack web applications", href: "#services" },
+        { label: "Website redesigns", href: "#services" },
+        { label: "AI-integrated products", href: "#services" },
+        { label: "Custom business automations", href: "#services" },
     ],
     company: [
-        { label: "Contact us", href: "https://cal.com/theperry/30min" },
+        { label: "Contact us", href: "mailto:media.theperry@gmail.com" },
         { label: "Privacy Policy", href: "#" },
         { label: "Terms & Conditions", href: "#" },
     ],
     social: [
-        { label: "Twitter / X", href: "https://twitter.com" },
-        { label: "LinkedIn", href: "https://linkedin.com" },
-        { label: "Instagram", href: "https://instagram.com" },
-        { label: "GitHub", href: "https://github.com" },
+        { label: "Twitter / X", href: "https://x.com/theperrydevs" },
+        { label: "LinkedIn", href: "https://www.linkedin.com/company/theperry/" },
+        { label: "Instagram", href: "https://www.instagram.com/theperrydevs/" },
+        
     ],
 };
 
@@ -237,10 +238,10 @@ export function Footer() {
                             © {currentYear} theperry. All rights reserved.
                         </p>
                         <a
-                            href="mailto:hello@theperry.com"
+                            href="mailto:media.theperry@gmail.com"
                             className="text-sm font-satoshi text-white transition-colors"
                         >
-                            hello@theperry.com
+                            media@theperry.tech
                         </a>
                     </div>
                 </div>
