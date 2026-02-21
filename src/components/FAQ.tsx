@@ -131,13 +131,29 @@ export function FAQ() {
                         {/* Column 1 */}
                         <div className="flex-1 w-full space-y-4">
                             {faqs.filter((_, i) => i % 2 === 0).map((faq, i) => (
-                                <AccordionItem key={faq.id} faq={faq} index={i * 2} />
+                                <motion.div
+                                    key={faq.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.08 }}
+                                >
+                                    <AccordionItem faq={faq} index={i * 2} />
+                                </motion.div>
                             ))}
                         </div>
                         {/* Column 2 */}
                         <div className="flex-1 w-full space-y-4">
                             {faqs.filter((_, i) => i % 2 !== 0).map((faq, i) => (
-                                <AccordionItem key={faq.id} faq={faq} index={i * 2 + 1} />
+                                <motion.div
+                                    key={faq.id}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    whileInView={{ opacity: 1, y: 0 }}
+                                    viewport={{ once: true }}
+                                    transition={{ duration: 0.45, ease: "easeOut", delay: i * 0.08 + 0.04 }}
+                                >
+                                    <AccordionItem faq={faq} index={i * 2 + 1} />
+                                </motion.div>
                             ))}
                         </div>
                     </div>

@@ -66,7 +66,13 @@ export function ImmersiveServices() {
         <section id="services" className="py-24 md:py-32 bg-black relative overflow-hidden">
             <ContentContainer>
                 {/* ── Header ── */}
-                <div className="text-center mb-16">
+                <motion.div
+                    className="text-center mb-16"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: "easeOut" }}
+                >
                     <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md mb-6">
                         <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.4)]" />
                         <span className="text-[11px] font-semibold font-satoshi text-neutral-300 uppercase tracking-[0.2em] leading-none mt-[1px]">
@@ -81,14 +87,18 @@ export function ImmersiveServices() {
                     <p className="text-md text-zinc-400 font-satoshi max-w-xl mx-auto leading-relaxed">
                         Explore our solutions — crafted for reliability, scalability, and success.
                     </p>
-                </div>
+                </motion.div>
 
                 {/* ── 3D Card Deck — perspective enables the rotateY depth ── */}
-                <div
+                <motion.div
                     className="relative mx-auto flex items-center justify-center"
                     style={{ height: 340, width: 300, perspective: "900px" }}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
                 >
                     {order.map((svcId, slotIdx) => {
                         const svc = services[svcId];
@@ -110,10 +120,16 @@ export function ImmersiveServices() {
                             />
                         );
                     })}
-                </div>
+                </motion.div>
 
                 {/* ── Pill + description ── */}
-                <div className="flex flex-col items-center text-center mt-10 max-w-md mx-auto">
+                <motion.div
+                    className="flex flex-col items-center text-center mt-10 max-w-md mx-auto"
+                    initial={{ opacity: 0, y: 20 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.3 }}
+                >
                     <div className="inline-flex items-center gap-2.5 px-5 py-2 rounded-full border border-white/20 bg-white/[0.05] mb-6">
                         <span className="text-xs font-satoshi text-white/40 font-semibold tracking-widest">
                             {activeSvc.num}
@@ -150,7 +166,7 @@ export function ImmersiveServices() {
                             );
                         })}
                     </div>
-                </div>
+                </motion.div>
             </ContentContainer>
         </section>
     );

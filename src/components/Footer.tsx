@@ -139,7 +139,13 @@ export function Footer() {
                 <div className="relative z-1">
                     <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 grid grid-cols-2 md:grid-cols-5 gap-10">
                         {/* Logo */}
-                        <div className="col-span-2 md:col-span-1">
+                        <motion.div
+                            className="col-span-2 md:col-span-1"
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.45, ease: "easeOut", delay: 0 }}
+                        >
                             <Link href="/" className="inline-block mb-3">
                                 <span className="text-2xl font-bold font-satoshi text-white">
                                     theperry.
@@ -148,10 +154,15 @@ export function Footer() {
                             <p className="text-xs text-neutral-500 font-satoshi leading-relaxed max-w-[160px]">
                                 Premium digital products for ambitious teams.
                             </p>
-                        </div>
+                        </motion.div>
 
                         {/* Navigate */}
-                        <div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.45, ease: "easeOut", delay: 0.08 }}
+                        >
                             <p className="text-xs font-semibold font-satoshi text-white uppercase tracking-widest mb-5">
                                 Navigate
                             </p>
@@ -167,10 +178,15 @@ export function Footer() {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </motion.div>
 
                         {/* Services */}
-                        <div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.45, ease: "easeOut", delay: 0.16 }}
+                        >
                             <p className="text-xs font-semibold font-satoshi text-white uppercase tracking-widest mb-5">
                                 Services
                             </p>
@@ -186,10 +202,15 @@ export function Footer() {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </motion.div>
 
                         {/* Company */}
-                        <div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.45, ease: "easeOut", delay: 0.24 }}
+                        >
                             <p className="text-xs font-semibold font-satoshi text-white uppercase tracking-widest mb-5">
                                 Company
                             </p>
@@ -206,10 +227,15 @@ export function Footer() {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </motion.div>
 
                         {/* Social */}
-                        <div>
+                        <motion.div
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.45, ease: "easeOut", delay: 0.32 }}
+                        >
                             <p className="text-xs font-semibold font-satoshi text-white uppercase tracking-widest mb-5">
                                 Social media
                             </p>
@@ -227,7 +253,7 @@ export function Footer() {
                                     </li>
                                 ))}
                             </ul>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
 
