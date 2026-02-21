@@ -2,6 +2,7 @@
 
 import React, { useState } from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { motion } from "framer-motion";
 import { PhoneCall } from "lucide-react";
 
@@ -44,41 +45,54 @@ export function Footer() {
                 <div
                     className="relative rounded-3xl overflow-hidden"
                 >
-                    {/* Single performant gradient bg — no blur filter */}
-
-                    {/* Dot pattern */}
-                    <div
-                        className="absolute inset-0 pointer-events-none opacity-25"
-                        style={{
-                            backgroundImage: 'radial-gradient(circle, rgba(255,255,255,0.07) 1px, transparent 1px)',
-                            backgroundSize: '28px 28px',
-                        }}
+                    {/* Background image */}
+                    <Image
+                        src="/prefooter-bg.jpeg"
+                        alt="CTA Background"
+                        fill
+                        className="object-cover"
+                        priority
                     />
+                    {/* Dark overlay for readability */}
                     <div className="relative z-10 py-24 md:py-32 px-8 md:px-16 text-center">
-                        <motion.div
-                            initial={{ opacity: 0, y: 20 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            viewport={{ once: true }}
-                            transition={{ duration: 0.6 }}
-                            className="space-y-6 max-w-2xl mx-auto"
-                        >
-                            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-white leading-tight">
+                        <motion.div className="space-y-6 max-w-2xl mx-auto">
+
+                            {/* Heading */}
+                            <motion.h2
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6 }}
+                                className="text-4xl md:text-5xl lg:text-6xl font-bold font-satoshi text-white leading-tight"
+                            >
                                 Ready to dive in?
-                            </h2>
-                            <p className="text-base md:text-lg text-neutral-300 font-satoshi">
-                                Let&apos;s build something great together — fast, precise, and built for impact.
-                            </p>
-                            <div className="pt-2">
-                                <a
-                                    href="https://cal.com/theperry/30min"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black text-sm font-semibold font-satoshi rounded-full hover:bg-neutral-100 transition-colors shadow-lg"
-                                >
+                            </motion.h2>
+
+                            {/* Paragraph */}
+                            <motion.p
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.2 }}
+                                className="text-base md:text-lg text-neutral-300 font-satoshi"
+                            >
+                                Let's build something great together Fast, precise, and built for impact.
+                            </motion.p>
+
+                            {/* Button */}
+                            <motion.div
+                                initial={{ opacity: 0, y: 20 }}
+                                whileInView={{ opacity: 1, y: 0 }}
+                                viewport={{ once: true }}
+                                transition={{ duration: 0.6, delay: 0.4 }}
+                                className="pt-2"
+                            >
+                                <button className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black text-sm font-semibold font-satoshi rounded-full hover:bg-neutral-100 transition-colors shadow-lg">
                                     <PhoneCall className="w-4 h-4" />
                                     Book a Free Call
-                                </a>
-                            </div>
+                                </button>
+                            </motion.div>
+
                         </motion.div>
                     </div>
                 </div>
