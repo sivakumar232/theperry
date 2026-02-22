@@ -16,7 +16,6 @@ const steps = [
         description:
             "Share what's on your mind — your goals, ideas, or even rough thoughts. We listen, understand, and move with clarity.",
         icon: brainstormAnimation,
-        accent: "#6366f1",
     },
     {
         id: 2,
@@ -25,7 +24,6 @@ const steps = [
         description:
             "We define the scope, plan the strategy, and map the right approach. You review, we refine — until it's perfect.",
         icon: trainingAnimation,
-        accent: "#8b5cf6",
     },
     {
         id: 3,
@@ -34,36 +32,85 @@ const steps = [
         description:
             "Our experts build with precision, keeping you updated throughout. A smooth, confident launch — every time.",
         icon: missionAnimation,
-        accent: "#a78bfa",
     },
 ];
 
-// LEFT: one icon shown at a time, swaps based on scroll
+/**
+ * ALIGNMENT MATH:
+ * Container = 300vh  |  Each card = min-h-screen (100vh)  |  No padding offsets
+ * Scroll distance = 300 - 100 = 200vh
+ *
+ * Card[i] center in container = i * 100 + 50 (vh)
+ * → at viewport center when scroll = i * 100 + 50 - 50 = i * 100 vh
+ * → scrollYProgress = (i * 100) / 200 = i / 2
+ *   Step 0: progress = 0.0
+ *   Step 1: progress = 0.5
+ *   Step 2: progress = 1.0
+ *
+ * Switch thresholds (midpoints between centers):
+ *   0→1 switch at 0.25
+ *   1→2 switch at 0.75
+ */
+const N = steps.length;
+const cardCenterAt = (i: number) => i / (N - 1); // 0, 0.5, 1
+const switchAt = (i: number) =>
+    (cardCenterAt(i) + cardCenterAt(i + 1)) / 2; // 0.25, 0.75
+
+function getRange(index: number): [number, number] {
+    const start = index === 0 ? 0 : switchAt(index - 1);
+    const end = index === N - 1 ? 1 : switchAt(index);
+    return [start, end];
+}
+
+// LEFT sticky icon: blurs out at transitions, fully sharp in the middle of its range
 function StickyIcon({
     step,
     scrollYProgress,
     index,
-    total,
 }: {
     step: typeof steps[0];
     scrollYProgress: MotionValue<number>;
     index: number;
-    total: number;
 }) {
-    const start = index / total;
-    const end = (index + 1) / total;
+    const [start, end] = getRange(index);
+    const isFirst = index === 0;
+    const isLast = index === N - 1;
+    const FADE = 0.06;
 
     const opacity = useTransform(
         scrollYProgress,
-        [start - 0.03, start + 0.07, end - 0.07, end + 0.03],
-        [0, 1, 1, 0]
+        isFirst && isLast
+            ? [0, 1]
+            : isFirst
+                ? [0, end - FADE, end + FADE]
+                : isLast
+                    ? [start - FADE, start + FADE, 1]
+                    : [start - FADE, start + FADE, end - FADE, end + FADE],
+        isFirst && isLast
+            ? [1, 1]
+            : isFirst
+                ? [1, 1, 0]
+                : isLast
+                    ? [0, 1, 1]
+                    : [0, 1, 1, 0]
     );
 
-    // Blur: 14px when entering/exiting, 0 when active
     const blur = useTransform(
         scrollYProgress,
-        [start - 0.03, start + 0.07, end - 0.07, end + 0.03],
-        [14, 0, 0, 14]
+        isFirst && isLast
+            ? [0, 1]
+            : isFirst
+                ? [0, end - FADE, end + FADE]
+                : isLast
+                    ? [start - FADE, start + FADE, 1]
+                    : [start - FADE, start + FADE, end - FADE, end + FADE],
+        isFirst && isLast
+            ? [0, 0]
+            : isFirst
+                ? [0, 0, 14]
+                : isLast
+                    ? [14, 0, 0]
+                    : [14, 0, 0, 14]
     );
     const filter = useTransform(blur, (b) => `blur(${b}px)`);
 
@@ -73,7 +120,7 @@ function StickyIcon({
             className="absolute inset-0 flex flex-col justify-center items-center"
         >
             <div
-                className="rounded-3xl p-8 flex items-center justify-center mb-8"
+                className="rounded-3xl p-8 flex items-center justify-center"
                 style={{
                     background: `rgba(255,255,255,0.03)`,
                     border: `1px solid rgba(255,255,255,0.15)`,
@@ -88,17 +135,53 @@ function StickyIcon({
     );
 }
 
-// RIGHT: each step card — normal flow, heading + description reveals on whileInView
-function StepCard({ step }: { step: typeof steps[0] }) {
+// RIGHT card: opacity + y tied to same range as icon, first starts fully visible
+function StepCard({
+    step,
+    scrollYProgress,
+    index,
+}: {
+    step: typeof steps[0];
+    scrollYProgress: MotionValue<number>;
+    index: number;
+}) {
+    const [start, end] = getRange(index);
+    const isFirst = index === 0;
+    const isLast = index === N - 1;
+    const FADE = 0.06;
+    const SLIDE = 0.08;
+
+    const opacity = useTransform(
+        scrollYProgress,
+        isFirst && isLast
+            ? [0, 1]
+            : isFirst
+                ? [0, end - FADE, end + FADE]
+                : isLast
+                    ? [start - FADE, start + SLIDE, 1]
+                    : [start - FADE, start + SLIDE, end - FADE, end + FADE],
+        isFirst && isLast
+            ? [1, 1]
+            : isFirst
+                ? [1, 1, 0]
+                : isLast
+                    ? [0, 1, 1]
+                    : [0, 1, 1, 0]
+    );
+
+    const y = useTransform(
+        scrollYProgress,
+        isFirst
+            ? [0, 1] // first card: no slide-up needed
+            : [start - FADE, start + SLIDE],
+        isFirst
+            ? [0, 0]
+            : [28, 0]
+    );
+
     return (
-        <div className="min-h-screen flex flex-col justify-center py-24 md:py-0">
-            <motion.div
-                initial={{ opacity: 0, y: 40 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: false, margin: "-15%" }}
-                transition={{ duration: 0.7, ease: "easeOut" }}
-                className="flex flex-col items-start"
-            >
+        <div className="min-h-screen flex flex-col justify-center">
+            <motion.div style={{ opacity, y }} className="flex flex-col items-start">
                 <span className="text-xs font-satoshi font-bold tracking-widest mb-4 block text-neutral-400">
                     {step.stepLabel}
                 </span>
@@ -142,7 +225,7 @@ export function ProcessCinematic() {
                 </p>
             </div>
 
-            {/* MOBILE: simple stacked list — shown only below md */}
+            {/* MOBILE: simple stacked list */}
             <div className="md:hidden max-w-xl mx-auto px-6 pb-20 flex flex-col gap-12">
                 {steps.map((step) => (
                     <motion.div
@@ -179,13 +262,13 @@ export function ProcessCinematic() {
                 ))}
             </div>
 
-            {/* DESKTOP: cinematic sticky scroll — shown only md+ */}
+            {/* DESKTOP: cinematic sticky scroll */}
             <div
                 ref={containerRef}
                 className="hidden md:flex relative max-w-6xl mx-auto px-12 flex-row gap-16"
-                style={{ height: `${steps.length * 100}vh` }}
+                style={{ height: "300vh" }}
             >
-                {/* LEFT sticky icon */}
+                {/* LEFT sticky icon panel */}
                 <div className="w-[44%] shrink-0">
                     <div className="sticky top-0 h-screen">
                         <div className="relative h-full">
@@ -195,7 +278,6 @@ export function ProcessCinematic() {
                                     step={step}
                                     scrollYProgress={scrollYProgress}
                                     index={i}
-                                    total={steps.length}
                                 />
                             ))}
                         </div>
@@ -205,10 +287,15 @@ export function ProcessCinematic() {
                 {/* Divider */}
                 <div className="w-px bg-white/[0.06] shrink-0 self-stretch" />
 
-                {/* RIGHT scrolling headings */}
+                {/* RIGHT scrolling step cards — each min-h-screen, no padding offset */}
                 <div className="flex-1 flex flex-col">
-                    {steps.map((step) => (
-                        <StepCard key={step.id} step={step} />
+                    {steps.map((step, i) => (
+                        <StepCard
+                            key={step.id}
+                            step={step}
+                            scrollYProgress={scrollYProgress}
+                            index={i}
+                        />
                     ))}
                 </div>
             </div>

@@ -8,8 +8,8 @@ import Image from "next/image";
 import { FloatingElement } from "@/components/ui/floating-element";
 import { HoverBorderGradient } from "@/components/ui/hover-border-gradient";
 import { PhoneCall } from "lucide-react";
-import { motion } from "framer-motion";
-import { useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { useEffect, useState } from "react";
 
 import { BrandingText } from "@/components/BrandingText";
 import { FounderSection } from "@/components/FounderSection";
@@ -32,6 +32,8 @@ export default function Home() {
   useEffect(() => {
     import('@shadergradient/react');
   }, []);
+
+  const [ctaHovered, setCtaHovered] = useState(false);
 
   return (
     <main className="min-h-screen bg-black text-white tracking-tight">
@@ -89,14 +91,47 @@ export default function Home() {
 
         {/* Clean CTA */}
         <div className="flex justify-center mt-8 z-10">
-          <a href="https://cal.com/theperry/30min" target="_blank" rel="noopener noreferrer">
+          <a
+            href="https://cal.com/theperry/30min"
+            target="_blank"
+            rel="noopener noreferrer"
+            onMouseEnter={() => setCtaHovered(true)}
+            onMouseLeave={() => setCtaHovered(false)}
+          >
             <HoverBorderGradient
               containerClassName="rounded-xl group"
               as="div"
               className="bg-black text-white flex items-center space-x-0 cursor-pointer"
             >
               <span>Book a 30-Minute Call</span>
-              <PhoneCall className="w-0 opacity-0 transition-all duration-300 group-hover:w-5 group-hover:ml-2 group-hover:opacity-100" />
+              <AnimatePresence>
+                {ctaHovered && (
+                  <motion.span
+                    key="phone-icon"
+                    initial={{ width: 0, opacity: 0, marginLeft: 0, rotate: 0 }}
+                    animate={{
+                      width: 20,
+                      opacity: 1,
+                      marginLeft: 8,
+                      rotate: [0, -15, 15, -10, 10],
+                    }}
+                    transition={{
+                      width: { duration: 0.15 },
+                      opacity: { duration: 0.1 },
+                      marginLeft: { duration: 0.15 },
+                      rotate: {
+                        duration: 0.4,
+                        repeat: Infinity,
+                        ease: "linear"
+                      },
+                    }}
+                    exit={{ width: 0, opacity: 0, marginLeft: 0, transition: { duration: 0.3 } }}
+                    className="inline-flex items-center overflow-hidden"
+                  >
+                    <PhoneCall className="w-5 h-5 flex-shrink-0" />
+                  </motion.span>
+                )}
+              </AnimatePresence>
             </HoverBorderGradient>
           </a>
         </div>

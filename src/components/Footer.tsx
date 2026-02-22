@@ -51,6 +51,7 @@ export function Footer() {
                         alt="CTA Background"
                         fill
                         className="object-cover"
+                        style={{ filter: "blur(4px) brightness(0.8)" }}
                         priority
                     />
                     {/* Dark overlay for readability */}
@@ -115,10 +116,6 @@ export function Footer() {
                     <div className="max-w-7xl mx-auto px-6 md:px-10 py-16 md:py-20 grid md:grid-cols-2 gap-12 items-center">
                         {/* Left — big branding text */}
                         <div>
-                            <span className="flex items-center gap-2 text-xs font-semibold font-satoshi text-neutral-500 uppercase tracking-widest mb-5">
-                                <span className="w-2 h-2 rounded-full bg-white inline-block" />
-                                Get in touch
-                            </span>
                             <p className="text-4xl md:text-5xl font-bold font-satoshi text-white leading-[1.15]">
                                 The fastest way to build your{" "}
                                 <span className="text-neutral-400">digital presence.</span>
@@ -126,11 +123,13 @@ export function Footer() {
                         </div>
 
                         {/* Right — email input aligned to bottom */}
-                        <div className="flex flex-col justify-end">
-                            <span className="flex items-center gap-2 text-xs font-semibold font-satoshi text-neutral-500 uppercase tracking-widest mb-4">
-                                <span className="w-2 h-2 rounded-full bg-white inline-block" />
-                                E-MAIL
-                            </span>
+                        <motion.div
+                            className="flex flex-col justify-end"
+                            initial={{ opacity: 0, y: 15 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ duration: 0.5, ease: "easeOut", delay: 0.2 }}
+                        >
                             <div className="flex gap-3">
                                 <input
                                     type="email"
@@ -146,7 +145,7 @@ export function Footer() {
                                     Subscribe →
                                 </button>
                             </div>
-                        </div>
+                        </motion.div>
                     </div>
                 </div>
 
@@ -273,7 +272,13 @@ export function Footer() {
                 </div>
 
                 {/* Bottom Bar */}
-                <div className="relative z-10 mb-15">
+                <motion.div
+                    className="relative z-10 mb-15"
+                    initial={{ opacity: 0, y: 15 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.5, ease: "easeOut", delay: 0.4 }}
+                >
                     <div className="max-w-7xl mx-auto px-6 md:px-10 py-6 flex flex-col md:flex-row items-center justify-between gap-3">
                         <p className="text-sm font-satoshi text-white">
                             © {currentYear} theperry. All rights reserved.
@@ -285,7 +290,7 @@ export function Footer() {
                             media@theperry.tech
                         </a>
                     </div>
-                </div>
+                </motion.div>
             </footer>
         </>
     );

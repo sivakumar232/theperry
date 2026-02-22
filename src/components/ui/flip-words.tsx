@@ -15,64 +15,61 @@ export const FlipWords = ({
   delay?: number;
 }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isInitialLoad, setIsInitialLoad] = useState(true);
   const currentWord = words[currentIndex];
 
-  // Wait for the delay before showing the component
   useEffect(() => {
-    const visibilityTimer = setTimeout(() => {
-      setIsVisible(true);
-    }, delay * 1000);
+    // Start flipping right after the initial delay + duration
+    const initialTimer = setTimeout(() => {
+      setIsInitialLoad(false);
+      setCurrentIndex((prev) => (prev + 1) % words.length);
+    }, delay * 1000 + duration);
 
-    return () => clearTimeout(visibilityTimer);
-  }, [delay]);
+    return () => clearTimeout(initialTimer);
+  }, [delay, duration, words.length]);
 
-  // Start flipping only after the component becomes visible
   useEffect(() => {
-    if (!isVisible) return;
+    if (isInitialLoad) return;
 
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % words.length);
     }, duration);
     return () => clearInterval(timer);
-  }, [words.length, duration, isVisible]);
+  }, [words.length, duration, isInitialLoad]);
 
   return (
     <span className="inline-flex relative align-baseline">
-      {/* Hidden words to establish natural max width */}
+      {/* Hidden max-width placeholder */}
       <span className="invisible whitespace-nowrap" aria-hidden="true">
         {words.reduce((a, b) => (a.length > b.length ? a : b), "")}
       </span>
 
-      {/* Only show animated word after delay */}
-      {isVisible && (
-        <AnimatePresence mode="popLayout">
-          <motion.span
-            key={currentWord}
-            className={cn(
-              "absolute left-0 top-0 whitespace-nowrap",
-              className
-            )}
-          >
-            {currentWord.split("").map((char, i) => (
-              <motion.span
-                key={`${currentWord}-${i}`}
-                initial={{ opacity: 0, filter: "blur(8px)", y: 5 }}
-                animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
-                exit={{ opacity: 0, filter: "blur(8px)", y: -5 }}
-                transition={{
-                  duration: 0.3,
-                  delay: i * 0.02,
-                  ease: [0.25, 0.4, 0.25, 1],
-                }}
-                className="inline-block"
-              >
-                {char}
-              </motion.span>
-            ))}
-          </motion.span>
-        </AnimatePresence>
-      )}
+      <AnimatePresence mode="popLayout">
+        <motion.span
+          key={currentWord}
+          className={cn(
+            "absolute left-0 top-0 whitespace-nowrap",
+            className
+          )}
+        >
+          {currentWord.split("").map((char, i) => (
+            <motion.span
+              key={`${currentWord}-${i}`}
+              initial={{ opacity: 0, filter: "blur(8px)", y: 5 }}
+              animate={{ opacity: 1, filter: "blur(0px)", y: 0 }}
+              exit={{ opacity: 0, filter: "blur(8px)", y: -5 }}
+              transition={{
+                duration: 0.3,
+                delay: (isInitialLoad ? delay : 0) + i * 0.02,
+                ease: [0.25, 0.4, 0.25, 1],
+              }}
+              className="inline-block"
+            >
+              {char}
+            </motion.span>
+          ))}
+        </motion.span>
+      </AnimatePresence>
     </span>
   );
 };

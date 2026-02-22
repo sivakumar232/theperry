@@ -103,6 +103,7 @@ export function ImmersiveServices() {
                     {order.map((svcId, slotIdx) => {
                         const svc = services[svcId];
                         const pos = slots[slotIdx];
+                        const isFront = slotIdx === 0;
 
                         return (
                             <motion.div
@@ -115,8 +116,11 @@ export function ImmersiveServices() {
                                     boxShadow: `0 24px 60px -12px ${svc.accent}55`,
                                     transformStyle: "preserve-3d",
                                 }}
-                                animate={pos}
-                                transition={{ duration: 0.7, ease: [0.32, 0.72, 0, 1] }}
+                                animate={{
+                                    ...pos,
+                                    scale: isFront && paused ? 1.06 : pos.scale,
+                                }}
+                                transition={{ type: "spring", stiffness: 180, damping: 22 }}
                             />
                         );
                     })}
