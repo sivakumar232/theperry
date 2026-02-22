@@ -10,27 +10,60 @@ import { motion, AnimatePresence } from "motion/react";
 export default function Navbar() {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+    const [activeSection, setActiveSection] = useState<string>("");
     const [backgroundStyle, setBackgroundStyle] = useState({});
     const navRef = useRef<HTMLDivElement>(null);
     const isScrolled = useScrollPosition(20);
 
     const navItems = [
+        { name: "Why Us", href: "#why-us" },
         { name: "Process", href: "#process" },
         { name: "Services", href: "#services" },
-        { name: "FAQ", href: "#faq" },
-        { name: "Why Us", href: "#why-us" }
-    ];
+        { name: "FAQ", href: "#faq" }];
+
+    // Track active section via IntersectionObserver
+    useEffect(() => {
+        const sectionIds = navItems.map((item) => item.href.replace("#", ""));
+        const intersecting = new Map<string, boolean>();
+        const observers: IntersectionObserver[] = [];
+
+        sectionIds.forEach((id) => {
+            intersecting.set(id, false);
+            const el = document.getElementById(id);
+            if (!el) return;
+
+            const observer = new IntersectionObserver(
+                ([entry]) => {
+                    intersecting.set(id, entry.isIntersecting);
+                    // Find first intersecting section in nav order
+                    const active = sectionIds.find((sid) => intersecting.get(sid));
+                    setActiveSection(active ?? "");
+                },
+                { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+            );
+            observer.observe(el);
+            observers.push(observer);
+        });
+
+        return () => observers.forEach((o) => o.disconnect());
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     useEffect(() => {
-        if (hoveredIndex !== null && navRef.current) {
-            const navElement = navRef.current;
-            const linkElements = navElement.querySelectorAll('a');
-            const hoveredElement = linkElements[hoveredIndex];
+        const navElement = navRef.current;
+        if (!navElement) return;
+        const linkElements = navElement.querySelectorAll('a');
 
-            if (hoveredElement) {
-                const rect = hoveredElement.getBoundingClientRect();
+        // Hover takes priority over active
+        const targetIndex = hoveredIndex !== null
+            ? hoveredIndex
+            : navItems.findIndex((item) => item.href.replace("#", "") === activeSection);
+
+        if (targetIndex !== -1) {
+            const targetElement = linkElements[targetIndex];
+            if (targetElement) {
+                const rect = targetElement.getBoundingClientRect();
                 const navRect = navElement.getBoundingClientRect();
-
                 setBackgroundStyle({
                     transform: `translateX(${rect.left - navRect.left}px)`,
                     width: `${rect.width}px`,
@@ -38,11 +71,9 @@ export default function Navbar() {
                 });
             }
         } else {
-            setBackgroundStyle({
-                opacity: 0,
-            });
+            setBackgroundStyle({ opacity: 0 });
         }
-    }, [hoveredIndex]);
+    }, [hoveredIndex, activeSection]);
 
     return (
         <>
@@ -77,16 +108,20 @@ export default function Navbar() {
                                 className="absolute top-0 left-0 h-full bg-white/10 rounded-full transition-all duration-300 ease-out pointer-events-none"
                                 style={backgroundStyle}
                             />
-                            {navItems.map((item, index) => (
-                                <Link
-                                    key={item.name}
-                                    href={item.href}
-                                    className="relative px-3 py-2 text-sm font-medium text-white hover:text-white/80 transition-colors duration-200 z-10 whitespace-nowrap"
-                                    onMouseEnter={() => setHoveredIndex(index)}
-                                >
-                                    {item.name}
-                                </Link>
-                            ))}
+                            {navItems.map((item, index) => {
+                                const isActive = activeSection === item.href.replace("#", "");
+                                return (
+                                    <Link
+                                        key={item.name}
+                                        href={item.href}
+                                        className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 z-10 whitespace-nowrap ${isActive || hoveredIndex === index ? "text-white" : "text-white/60"
+                                            }`}
+                                        onMouseEnter={() => setHoveredIndex(index)}
+                                    >
+                                        {item.name}
+                                    </Link>
+                                );
+                            })}
                         </div>
 
                         {/* Right column — CTA on desktop, hamburger on mobile */}
@@ -156,7 +191,10 @@ export default function Navbar() {
                                         <Link
                                             href={item.href}
                                             onClick={() => setIsMobileMenuOpen(false)}
-                                            className="block text-lg font-medium text-white hover:text-white/70 transition-colors duration-200"
+                                            className={`block text-lg font-medium transition-colors duration-200 ${activeSection === item.href.replace("#", "")
+                                                ? "text-white"
+                                                : "text-white/50 hover:text-white/80"
+                                                }`}
                                         >
                                             {item.name}
                                         </Link>
