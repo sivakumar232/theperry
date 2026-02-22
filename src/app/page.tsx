@@ -103,7 +103,7 @@ export default function Home() {
               as="div"
               className="bg-black text-white flex items-center space-x-0 cursor-pointer"
             >
-              <span>Book a 30-Minute Call</span>
+              <span className="font-semibold">Book a 30-Minute Call</span>
               <AnimatePresence>
                 {ctaHovered && (
                   <motion.span
