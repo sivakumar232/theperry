@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion, animate, useMotionValue } from "motion/react";
+import { motion, animate, useMotionValue, AnimatePresence } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 
@@ -35,11 +35,10 @@ const services = [
     },
 ];
 
-// Stacked deck: front on top, two cards peeking behind
 const slots = [
-    { x: 0, y: 0, rotateZ: 0, rotateY: 0, scale: 1, zIndex: 30, opacity: 1 }, // front
-    { x: -72, y: 22, rotateZ: -6, rotateY: 18, scale: 0.88, zIndex: 20, opacity: 0.85 }, // mid
-    { x: 55, y: 42, rotateZ: 10, rotateY: -22, scale: 0.76, zIndex: 10, opacity: 0.70 }, // back
+    { x: 0, y: 0, rotateZ: 0, rotateY: 0, scale: 1, zIndex: 30, opacity: 1 },
+    { x: -72, y: 22, rotateZ: -6, rotateY: 18, scale: 0.88, zIndex: 20, opacity: 0.85 },
+    { x: 55, y: 42, rotateZ: 10, rotateY: -22, scale: 0.76, zIndex: 10, opacity: 0.70 },
 ];
 
 const DRAG_THRESHOLD = 60;
@@ -50,12 +49,14 @@ function DraggableCard({
     onBringToFront,
     onDragStart,
     onDragEnd,
+    onHover,
 }: {
     svcId: number;
     slotIdx: number;
     onBringToFront: (slotIdx: number) => void;
     onDragStart: () => void;
     onDragEnd: () => void;
+    onHover: (slotIdx: number | null, clientX?: number, clientY?: number) => void;
 }) {
     const svc = services[svcId];
     const pos = slots[slotIdx];
@@ -103,11 +104,13 @@ function DraggableCard({
                     : `0 24px 60px -12px ${svc.accent}55`,
             }}
             transition={{ type: "spring", stiffness: 55, damping: 18 }}
-            onTap={() => {
-                if (isDraggable) onBringToFront(slotIdx);
-            }}
+            onTap={() => { if (isDraggable) onBringToFront(slotIdx); }}
+            onMouseEnter={(e) => { if (isDraggable) onHover(slotIdx, e.clientX, e.clientY); }}
+            onMouseLeave={() => onHover(null)}
+            onMouseMove={(e) => { if (isDraggable && !isDragging) onHover(slotIdx, e.clientX, e.clientY); }}
             onDragStart={() => {
                 setIsDragging(true);
+                onHover(null);
                 onDragStart();
             }}
             onDragEnd={(_, info) => {
@@ -129,17 +132,36 @@ export function ImmersiveServices() {
     const [order, setOrder] = useState([0, 1, 2]);
     const pausedRef = useRef(false);
 
+    // Tooltip state — rendered OUTSIDE card transforms
+    const [hoveredSlot, setHoveredSlot] = useState<number | null>(null);
+    const [tipPos, setTipPos] = useState({ x: 0, y: 0 });
+
+    const handleHover = (slotIdx: number | null, clientX?: number, clientY?: number) => {
+        setHoveredSlot(slotIdx);
+        if (slotIdx !== null && clientX !== undefined && clientY !== undefined) {
+            // slot 1 = left card → tooltip appears to the right (+14px)
+            // slot 2 = back card → tooltip appears above-right
+            const xOffset = 14;
+            const yOffset = -38;
+            setTipPos({ x: clientX + xOffset, y: clientY + yOffset });
+        }
+    };
+
     useEffect(() => {
         const t = setInterval(() => {
             if (!pausedRef.current) {
                 setOrder(([a, b, c]) => [b, c, a]);
+                setHoveredSlot(null);
             }
         }, 2800);
         return () => clearInterval(t);
     }, []);
 
     const handleMouseEnter = () => { pausedRef.current = true; };
-    const handleMouseLeave = () => { pausedRef.current = false; };
+    const handleMouseLeave = () => {
+        pausedRef.current = false;
+        setHoveredSlot(null);
+    };
 
     const bringToFront = (slotIdx: number) => {
         setOrder((prev) => {
@@ -148,12 +170,36 @@ export function ImmersiveServices() {
             next.unshift(removed);
             return next;
         });
+        setHoveredSlot(null);
     };
 
     const activeSvc = services[order[0]];
 
     return (
         <section id="services" className="py-24 md:py-32 bg-black relative overflow-hidden">
+            {/* Floating tooltip rendered OUTSIDE all 3D-transformed cards */}
+            <AnimatePresence>
+                {hoveredSlot !== null && (
+                    <motion.div
+                        className="pointer-events-none fixed z-[9999] px-3 py-1.5 rounded-lg text-[11px] font-satoshi font-medium text-white/85 whitespace-nowrap"
+                        style={{
+                            left: tipPos.x,
+                            top: tipPos.y,
+                            background: "rgba(10,10,10,0.92)",
+                            border: "1px solid rgba(255,255,255,0.10)",
+                            backdropFilter: "blur(10px)",
+                            boxShadow: "0 6px 24px rgba(0,0,0,0.5)",
+                        }}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        exit={{ opacity: 0, scale: 0.9 }}
+                        transition={{ duration: 0.12, ease: "easeOut" }}
+                    >
+                        Click to view details
+                    </motion.div>
+                )}
+            </AnimatePresence>
+
             <ContentContainer>
                 {/* ── Header ── */}
                 <motion.div
@@ -170,7 +216,7 @@ export function ImmersiveServices() {
                         </span>
                     </div>
                     <CinematicBlurReveal
-                        text="Powering Your Next Stage"
+                        text={"Powering Your Next\nStage"}
                         as="h2"
                         className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
                     />
@@ -198,6 +244,7 @@ export function ImmersiveServices() {
                                 svcId={svcId}
                                 slotIdx={slotIdx}
                                 onBringToFront={bringToFront}
+                                onHover={handleHover}
                                 onDragStart={() => { pausedRef.current = true; }}
                                 onDragEnd={() => { pausedRef.current = false; }}
                             />
@@ -233,7 +280,6 @@ export function ImmersiveServices() {
                         {activeSvc.description}
                     </motion.p>
 
-                    {/* Dot indicators */}
                     <div className="flex items-center gap-2 mt-8">
                         {services.map((svc) => {
                             const isActive = order[0] === svc.id;

@@ -118,7 +118,7 @@ export function FAQ() {
                             <span className="text-[11px] font-semibold font-satoshi text-neutral-300 uppercase tracking-[0.2em] leading-none mt-[1px]">FAQs</span>
                         </div>
                         <CinematicBlurReveal
-                            text="Your Questions, Answered"
+                            text={"Your Questions,\nAnswered"}
                             className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
                         />
                         <p className="text-md text-neutral-400 font-satoshi max-w-xl mx-auto leading-relaxed">
