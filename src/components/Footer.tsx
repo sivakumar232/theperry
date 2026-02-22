@@ -101,15 +101,6 @@ export function Footer() {
             </section>
 
             <footer className="relative w-full overflow-hidden bg-[#080808]">
-                {/* Dot pattern background */}
-                <div
-                    className="pointer-events-none absolute inset-0 z-0"
-                    style={{
-                        backgroundImage:
-                            "radial-gradient(circle, rgba(255,255,255,0.06) 1px, transparent 1px)",
-                        backgroundSize: "28px 28px",
-                    }}
-                />
 
                 {/* Newsletter Section */}
                 <div className="relative z-10">

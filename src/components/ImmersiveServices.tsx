@@ -4,14 +4,12 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, animate, useMotionValue } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
-import { MouseTooltip } from "./ui/mouse-tooltip";
 
 const services = [
     {
         id: 0,
         num: "01",
         label: "Websites",
-        tooltip: "Next.js · React · TailwindCSS · Sanity CMS",
         description:
             "We build beautiful, stunning websites that represent your brand and convert visitors into customers.",
         gradient: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2d1b69 100%)",
@@ -21,7 +19,6 @@ const services = [
         id: 1,
         num: "02",
         label: "Custom Tech Products",
-        tooltip: "Node.js · Python · PostgreSQL · AWS · React Native",
         description:
             "From MVPs to full-scale platforms — we build the software that powers your business and users' experience.",
         gradient: "linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #0c4a6e 100%)",
@@ -31,7 +28,6 @@ const services = [
         id: 2,
         num: "03",
         label: "AI & Automation",
-        tooltip: "GPT-4 · LangChain · n8n · Python · Zapier",
         description:
             "We integrate AI and automation into your workflows so your business runs faster with less manual effort.",
         gradient: "linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #78350f 100%)",
@@ -42,8 +38,8 @@ const services = [
 // Stacked deck: front on top, two cards peeking behind
 const slots = [
     { x: 0, y: 0, rotateZ: 0, rotateY: 0, scale: 1, zIndex: 30, opacity: 1 }, // front
-    { x: -72, y: 22, rotateZ: -6, rotateY: 18, scale: 0.88, zIndex: 20, opacity: 0.85 }, // mid (left-behind)
-    { x: 55, y: 42, rotateZ: 10, rotateY: -22, scale: 0.76, zIndex: 10, opacity: 0.70 }, // back (right-behind)
+    { x: -72, y: 22, rotateZ: -6, rotateY: 18, scale: 0.88, zIndex: 20, opacity: 0.85 }, // mid
+    { x: 55, y: 42, rotateZ: 10, rotateY: -22, scale: 0.76, zIndex: 10, opacity: 0.70 }, // back
 ];
 
 const DRAG_THRESHOLD = 60;
@@ -125,15 +121,7 @@ function DraggableCard({
                     animate(dragY, 0, { type: "spring", stiffness: 200, damping: 24 });
                 }
             }}
-        >
-            {isDraggable && !isDragging && (
-                <div className="absolute inset-0 flex items-end justify-center pb-5 pointer-events-none opacity-0 hover:opacity-100 transition-opacity duration-300">
-                    <span className="text-[10px] font-satoshi text-white/40 tracking-wider bg-black/30 px-2 py-1 rounded-full">
-                        click or drag to front
-                    </span>
-                </div>
-            )}
-        </motion.div>
+        />
     );
 }
 
@@ -230,11 +218,9 @@ export function ImmersiveServices() {
                             {activeSvc.num}
                         </span>
                         <span className="w-px h-3 bg-white/20" />
-                        <MouseTooltip label={activeSvc.tooltip}>
-                            <span className="text-sm font-satoshi font-semibold text-white tracking-wide cursor-default">
-                                {activeSvc.label}
-                            </span>
-                        </MouseTooltip>
+                        <span className="text-sm font-satoshi font-semibold text-white tracking-wide">
+                            {activeSvc.label}
+                        </span>
                     </div>
 
                     <motion.p
