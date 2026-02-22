@@ -75,9 +75,9 @@ function StickyIcon({
             <div
                 className="rounded-3xl p-8 flex items-center justify-center mb-8"
                 style={{
-                    background: `radial-gradient(ellipse at 60% 40%, ${step.accent}22, transparent 70%), rgba(255,255,255,0.03)`,
-                    border: `1px solid ${step.accent}40`,
-                    boxShadow: `0 0 60px -12px ${step.accent}55`,
+                    background: `rgba(255,255,255,0.03)`,
+                    border: `1px solid rgba(255,255,255,0.15)`,
+                    boxShadow: `0 0 50px -12px rgba(255,255,255,0.12)`,
                     width: 220,
                     height: 220,
                 }}
@@ -99,10 +99,7 @@ function StepCard({ step }: { step: typeof steps[0] }) {
                 transition={{ duration: 0.7, ease: "easeOut" }}
                 className="flex flex-col items-start"
             >
-                <span
-                    className="text-xs font-satoshi font-bold tracking-widest mb-4 block"
-                    style={{ color: step.accent }}
-                >
+                <span className="text-xs font-satoshi font-bold tracking-widest mb-4 block text-neutral-400">
                     {step.stepLabel}
                 </span>
                 <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold font-satoshi text-white leading-tight mb-6">
