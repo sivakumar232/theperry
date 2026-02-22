@@ -116,18 +116,15 @@ function StepCard({ step }: { step: typeof steps[0] }) {
 export function ProcessCinematic() {
     const containerRef = useRef<HTMLDivElement>(null);
 
-    // Track scroll through the entire content container
     const { scrollYProgress } = useScroll({
         target: containerRef,
         offset: ["start start", "end end"],
     });
 
-    const progressWidth = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
-
     return (
         <section id="process" className="bg-black relative">
 
-            {/* Section header — scrolls normally */}
+            {/* Section header */}
             <div className="py-20 text-center relative z-10 max-w-4xl mx-auto px-6">
                 <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md mb-6">
                     <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.4)]" />
@@ -145,14 +142,51 @@ export function ProcessCinematic() {
                 </p>
             </div>
 
+            {/* MOBILE: simple stacked list — shown only below md */}
+            <div className="md:hidden max-w-xl mx-auto px-6 pb-20 flex flex-col gap-12">
+                {steps.map((step) => (
+                    <motion.div
+                        key={step.id}
+                        initial={{ opacity: 0, y: 24 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.5, ease: "easeOut" }}
+                        className="flex flex-col items-center text-center gap-5"
+                    >
+                        <div
+                            className="rounded-2xl p-5 flex items-center justify-center"
+                            style={{
+                                background: `rgba(255,255,255,0.03)`,
+                                border: `1px solid rgba(255,255,255,0.15)`,
+                                width: 96,
+                                height: 96,
+                            }}
+                        >
+                            <Lottie animationData={step.icon} loop autoplay style={{ width: 56, height: 56 }} />
+                        </div>
+                        <div>
+                            <span className="text-xs font-satoshi font-bold tracking-widest mb-2 block text-neutral-400">
+                                {step.stepLabel}
+                            </span>
+                            <h3 className="text-2xl font-bold font-satoshi text-white leading-tight mb-3">
+                                {step.title}
+                            </h3>
+                            <p className="text-base text-neutral-400 font-satoshi leading-relaxed">
+                                {step.description}
+                            </p>
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
 
-            {/* Main two-column container */}
+            {/* DESKTOP: cinematic sticky scroll — shown only md+ */}
             <div
                 ref={containerRef}
-                className="relative max-w-6xl mx-auto px-6 md:px-12 flex flex-col md:flex-row gap-0 md:gap-16"
+                className="hidden md:flex relative max-w-6xl mx-auto px-12 flex-row gap-16"
+                style={{ height: `${steps.length * 100}vh` }}
             >
-                {/* === LEFT — sticky, swaps icon on scroll === */}
-                <div className="hidden md:block md:w-[44%] shrink-0">
+                {/* LEFT sticky icon */}
+                <div className="w-[44%] shrink-0">
                     <div className="sticky top-0 h-screen">
                         <div className="relative h-full">
                             {steps.map((step, i) => (
@@ -168,16 +202,17 @@ export function ProcessCinematic() {
                     </div>
                 </div>
 
-                {/* Thin vertical divider */}
-                <div className="hidden md:block w-px bg-white/[0.06] shrink-0 self-stretch" />
+                {/* Divider */}
+                <div className="w-px bg-white/[0.06] shrink-0 self-stretch" />
 
-                {/* === RIGHT — normal scroll, 3 stacked heading+desc cards === */}
+                {/* RIGHT scrolling headings */}
                 <div className="flex-1 flex flex-col">
                     {steps.map((step) => (
                         <StepCard key={step.id} step={step} />
                     ))}
                 </div>
             </div>
+
         </section>
     );
 }
