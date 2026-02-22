@@ -21,6 +21,14 @@ export default function Navbar() {
         { name: "Services", href: "#services" },
         { name: "FAQ", href: "#faq" }];
 
+    const handleNavClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+        if (!href.startsWith("#")) return;
+        e.preventDefault();
+        const id = href.slice(1);
+        const el = document.getElementById(id);
+        if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    };
+
     // Track active section via IntersectionObserver
     useEffect(() => {
         const sectionIds = navItems.map((item) => item.href.replace("#", ""));
@@ -39,7 +47,7 @@ export default function Navbar() {
                     const active = sectionIds.find((sid) => intersecting.get(sid));
                     setActiveSection(active ?? "");
                 },
-                { rootMargin: "-40% 0px -50% 0px", threshold: 0 }
+                { rootMargin: "-20% 0px -30% 0px", threshold: 0 }
             );
             observer.observe(el);
             observers.push(observer);
@@ -114,6 +122,7 @@ export default function Navbar() {
                                     <Link
                                         key={item.name}
                                         href={item.href}
+                                        onClick={(e) => handleNavClick(e, item.href)}
                                         className={`relative px-3 py-2 text-sm font-medium transition-colors duration-200 z-10 whitespace-nowrap ${isActive || hoveredIndex === index ? "text-white" : "text-white/60"
                                             }`}
                                         onMouseEnter={() => setHoveredIndex(index)}
@@ -190,7 +199,10 @@ export default function Navbar() {
                                     >
                                         <Link
                                             href={item.href}
-                                            onClick={() => setIsMobileMenuOpen(false)}
+                                            onClick={(e) => {
+                                                handleNavClick(e, item.href);
+                                                setIsMobileMenuOpen(false);
+                                            }}
                                             className={`block text-lg font-medium transition-colors duration-200 ${activeSection === item.href.replace("#", "")
                                                 ? "text-white"
                                                 : "text-white/50 hover:text-white/80"

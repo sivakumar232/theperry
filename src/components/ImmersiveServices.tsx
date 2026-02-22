@@ -1,15 +1,17 @@
 "use client";
 
 import React, { useState, useEffect, useRef } from "react";
-import { motion } from "motion/react";
+import { motion, animate, useMotionValue } from "motion/react";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
+import { MouseTooltip } from "./ui/mouse-tooltip";
 
 const services = [
     {
         id: 0,
         num: "01",
         label: "Websites",
+        tooltip: "Next.js · React · TailwindCSS · Sanity CMS",
         description:
             "We build beautiful, stunning websites that represent your brand and convert visitors into customers.",
         gradient: "linear-gradient(135deg, #4f46e5 0%, #7c3aed 50%, #2d1b69 100%)",
@@ -19,6 +21,7 @@ const services = [
         id: 1,
         num: "02",
         label: "Custom Tech Products",
+        tooltip: "Node.js · Python · PostgreSQL · AWS · React Native",
         description:
             "From MVPs to full-scale platforms — we build the software that powers your business and users' experience.",
         gradient: "linear-gradient(135deg, #0891b2 0%, #06b6d4 50%, #0c4a6e 100%)",
@@ -28,6 +31,7 @@ const services = [
         id: 2,
         num: "03",
         label: "AI & Automation",
+        tooltip: "GPT-4 · LangChain · n8n · Python · Zapier",
         description:
             "We integrate AI and automation into your workflows so your business runs faster with less manual effort.",
         gradient: "linear-gradient(135deg, #d97706 0%, #f59e0b 50%, #78350f 100%)",
@@ -35,17 +39,106 @@ const services = [
     },
 ];
 
-// Position slots: [front, mid, back]
-// rotateY gives the 3D Z-angle on back cards (requires perspective on parent)
+// Stacked deck: front on top, two cards peeking behind
 const slots = [
     { x: 0, y: 0, rotateZ: 0, rotateY: 0, scale: 1, zIndex: 30, opacity: 1 }, // front
-    { x: -72, y: 22, rotateZ: -6, rotateY: 18, scale: 0.88, zIndex: 20, opacity: 0.85 }, // mid
-    { x: 55, y: 42, rotateZ: 10, rotateY: -22, scale: 0.76, zIndex: 10, opacity: 0.70 }, // back
+    { x: -72, y: 22, rotateZ: -6, rotateY: 18, scale: 0.88, zIndex: 20, opacity: 0.85 }, // mid (left-behind)
+    { x: 55, y: 42, rotateZ: 10, rotateY: -22, scale: 0.76, zIndex: 10, opacity: 0.70 }, // back (right-behind)
 ];
+
+const DRAG_THRESHOLD = 60;
+
+function DraggableCard({
+    svcId,
+    slotIdx,
+    onBringToFront,
+    onDragStart,
+    onDragEnd,
+}: {
+    svcId: number;
+    slotIdx: number;
+    onBringToFront: (slotIdx: number) => void;
+    onDragStart: () => void;
+    onDragEnd: () => void;
+}) {
+    const svc = services[svcId];
+    const pos = slots[slotIdx];
+    const isFront = slotIdx === 0;
+    const isDraggable = !isFront;
+
+    const dragX = useMotionValue(0);
+    const dragY = useMotionValue(0);
+    const [isDragging, setIsDragging] = useState(false);
+
+    return (
+        <motion.div
+            drag={isDraggable}
+            dragElastic={0.18}
+            dragMomentum={false}
+            dragConstraints={{ left: -120, right: 120, top: -120, bottom: 120 }}
+            whileHover={!isDragging ? (
+                isFront
+                    ? { scale: 1.06, transition: { type: "spring", stiffness: 300, damping: 20 } }
+                    : { y: pos.y - 10, scale: pos.scale + 0.04, transition: { type: "spring", stiffness: 300, damping: 20 } }
+            ) : undefined}
+            style={{
+                x: isDraggable ? dragX : undefined,
+                y: isDraggable ? dragY : undefined,
+                position: "absolute",
+                width: 240,
+                height: 310,
+                borderRadius: 16,
+                background: svc.gradient,
+                border: "1px solid rgba(255,255,255,0.1)",
+                overflow: "hidden",
+                cursor: isDraggable ? (isDragging ? "grabbing" : "pointer") : "default",
+                transformStyle: "preserve-3d",
+            }}
+            animate={{
+                x: isFront || isDragging ? 0 : pos.x,
+                y: isFront || isDragging ? 0 : pos.y,
+                rotateZ: isDragging ? 0 : pos.rotateZ,
+                rotateY: isDragging ? 0 : pos.rotateY,
+                scale: isDragging ? 1.04 : pos.scale,
+                opacity: pos.opacity,
+                zIndex: isDragging ? 50 : pos.zIndex,
+                boxShadow: isDragging
+                    ? `0 32px 80px -8px ${svc.accent}88`
+                    : `0 24px 60px -12px ${svc.accent}55`,
+            }}
+            transition={{ type: "spring", stiffness: 55, damping: 18 }}
+            onTap={() => {
+                if (isDraggable) onBringToFront(slotIdx);
+            }}
+            onDragStart={() => {
+                setIsDragging(true);
+                onDragStart();
+            }}
+            onDragEnd={(_, info) => {
+                setIsDragging(false);
+                onDragEnd();
+                const dist = Math.sqrt(info.offset.x ** 2 + info.offset.y ** 2);
+                if (dist > DRAG_THRESHOLD) {
+                    onBringToFront(slotIdx);
+                } else {
+                    animate(dragX, 0, { type: "spring", stiffness: 200, damping: 24 });
+                    animate(dragY, 0, { type: "spring", stiffness: 200, damping: 24 });
+                }
+            }}
+        >
+            {isDraggable && !isDragging && (
+                <div className="absolute inset-0 flex items-end justify-center pb-5 pointer-events-none opacity-0 hover:opacity-100 transition-opacity duration-300">
+                    <span className="text-[10px] font-satoshi text-white/40 tracking-wider bg-black/30 px-2 py-1 rounded-full">
+                        click or drag to front
+                    </span>
+                </div>
+            )}
+        </motion.div>
+    );
+}
 
 export function ImmersiveServices() {
     const [order, setOrder] = useState([0, 1, 2]);
-    const [paused, setPaused] = useState(false);
     const pausedRef = useRef(false);
 
     useEffect(() => {
@@ -57,8 +150,17 @@ export function ImmersiveServices() {
         return () => clearInterval(t);
     }, []);
 
-    const handleMouseEnter = () => { pausedRef.current = true; setPaused(true); };
-    const handleMouseLeave = () => { pausedRef.current = false; setPaused(false); };
+    const handleMouseEnter = () => { pausedRef.current = true; };
+    const handleMouseLeave = () => { pausedRef.current = false; };
+
+    const bringToFront = (slotIdx: number) => {
+        setOrder((prev) => {
+            const next = [...prev];
+            const [removed] = next.splice(slotIdx, 1);
+            next.unshift(removed);
+            return next;
+        });
+    };
 
     const activeSvc = services[order[0]];
 
@@ -89,9 +191,9 @@ export function ImmersiveServices() {
                     </p>
                 </motion.div>
 
-                {/* ── 3D Card Deck — perspective enables the rotateY depth ── */}
+                {/* ── 3D Card Deck ── */}
                 <motion.div
-                    className="relative mx-auto flex items-center justify-center"
+                    className="relative mx-auto flex items-center justify-center select-none"
                     style={{ height: 340, width: 300, perspective: "900px" }}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
@@ -100,27 +202,16 @@ export function ImmersiveServices() {
                     viewport={{ once: true }}
                     transition={{ duration: 0.6, ease: "easeOut", delay: 0.15 }}
                 >
-                    {order.map((svcId, slotIdx) => {
-                        const svc = services[svcId];
-                        const pos = slots[slotIdx];
-                        const isFront = slotIdx === 0;
-
+                    {[...order].reverse().map((svcId, revIdx) => {
+                        const slotIdx = order.length - 1 - revIdx;
                         return (
-                            <motion.div
+                            <DraggableCard
                                 key={svcId}
-                                className="absolute rounded-2xl border border-white/10 overflow-hidden"
-                                style={{
-                                    width: 240,
-                                    height: 310,
-                                    background: svc.gradient,
-                                    boxShadow: `0 24px 60px -12px ${svc.accent}55`,
-                                    transformStyle: "preserve-3d",
-                                }}
-                                animate={{
-                                    ...pos,
-                                    scale: isFront && paused ? 1.06 : pos.scale,
-                                }}
-                                transition={{ type: "spring", stiffness: 180, damping: 22 }}
+                                svcId={svcId}
+                                slotIdx={slotIdx}
+                                onBringToFront={bringToFront}
+                                onDragStart={() => { pausedRef.current = true; }}
+                                onDragEnd={() => { pausedRef.current = false; }}
                             />
                         );
                     })}
@@ -139,9 +230,11 @@ export function ImmersiveServices() {
                             {activeSvc.num}
                         </span>
                         <span className="w-px h-3 bg-white/20" />
-                        <span className="text-sm font-satoshi font-semibold text-white tracking-wide">
-                            {activeSvc.label}
-                        </span>
+                        <MouseTooltip label={activeSvc.tooltip}>
+                            <span className="text-sm font-satoshi font-semibold text-white tracking-wide cursor-default">
+                                {activeSvc.label}
+                            </span>
+                        </MouseTooltip>
                     </div>
 
                     <motion.p

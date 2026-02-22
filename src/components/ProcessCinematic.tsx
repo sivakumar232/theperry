@@ -37,15 +37,12 @@ const steps = [
 
 /**
  * ALIGNMENT MATH:
- * Container = 300vh  |  Each card = min-h-screen (100vh)  |  No padding offsets
- * Scroll distance = 300 - 100 = 200vh
+ * Container = 240vh  |  Each card = min-h-[80vh]  |  No padding offsets
+ * Scroll distance = 240 - 100 = 140vh
  *
- * Card[i] center in container = i * 100 + 50 (vh)
- * → at viewport center when scroll = i * 100 + 50 - 50 = i * 100 vh
- * → scrollYProgress = (i * 100) / 200 = i / 2
- *   Step 0: progress = 0.0
- *   Step 1: progress = 0.5
- *   Step 2: progress = 1.0
+ * Card[i] center in container = i * 80 + 40 (vh)
+ * → at viewport center when scroll = i * 80 + 40 - 50 = i * 80 - 10 vh
+ * → scrollYProgress ≈ i / 2  (same midpoints 0.25 / 0.75 still hold)
  *
  * Switch thresholds (midpoints between centers):
  *   0→1 switch at 0.25
@@ -180,7 +177,7 @@ function StepCard({
     );
 
     return (
-        <div className="min-h-screen flex flex-col justify-center">
+        <div className="min-h-[70vh] flex flex-col justify-center">
             <motion.div style={{ opacity, y }} className="flex flex-col items-start">
                 <span className="text-xs font-satoshi font-bold tracking-widest mb-4 block text-neutral-400">
                     {step.stepLabel}
@@ -266,7 +263,7 @@ export function ProcessCinematic() {
             <div
                 ref={containerRef}
                 className="hidden md:flex relative max-w-6xl mx-auto px-12 flex-row gap-16"
-                style={{ height: "300vh" }}
+                style={{ height: "240vh" }}
             >
                 {/* LEFT sticky icon panel */}
                 <div className="w-[44%] shrink-0">
@@ -287,8 +284,8 @@ export function ProcessCinematic() {
                 {/* Divider */}
                 <div className="w-px bg-white/[0.06] shrink-0 self-stretch" />
 
-                {/* RIGHT scrolling step cards — each min-h-screen, no padding offset */}
-                <div className="flex-1 flex flex-col">
+                {/* RIGHT scrolling step cards — pt-[15vh] shifts card centers to match icon progress */}
+                <div className="flex-1 flex flex-col pt-[15vh]">
                     {steps.map((step, i) => (
                         <StepCard
                             key={step.id}

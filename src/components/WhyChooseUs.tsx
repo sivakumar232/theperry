@@ -17,6 +17,7 @@ type CardData = {
     id: number;
     heading: string;
     caption: string;
+    tooltip: string;
     animationData?: object;
     staticIcon?: React.ReactNode;
 };
@@ -25,44 +26,51 @@ const cards: CardData[] = [
     {
         id: 1,
         heading: "Built for Real Impact",
+        tooltip: "Strategy-first — every decision ties to your goals",
         caption: "We don't just code features. We build products to create real business impact.",
         animationData: goalAnimation,
     },
     {
         id: 2,
         heading: "A True Technical Partner",
+        tooltip: "Direct access to senior engineers, no middlemen",
         caption: "No in-house tech team? Work directly with experienced engineers — zero layers, zero noise.",
         animationData: handshakeAnimation,
     },
     {
         id: 3,
         heading: "Fast & Reliable Delivery",
+        tooltip: "Sprints · Milestones · On-time, every time",
         caption: "Get high-quality results in days or weeks, not months.",
         animationData: flightmodeAnimation,
     },
     {
         id: 4,
         heading: "Visibility by Design",
+        tooltip: "Core Web Vitals · SEO-first · Performance optimised",
         caption: "Exceptional UI, engineered for speed, designed to scale, and built to be seen.",
         animationData: graphupAnimation,
     },
     {
         id: 5,
         heading: "Post Launch Support",
+        tooltip: "Monitoring · Updates · Feature iteration",
         caption: "Launch is just the start. We maintain, improve, and evolve. Built for the long run.",
         animationData: supportAnimation,
     },
     {
         id: 6,
         heading: "Smooth Collaboration",
+        tooltip: "Slack · Notion · Loom · Weekly stand-ups",
         caption: "Clear communication, transparent process, consistent progress - Pricing tailored for you.",
         staticIcon: <AnimatedCollabIcon />,
     },
 ];
 
-const Card = React.memo(({ title, body, animationData, staticIcon, index }: {
+const Card = React.memo(({ title, body, tooltip, animationData, staticIcon, index }: {
     title: string;
     body: string;
+    tooltip: string;
     animationData?: object;
     staticIcon?: React.ReactNode;
     index: number;
@@ -166,7 +174,7 @@ export function WhyChooseUs() {
                     }}
                 >
                     {cards.map((card, index) => (
-                        <Card key={card.id} title={card.heading} body={card.caption} animationData={card.animationData} staticIcon={card.staticIcon} index={index} />
+                        <Card key={card.id} title={card.heading} body={card.caption} tooltip={card.tooltip} animationData={card.animationData} staticIcon={card.staticIcon} index={index} />
                     ))}
                 </motion.div>
             </div>
