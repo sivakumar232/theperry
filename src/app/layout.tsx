@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Dancing_Script } from "next/font/google";
 import "./globals.css";
-// import { SmoothScrollProvider } from "@/components/ui/smooth-scroll";
+import { ReactLenis } from "lenis/react";
 import { CircularCTA } from "@/components/CircularCTA";
 
 const inter = Inter({
@@ -121,6 +121,7 @@ export default function RootLayout({
         />
       </head>
       <body className={`${inter.variable} ${dancingScript.variable} antialiased relative`}>
+        <ReactLenis root options={{ smoothWheel: true, lerp: 0.12, duration: 0.8 }} />
         {/* Main Content */}
         {children}
 

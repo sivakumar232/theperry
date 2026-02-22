@@ -8,16 +8,16 @@ export function SmoothScrollProvider({ children }: { children: ReactNode }) {
 
     useEffect(() => {
         const lenis = new Lenis({
-            duration: 1.0, // Smoother scrolling
-            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+            duration: 0.8,                                                     // Shorter = snappier, less lag feel
+            easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),          // Expo ease-out
             orientation: "vertical",
             gestureOrientation: "vertical",
             smoothWheel: true,
-            wheelMultiplier: 1.0, // Normal wheel speed to prevent overshooting
-            touchMultiplier: 1.5, // Reduced touch multiplier
+            wheelMultiplier: 0.9,
+            touchMultiplier: 1.2,
             infinite: false,
             autoResize: true,
-            lerp: 0.1, // Lower lerp for smoother deceleration at boundaries
+            lerp: 0.12,                                                        // Higher = more responsive, less trailing
         });
 
         lenisRef.current = lenis;
