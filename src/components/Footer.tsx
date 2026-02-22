@@ -79,18 +79,19 @@ export function Footer() {
                                 Let's build something great together Fast, precise, and built for impact.
                             </motion.p>
 
-                            {/* Button */}
+                            {/* Button with Arrow */}
                             <motion.div
                                 initial={{ opacity: 0, y: 20 }}
                                 whileInView={{ opacity: 1, y: 0 }}
                                 viewport={{ once: true }}
                                 transition={{ duration: 0.6, delay: 0.4 }}
-                                className="pt-2"
+                                className="pt-2 flex justify-center items-center relative"
                             >
-                                <button className="inline-flex items-center gap-2 px-8 py-4 bg-white text-black text-sm font-semibold font-satoshi rounded-full hover:bg-neutral-100 transition-colors shadow-lg">
+                                <button className="inline-flex z-10 items-center gap-2 px-8 py-4 bg-white text-black text-sm font-semibold font-satoshi rounded-full hover:bg-neutral-100 transition-colors shadow-lg">
                                     <PhoneCall className="w-4 h-4" />
                                     Book a Free Call
                                 </button>
+
                             </motion.div>
 
                         </motion.div>

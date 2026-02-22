@@ -14,6 +14,7 @@ import { useEffect } from "react";
 import { BrandingText } from "@/components/BrandingText";
 import { FounderSection } from "@/components/FounderSection";
 import { ProcessSection } from "@/components/ProcessSection";
+import { ProcessCinematic } from "@/components/ProcessCinematic";
 import { ImmersiveServices } from "@/components/ImmersiveServices";
 
 import { WhyChooseUs } from "@/components/WhyChooseUs";
@@ -109,7 +110,7 @@ export default function Home() {
       <BrandingText />
       {/* Why Choose Us */}
       <WhyChooseUs />
-            <ProcessSection />
+      <ProcessCinematic />
 
       {/* Services Section - Horizontal Scroll */}
       <ImmersiveServices />
