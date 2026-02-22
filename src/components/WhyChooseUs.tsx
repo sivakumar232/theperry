@@ -5,12 +5,12 @@ import Lottie from "lottie-react";
 import goalAnimation from "@/assets/lottie/goal.json";
 import supportAnimation from "@/assets/lottie/support.json";
 import flightmodeAnimation from "@/assets/lottie/flightmode.json";
+import graphupAnimation from "@/assets/lottie/Graphup.json";
+import handshakeAnimation from "@/assets/lottie/Handshake.json";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 import { motion } from "motion/react";
-import { AnimatedEyeIcon } from "./ui/animated-icons";
 import { AnimatedCollabIcon } from "./ui/AnimatedCollabIcon";
-
 import { AnimatedHandshakeIcon } from "./ui/AnimatedHandshakeIcon";
 
 const cards = [
@@ -28,7 +28,11 @@ const cards = [
         id: 2,
         heading: "A True Technical Partner",
         caption: "No in-house tech team? Work directly with experienced engineers — zero layers, zero noise.",
-        icon: <AnimatedHandshakeIcon />,
+        icon: (
+            <div className="w-10 h-10 md:w-14 md:h-14">
+                <Lottie animationData={handshakeAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
+            </div>
+        ),
     },
     {
         id: 3,
@@ -44,7 +48,11 @@ const cards = [
         id: 4,
         heading: "Visibility by Design",
         caption: "Exceptional UI, engineered for speed, designed to scale, and built to be seen.",
-        icon: <AnimatedEyeIcon />,
+        icon: (
+            <div className="w-10 h-10 md:w-14 md:h-14">
+                <Lottie animationData={graphupAnimation} loop={true} autoplay={true} style={{ width: "100%", height: "100%" }} />
+            </div>
+        ),
     },
     {
         id: 5,

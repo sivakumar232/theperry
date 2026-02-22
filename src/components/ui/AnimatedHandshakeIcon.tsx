@@ -1,7 +1,7 @@
 "use client";
 
 import Lottie from "lottie-react";
-import handshakeAnimation from "@/assets/lottie/handshake.json";
+import handshakeAnimation from "@/assets/lottie/Handshake.json";
 
 export const AnimatedHandshakeIcon = () => {
     return (
