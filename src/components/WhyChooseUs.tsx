@@ -1,24 +1,28 @@
 "use client";
 
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import Lottie, { LottieRefCurrentProps } from "lottie-react";
-import goalAnimation from "@/assets/lottie/goal.json";
-import supportAnimation from "@/assets/lottie/support.json";
-import flightmodeAnimation from "@/assets/lottie/flightmode.json";
-import graphupAnimation from "@/assets/lottie/Graphup.json";
-import handshakeAnimation from "@/assets/lottie/Handshake.json";
 import { ContentContainer } from "./ui/ContentContainer";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 import { motion } from "motion/react";
 import { AnimatedCollabIcon } from "./ui/AnimatedCollabIcon";
-import { AnimatedHandshakeIcon } from "./ui/AnimatedHandshakeIcon";
+
+// ── Lottie file paths (relative to /public would be fetch-based;
+//    using dynamic import() so webpack code-splits each JSON) ────────────────
+const lottieImports: Record<string, () => Promise<{ default: object }>> = {
+    goal: () => import("@/assets/lottie/goal.json"),
+    support: () => import("@/assets/lottie/support.json"),
+    flightmode: () => import("@/assets/lottie/flightmode.json"),
+    Graphup: () => import("@/assets/lottie/Graphup.json"),
+    Handshake: () => import("@/assets/lottie/Handshake.json"),
+};
 
 type CardData = {
     id: number;
     heading: string;
     caption: string;
     tooltip: string;
-    animationData?: object;
+    lottieKey?: keyof typeof lottieImports;
     staticIcon?: React.ReactNode;
 };
 
@@ -28,35 +32,35 @@ const cards: CardData[] = [
         heading: "Built for Real Impact",
         tooltip: "Strategy-first — every decision ties to your goals",
         caption: "We don't just code features. We build products to create real business impact.",
-        animationData: goalAnimation,
+        lottieKey: "goal",
     },
     {
         id: 2,
         heading: "A True Technical Partner",
         tooltip: "Direct access to senior engineers, no middlemen",
         caption: "No in-house tech team? Work directly with experienced engineers — zero layers, zero noise.",
-        animationData: handshakeAnimation,
+        lottieKey: "Handshake",
     },
     {
         id: 3,
         heading: "Fast & Reliable Delivery",
         tooltip: "Sprints · Milestones · On-time, every time",
         caption: "Get high-quality results in days or weeks, not months.",
-        animationData: flightmodeAnimation,
+        lottieKey: "flightmode",
     },
     {
         id: 4,
         heading: "Visibility by Design",
         tooltip: "Core Web Vitals · SEO-first · Performance optimised",
         caption: "Exceptional UI, engineered for speed, designed to scale, and built to be seen.",
-        animationData: graphupAnimation,
+        lottieKey: "Graphup",
     },
     {
         id: 5,
         heading: "Post Launch Support",
         tooltip: "Monitoring · Updates · Feature iteration",
         caption: "Launch is just the start. We maintain, improve, and evolve. Built for the long run.",
-        animationData: supportAnimation,
+        lottieKey: "support",
     },
     {
         id: 6,
@@ -67,56 +71,82 @@ const cards: CardData[] = [
     },
 ];
 
-const Card = React.memo(({ title, body, tooltip, animationData, staticIcon, index }: {
+// ── Lazy Lottie — loads the JSON only once the card enters the viewport ────
+function LazyLottie({ lottieKey }: { lottieKey: keyof typeof lottieImports }) {
+    const [animData, setAnimData] = useState<object | null>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
+    const lottieRef = useRef<LottieRefCurrentProps>(null);
+
+    useEffect(() => {
+        const el = containerRef.current;
+        if (!el) return;
+
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    lottieImports[lottieKey]().then((mod) => setAnimData(mod.default));
+                    io.disconnect();
+                }
+            },
+            { rootMargin: "150px" } // start loading 150px before entering view
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, [lottieKey]);
+
+    return (
+        <div ref={containerRef} className="w-10 h-10 md:w-14 md:h-14">
+            {animData && (
+                <Lottie
+                    lottieRef={lottieRef}
+                    animationData={animData}
+                    loop
+                    autoplay
+                    style={{ width: "100%", height: "100%" }}
+                />
+            )}
+        </div>
+    );
+}
+
+const Card = React.memo(function Card({
+    title,
+    body,
+    tooltip,
+    lottieKey,
+    staticIcon,
+}: {
     title: string;
     body: string;
     tooltip: string;
-    animationData?: object;
+    lottieKey?: keyof typeof lottieImports;
     staticIcon?: React.ReactNode;
     index: number;
-}) => {
+}) {
     const [hovered, setHovered] = useState(false);
-    const lottieRef = useRef<LottieRefCurrentProps>(null);
-
-    const handleMouseEnter = () => {
-        setHovered(true);
-        lottieRef.current?.pause();
-    };
-    const handleMouseLeave = () => {
-        setHovered(false);
-        lottieRef.current?.play();
-    };
 
     return (
         <motion.div
             variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } }
+                visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: "easeOut" } },
             }}
         >
             <div
                 className={`relative h-64 w-full bg-neutral-950 p-6 flex flex-col items-center text-center overflow-hidden transition-all duration-300 border ${hovered
-                    ? "border-white/25 shadow-[0_0_24px_0px_rgba(255,255,255,0.08)]"
-                    : "border-neutral-800/80"
+                        ? "border-white/25 shadow-[0_0_24px_0px_rgba(255,255,255,0.08)]"
+                        : "border-neutral-800/80"
                     }`}
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
+                onMouseEnter={() => setHovered(true)}
+                onMouseLeave={() => setHovered(false)}
             >
                 <motion.div
                     className="mb-4"
                     animate={{ scale: hovered ? 1.15 : 1 }}
                     transition={{ type: "spring", stiffness: 300, damping: 20 }}
                 >
-                    {animationData ? (
-                        <div className="w-10 h-10 md:w-14 md:h-14">
-                            <Lottie
-                                lottieRef={lottieRef}
-                                animationData={animationData}
-                                loop={true}
-                                autoplay={true}
-                                style={{ width: "100%", height: "100%" }}
-                            />
-                        </div>
+                    {lottieKey ? (
+                        <LazyLottie lottieKey={lottieKey} />
                     ) : (
                         staticIcon
                     )}
@@ -124,9 +154,7 @@ const Card = React.memo(({ title, body, tooltip, animationData, staticIcon, inde
                 <h3 className="text-[24px] font-semibold font-satoshi text-neutral-100 mb-4 leading-tight transition-colors">
                     {title}
                 </h3>
-                <p className="text-md text-neutral-400 font-satoshi font-medium">
-                    {body}
-                </p>
+                <p className="text-md text-neutral-400 font-satoshi font-medium">{body}</p>
             </div>
         </motion.div>
     );
@@ -146,7 +174,9 @@ export function WhyChooseUs() {
                 >
                     <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md mb-6 shadow-[0_4px_24px_-8px_rgba(255,255,255,0.1)]">
                         <div className="w-1.5 h-1.5 rounded-full bg-white shadow-[0_0_8px_2px_rgba(255,255,255,0.4)]" />
-                        <span className="text-[11px] font-semibold font-satoshi text-neutral-300 uppercase tracking-[0.2em] leading-none mt-[1px]">WHY US</span>
+                        <span className="text-[11px] font-semibold font-satoshi text-neutral-300 uppercase tracking-[0.2em] leading-none mt-[1px]">
+                            WHY US
+                        </span>
                     </div>
                     <CinematicBlurReveal
                         text="Why Choose theperry"
@@ -154,7 +184,9 @@ export function WhyChooseUs() {
                         className="text-3xl md:text-6xl font-bold font-satoshi text-white mb-4 md:mb-6 leading-tight"
                     />
                     <p className="text-md text-zinc-400 font-satoshi max-w-xl mx-auto leading-relaxed">
-                        Where real needs meet the right execution, meaningful products take shape. </p>                </motion.div>
+                        Where real needs meet the right execution, meaningful products take shape.
+                    </p>
+                </motion.div>
             </ContentContainer>
 
             {/* Staggered Grid Section */}
@@ -167,20 +199,26 @@ export function WhyChooseUs() {
                     variants={{
                         hidden: {},
                         visible: {
-                            transition: {
-                                staggerChildren: 0.15
-                            }
-                        }
+                            transition: { staggerChildren: 0.15 },
+                        },
                     }}
                 >
                     {cards.map((card, index) => (
-                        <Card key={card.id} title={card.heading} body={card.caption} tooltip={card.tooltip} animationData={card.animationData} staticIcon={card.staticIcon} index={index} />
+                        <Card
+                            key={card.id}
+                            title={card.heading}
+                            body={card.caption}
+                            tooltip={card.tooltip}
+                            lottieKey={card.lottieKey}
+                            staticIcon={card.staticIcon}
+                            index={index}
+                        />
                     ))}
                 </motion.div>
             </div>
 
-            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black via-black/50 to-transparent z-0"></div>
-            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black via-black/50 to-transparent z-0"></div>
+            <div className="pointer-events-none absolute inset-y-0 left-0 w-1/4 bg-gradient-to-r from-black via-black/50 to-transparent z-0" />
+            <div className="pointer-events-none absolute inset-y-0 right-0 w-1/4 bg-gradient-to-l from-black via-black/50 to-transparent z-0" />
         </section>
     );
 }

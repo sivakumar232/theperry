@@ -1,14 +1,9 @@
 import type { Metadata } from "next";
-import { Inter, Dancing_Script } from "next/font/google";
+import { Dancing_Script } from "next/font/google";
 import "./globals.css";
 import { ReactLenis } from "lenis/react";
 import { CircularCTA } from "@/components/CircularCTA";
 
-const inter = Inter({
-  variable: "--font-inter",
-  subsets: ["latin"],
-  display: "swap",
-});
 
 const dancingScript = Dancing_Script({
   variable: "--font-cursive",
@@ -120,7 +115,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${dancingScript.variable} antialiased relative`}>
+      <body className={`${dancingScript.variable} antialiased relative`}>
         <ReactLenis root options={{ smoothWheel: true, lerp: 0.1, duration: 0.9 }} />
         {/* Main Content */}
         {children}

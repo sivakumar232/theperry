@@ -1,21 +1,28 @@
 "use client";
 
-import React, { useRef } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import { motion, useScroll, useTransform, MotionValue } from "framer-motion";
 import Lottie from "lottie-react";
-import brainstormAnimation from "@/assets/lottie/brainstorm.json";
-import trainingAnimation from "@/assets/lottie/training.json";
-import missionAnimation from "@/assets/lottie/mission.json";
 import { CinematicBlurReveal } from "./ui/cinematic-blur-reveal";
 
-const steps = [
+// ── Lottie JSONs are now code-split and loaded lazily on intersection ──────
+const lottieImports = {
+    brainstorm: () => import("@/assets/lottie/brainstorm.json"),
+    training: () => import("@/assets/lottie/training.json"),
+    mission: () => import("@/assets/lottie/mission.json"),
+} as const;
+
+type LottieKey = keyof typeof lottieImports;
+
+// ── Static step metadata (no JSON bundled here) ───────────────────────────
+const steps: { id: number; stepLabel: string; title: string; description: string; lottieKey: LottieKey }[] = [
     {
         id: 1,
         stepLabel: "01",
         title: "Understand the Vision",
         description:
             "Share what's on your mind — your goals, ideas, or even rough thoughts. We listen, understand, and move with clarity.",
-        icon: brainstormAnimation,
+        lottieKey: "brainstorm",
     },
     {
         id: 2,
@@ -23,7 +30,7 @@ const steps = [
         title: "Shape the Solution",
         description:
             "We define the scope, plan the strategy, and map the right approach. You review, we refine — until it's perfect.",
-        icon: trainingAnimation,
+        lottieKey: "training",
     },
     {
         id: 3,
@@ -31,27 +38,42 @@ const steps = [
         title: "Bring It to Life",
         description:
             "Our experts build with precision, keeping you updated throughout. A smooth, confident launch — every time.",
-        icon: missionAnimation,
+        lottieKey: "mission",
     },
 ];
 
-/**
- * ALIGNMENT MATH:
- * Container = 240vh  |  Each card = min-h-[80vh]  |  No padding offsets
- * Scroll distance = 240 - 100 = 140vh
- *
- * Card[i] center in container = i * 80 + 40 (vh)
- * → at viewport center when scroll = i * 80 + 40 - 50 = i * 80 - 10 vh
- * → scrollYProgress ≈ i / 2  (same midpoints 0.25 / 0.75 still hold)
- *
- * Switch thresholds (midpoints between centers):
- *   0→1 switch at 0.25
- *   1→2 switch at 0.75
- */
+// ── LazyLottie: fetches JSON only once the element is near the viewport ────
+function LazyLottie({ lottieKey, width, height }: { lottieKey: LottieKey; width: number; height: number }) {
+    const [animData, setAnimData] = useState<object | null>(null);
+    const ref = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const el = ref.current;
+        if (!el) return;
+        const io = new IntersectionObserver(
+            ([entry]) => {
+                if (entry.isIntersecting) {
+                    lottieImports[lottieKey]().then((mod) => setAnimData(mod.default));
+                    io.disconnect();
+                }
+            },
+            { rootMargin: "200px" }
+        );
+        io.observe(el);
+        return () => io.disconnect();
+    }, [lottieKey]);
+
+    return (
+        <div ref={ref} style={{ width, height }}>
+            {animData && <Lottie animationData={animData} loop autoplay style={{ width, height }} />}
+        </div>
+    );
+}
+
+// ── Scroll math ───────────────────────────────────────────────────────────
 const N = steps.length;
-const cardCenterAt = (i: number) => i / (N - 1); // 0, 0.5, 1
-const switchAt = (i: number) =>
-    (cardCenterAt(i) + cardCenterAt(i + 1)) / 2; // 0.25, 0.75
+const cardCenterAt = (i: number) => i / (N - 1);
+const switchAt = (i: number) => (cardCenterAt(i) + cardCenterAt(i + 1)) / 2;
 
 function getRange(index: number): [number, number] {
     const start = index === 0 ? 0 : switchAt(index - 1);
@@ -59,13 +81,13 @@ function getRange(index: number): [number, number] {
     return [start, end];
 }
 
-// LEFT sticky icon: blurs out at transitions, fully sharp in the middle of its range
+// ── StickyIcon ────────────────────────────────────────────────────────────
 function StickyIcon({
     step,
     scrollYProgress,
     index,
 }: {
-    step: typeof steps[0];
+    step: (typeof steps)[0];
     scrollYProgress: MotionValue<number>;
     index: number;
 }) {
@@ -83,13 +105,7 @@ function StickyIcon({
                 : isLast
                     ? [start - FADE, start + FADE, 1]
                     : [start - FADE, start + FADE, end - FADE, end + FADE],
-        isFirst && isLast
-            ? [1, 1]
-            : isFirst
-                ? [1, 1, 0]
-                : isLast
-                    ? [0, 1, 1]
-                    : [0, 1, 1, 0]
+        isFirst && isLast ? [1, 1] : isFirst ? [1, 1, 0] : isLast ? [0, 1, 1] : [0, 1, 1, 0]
     );
 
     const blur = useTransform(
@@ -101,13 +117,7 @@ function StickyIcon({
                 : isLast
                     ? [start - FADE, start + FADE, 1]
                     : [start - FADE, start + FADE, end - FADE, end + FADE],
-        isFirst && isLast
-            ? [0, 0]
-            : isFirst
-                ? [0, 0, 14]
-                : isLast
-                    ? [14, 0, 0]
-                    : [14, 0, 0, 14]
+        isFirst && isLast ? [0, 0] : isFirst ? [0, 0, 14] : isLast ? [14, 0, 0] : [14, 0, 0, 14]
     );
     const filter = useTransform(blur, (b) => `blur(${b}px)`);
 
@@ -119,26 +129,26 @@ function StickyIcon({
             <div
                 className="rounded-3xl p-8 flex items-center justify-center"
                 style={{
-                    background: `rgba(255,255,255,0.03)`,
-                    border: `1px solid rgba(255,255,255,0.15)`,
-                    boxShadow: `0 0 50px -12px rgba(255,255,255,0.12)`,
+                    background: "rgba(255,255,255,0.03)",
+                    border: "1px solid rgba(255,255,255,0.15)",
+                    boxShadow: "0 0 50px -12px rgba(255,255,255,0.12)",
                     width: 220,
                     height: 220,
                 }}
             >
-                <Lottie animationData={step.icon} loop autoplay style={{ width: 140, height: 140 }} />
+                <LazyLottie lottieKey={step.lottieKey} width={140} height={140} />
             </div>
         </motion.div>
     );
 }
 
-// RIGHT card: opacity + y tied to same range as icon, first starts fully visible
+// ── StepCard ──────────────────────────────────────────────────────────────
 function StepCard({
     step,
     scrollYProgress,
     index,
 }: {
-    step: typeof steps[0];
+    step: (typeof steps)[0];
     scrollYProgress: MotionValue<number>;
     index: number;
 }) {
@@ -157,23 +167,13 @@ function StepCard({
                 : isLast
                     ? [start - FADE, start + SLIDE, 1]
                     : [start - FADE, start + SLIDE, end - FADE, end + FADE],
-        isFirst && isLast
-            ? [1, 1]
-            : isFirst
-                ? [1, 1, 0]
-                : isLast
-                    ? [0, 1, 1]
-                    : [0, 1, 1, 0]
+        isFirst && isLast ? [1, 1] : isFirst ? [1, 1, 0] : isLast ? [0, 1, 1] : [0, 1, 1, 0]
     );
 
     const y = useTransform(
         scrollYProgress,
-        isFirst
-            ? [0, 1] // first card: no slide-up needed
-            : [start - FADE, start + SLIDE],
-        isFirst
-            ? [0, 0]
-            : [28, 0]
+        isFirst ? [0, 1] : [start - FADE, start + SLIDE],
+        isFirst ? [0, 0] : [28, 0]
     );
 
     return (
@@ -193,6 +193,7 @@ function StepCard({
     );
 }
 
+// ── Main component ────────────────────────────────────────────────────────
 export function ProcessCinematic() {
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -203,7 +204,6 @@ export function ProcessCinematic() {
 
     return (
         <section id="process" className="bg-black relative">
-
             {/* Section header */}
             <div className="py-20 text-center relative z-10 max-w-4xl mx-auto px-6">
                 <div className="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-white/[0.03] border border-white/[0.08] backdrop-blur-md mb-6">
@@ -236,13 +236,13 @@ export function ProcessCinematic() {
                         <div
                             className="rounded-2xl p-5 flex items-center justify-center"
                             style={{
-                                background: `rgba(255,255,255,0.03)`,
-                                border: `1px solid rgba(255,255,255,0.15)`,
+                                background: "rgba(255,255,255,0.03)",
+                                border: "1px solid rgba(255,255,255,0.15)",
                                 width: 96,
                                 height: 96,
                             }}
                         >
-                            <Lottie animationData={step.icon} loop autoplay style={{ width: 56, height: 56 }} />
+                            <LazyLottie lottieKey={step.lottieKey} width={56} height={56} />
                         </div>
                         <div>
                             <span className="text-xs font-satoshi font-bold tracking-widest mb-2 block text-neutral-400">
@@ -284,7 +284,7 @@ export function ProcessCinematic() {
                 {/* Divider */}
                 <div className="w-px bg-white/[0.06] shrink-0 self-stretch" />
 
-                {/* RIGHT scrolling step cards — pt-[15vh] shifts card centers to match icon progress */}
+                {/* RIGHT scrolling step cards */}
                 <div className="flex-1 flex flex-col pt-[15vh]">
                     {steps.map((step, i) => (
                         <StepCard
@@ -296,7 +296,6 @@ export function ProcessCinematic() {
                     ))}
                 </div>
             </div>
-
         </section>
     );
 }
